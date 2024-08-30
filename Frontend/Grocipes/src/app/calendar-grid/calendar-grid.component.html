@@ -1,0 +1,27 @@
+<div class="row vh-100 d-flex flex-column m-1">
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-light m-2" (click)="previous()"> <  </button>
+            {{ today | date:'MMMM YYYY' }}
+            <button class="btn btn-light m-2" (click)="next()"> > </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">MONDAY</div>
+        <div class="col text-center">TUESDAY</div>
+        <div class="col text-center">WEDNESDAY</div>
+        <div class="col text-center">THURSDAY</div>
+        <div class="col text-center">FRIDAY</div>
+        <div class="col text-center">SATURDAY</div>
+        <div class="col text-center">SUNDAY</div>
+    </div>
+    <div *ngFor="let week of weeks; let weekIndex = index" class="row flex-grow-1">
+        <div *ngFor="let day of days; let dayIndex = index" 
+            class="col border border d-flex justify-content-center">
+            <span *ngIf="weekIndex === 0 && dayIndex < firstDayOffset">{{ previousMonthDays[dayIndex] }}</span>
+            <span *ngIf="weekIndex === 0 && dayIndex >= firstDayOffset">{{ currentMonthDays[dayIndex - firstDayOffset] }}</span>
+            <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) < currentMonthDays.length">{{ currentMonthDays[weekIndex * days.length + dayIndex - firstDayOffset] }}</span>
+            <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) >= currentMonthDays.length">{{ nextMonthDays[(weekIndex * days.length + dayIndex - firstDayOffset) - currentMonthDays.length] }}</span>
+        </div>
+    </div>
+</div>

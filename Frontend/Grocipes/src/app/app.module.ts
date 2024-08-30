@@ -11,6 +11,7 @@ import { ShoppingScheduleComponent } from './shopping-schedule/shopping-schedule
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
+import { CalendarGridComponent } from './calendar-grid/calendar-grid.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from './header/header.component';
     NutritionScheduleComponent,
     ShoppingScheduleComponent,
     HomepageComponent,
-    HeaderComponent
+    HeaderComponent,
+    CalendarGridComponent
   ],
   imports: [
     BrowserModule,
