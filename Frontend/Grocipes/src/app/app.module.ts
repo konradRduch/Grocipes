@@ -12,6 +12,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { CalendarGridComponent } from './calendar-grid/calendar-grid.component';
+import { ShopListItemComponent } from './shop-list-item/shop-list-item.component';
+import { GroceriesItemComponent } from './groceries/groceries-item/groceries-item.component';
+import { GroceriesItemDetailsComponent } from './groceries/groceries-item/groceries-item-details/groceries-item-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { CalendarGridComponent } from './calendar-grid/calendar-grid.component';
     ShoppingScheduleComponent,
     HomepageComponent,
     HeaderComponent,
-    CalendarGridComponent
+    CalendarGridComponent,
+    ShopListItemComponent,
+    GroceriesItemComponent,
+    GroceriesItemDetailsComponent
   ],
   imports: [
     BrowserModule,
