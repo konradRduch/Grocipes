@@ -15,6 +15,8 @@ import { CalendarGridComponent } from './calendar-grid/calendar-grid.component';
 import { ShopListItemComponent } from './shop-list-item/shop-list-item.component';
 import { GroceriesItemComponent } from './groceries/groceries-item/groceries-item.component';
 import { GroceriesItemDetailsComponent } from './groceries/groceries-item/groceries-item-details/groceries-item-details.component';
+import { RecipesItemComponent } from './recipes/recipes-item/recipes-item.component';
+import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item-details/recipes-item-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { GroceriesItemDetailsComponent } from './groceries/groceries-item/grocer
     CalendarGridComponent,
     ShopListItemComponent,
     GroceriesItemComponent,
-    GroceriesItemDetailsComponent
+    GroceriesItemDetailsComponent,
+    RecipesItemComponent,
+    RecipesItemDetailsComponent
   ],
   imports: [
     BrowserModule,
