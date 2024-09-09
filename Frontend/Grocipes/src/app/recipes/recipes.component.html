@@ -1,12 +1,53 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
+<br>
+<div class="row sticky-top text-center" style="background-color: white">
+    <div class="col-4"></div>
+    <div class="col-4 sticky-top">
+        <div class="input-group mb-3">
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2"
+            #searchtext
+            (input)="onSearchInput()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+    </div>
+    <div class="col-4"></div>
+</div>
 
-<div class="row" >
-    <div class="col-4" *ngFor="let r of recipes">
-        <app-recipes-item [recipe]="r"></app-recipes-item>
+
+
+<!-- No results -->
+<div *ngIf="searchMode" class="row text-center">
+    <div class="col">
+       <p style="font-size:xx-large;">
+           <strong>Search result: </strong>{{searchedRecipes.length}}
+       </p> 
     </div>
 </div>
-    
+<!-- Result -->
+<div *ngIf="searchMode" class="row" >
+    <div class="col-4" *ngFor="let r of searchedRecipes">
+        <div class="card-deck">
+            <app-recipes-item [recipe]="r"></app-recipes-item>
+        </div>
+    </div>
 </div>
+
+ <!-- Full list -->
+<div *ngIf="!searchMode" class="row" >
+    <div class="col-4" *ngFor="let r of recipes">
+        <div class="card-deck">
+            <app-recipes-item [recipe]="r"></app-recipes-item>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
 
 
 

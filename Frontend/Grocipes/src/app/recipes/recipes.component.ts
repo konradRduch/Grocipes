@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RecipesService } from '../recepies.service';
 import { Recipe } from '../recepie.model';
 
@@ -10,14 +10,30 @@ import { Recipe } from '../recepie.model';
 })
 export class RecipesComponent implements OnInit{
   recipes: Recipe[] = [];
+  @ViewChild('searchtext', { static: false }) searchtext!: ElementRef;
+  searchedRecipe: String = "";
+  searchedRecipes: Recipe[] = [];
+  searchMode: boolean = false;
 
   constructor(private recipesService: RecipesService){
-
   }
+
   ngOnInit(): void {
     this.recipes = this.recipesService.getRecipes();
     console.log(this.recipes);
   }
 
+  search(){
+    const query = this.searchtext.nativeElement.value;
+    this.searchedRecipes = this.recipesService.searchedRecipes(query);
+    console.log(this.searchedRecipes);
+    if(this.searchtext.nativeElement.value=="")this.searchMode = false;
+    else this.searchMode = true;
+    console.log(this.searchMode);
+  }
 
+  onSearchInput(){
+    console.log("print");
+  }
+  
 }
