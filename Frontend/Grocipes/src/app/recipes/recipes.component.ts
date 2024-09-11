@@ -10,7 +10,7 @@ import { Recipe } from '../recepie.model';
 })
 export class RecipesComponent implements OnInit{
   recipes: Recipe[] = [];
-  @ViewChild('searchtext', { static: false }) searchtext!: ElementRef;
+  @ViewChild('searchtext', { static: false }) searchtext!: ElementRef<HTMLInputElement>;
   searchedRecipe: String = "";
   searchedRecipes: Recipe[] = [];
   searchMode: boolean = false;
@@ -33,7 +33,9 @@ export class RecipesComponent implements OnInit{
   }
 
   onSearchInput(){
-    console.log("print");
+  }
+  exitSearchMode(){
+    this.searchMode = false;
   }
   
 }

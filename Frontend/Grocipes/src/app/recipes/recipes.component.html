@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
 <br>
-<div class="row sticky-top text-center" style="background-color: white">
+<div *ngIf="!searchMode" class="row sticky-top text-center" style="background-color: white">
     <div class="col-4"></div>
     <div class="col-4 sticky-top">
         <div class="input-group mb-3">
@@ -9,7 +9,7 @@
             #searchtext
             (input)="onSearchInput()">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
+              <button class="btn btn-outline-secondary" type="button" (click)="search()" [disabled]="searchtext.value === ''"><i class="fa fa-search"></i></button>
             </div>
           </div>
     </div>
@@ -20,11 +20,15 @@
 
 <!-- No results -->
 <div *ngIf="searchMode" class="row text-center">
-    <div class="col">
+    <div class="col-6 text-start">
        <p style="font-size:xx-large;">
            <strong>Search result: </strong>{{searchedRecipes.length}}
        </p> 
     </div>
+    <div class="col-6 text-end">
+        <button type="button" class="btn btn-primary" (click)="exitSearchMode()">Back to recipes</button>
+    </div>
+    <hr>
 </div>
 <!-- Result -->
 <div *ngIf="searchMode" class="row" >
@@ -33,6 +37,7 @@
             <app-recipes-item [recipe]="r"></app-recipes-item>
         </div>
     </div>
+    
 </div>
 
  <!-- Full list -->

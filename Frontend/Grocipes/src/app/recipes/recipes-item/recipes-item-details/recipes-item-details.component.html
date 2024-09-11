@@ -1,6 +1,6 @@
 <div class="container-fluid" style="height: 100vh;">
     <div class="row" style="height: 100%;">
-        <div class="col-md-6" style="padding-right: 0px;">
+        <div class="col-6 overflow-auto" style="padding-left: 0px;height: 100vh;">
             <div class="row text-center" style="margin-top: 50px;">
                 <h1>{{recipe?.title}}</h1>
             </div>
@@ -19,22 +19,22 @@
                     <p><strong> &#8226; {{i.name}} {{i.weight}} g</strong></p>
                 </div>
             </div>
-            <div class="row text-center" style="margin-top: 25px;">
+            <div class="row text-center" style="margin-top: 25px;margin-bottom: 25px;">
                 <p>{{recipe?.preparation_methhod}}</p>
             </div>
 
-            <div class="row"> 
-                <div class="col">
+            <div class="row align-self-end" style="margin-top: 25px;margin-bottom: 25px;margin-left: 15px;"> 
+                <div class="col-auto">
                     <button type="button" class="btn btn-primary">Add to shopping list</button>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <button type="button" class="btn btn-primary">Add to nutrition schedule</button>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6 d-flex align-items-stretch" style="padding-right: 0px;">
-            <img class="img-fluid" src="{{recipe?.image_url}}" alt="Recipe image" >
+        <div class="col-6 d-flex align-items-stretch" style="padding-right: 0px; padding-left: 0px;">
+            <img class="img-fluid" src="{{recipe?.image_url}}" alt="Recipe image">
         </div>
     </div>
 </div>
