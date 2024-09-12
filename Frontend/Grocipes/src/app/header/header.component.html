@@ -1,20 +1,27 @@
-<nav class="navbar navbar-expand bg-body-tertiary">
+<nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" routerLink="/">Grocipes</a>
-        <div class="collapse navbar-collapse justify-content-center">
-            <ul class="navbar-nav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/recipes">Recipes</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/groceries">Groceries</a>
                 </li>
-                <li class="nav-item"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" ngbDropdown display="dynamic" placement="bottom-end">
-                    <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button">Schedule</a>
-                    <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-                        <a class="dropdown-item" routerLink="/nutritionSchedule">Nutrition</a>
-                        <a class="dropdown-item" routerLink="/shoppingSchedule">Shopping</a>
-                    </div>
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" routerLink="/nutritionSchedule">Nutrition schedule</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" routerLink="/shoppingSchedule">Shopping schedule</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" style="margin-right: 10px;">
+                    <a class="nav-link" routerLink="/profile">Profile</a>
                 </li>
             </ul>
         </div>

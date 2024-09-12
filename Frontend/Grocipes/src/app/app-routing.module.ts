@@ -7,6 +7,7 @@ import { ShoppingScheduleComponent } from "./shopping-schedule/shopping-schedule
 import { HomepageComponent } from "./homepage/homepage.component";
 import { GroceriesItemDetailsComponent } from "./groceries/groceries-item/groceries-item-details/groceries-item-details.component";
 import { RecipesItemDetailsComponent } from "./recipes/recipes-item/recipes-item-details/recipes-item-details.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 const appRoutes: Routes = [
     {path: '', component: HomepageComponent},
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
     {path: 'groceries', component: GroceriesComponent},
     {path: 'groceries/:name', component: GroceriesItemDetailsComponent},
     {path: 'nutritionSchedule', component: NutritionScheduleComponent},
-    {path: 'shoppingSchedule', component: ShoppingScheduleComponent}
+    {path: 'shoppingSchedule', component: ShoppingScheduleComponent},
+    {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

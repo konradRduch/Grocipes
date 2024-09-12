@@ -17,6 +17,7 @@ import { GroceriesItemComponent } from './groceries/groceries-item/groceries-ite
 import { GroceriesItemDetailsComponent } from './groceries/groceries-item/groceries-item-details/groceries-item-details.component';
 import { RecipesItemComponent } from './recipes/recipes-item/recipes-item.component';
 import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item-details/recipes-item-details.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item
     GroceriesItemComponent,
     GroceriesItemDetailsComponent,
     RecipesItemComponent,
-    RecipesItemDetailsComponent
+    RecipesItemDetailsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

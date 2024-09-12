@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
 <br>
-<div *ngIf="!searchMode" class="row sticky-top text-center" style="background-color: white">
-    <div class="col-4"></div>
-    <div class="col-4 sticky-top">
+<div *ngIf="!searchMode" class="row sticky-top" style="background-color: white">
+    <div class="col col-sm col-md col-lg-4 col-lg-4"></div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4 sticky-top">
         <div class="input-group mb-3">
             <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2"
             #searchtext
@@ -13,26 +13,26 @@
             </div>
           </div>
     </div>
-    <div class="col-4"></div>
+    <div class="col col-sm col-md col-lg-4 col-lg-4"></div>
 </div>
 
 
 
 <!-- No results -->
 <div *ngIf="searchMode" class="row text-center">
-    <div class="col-6 text-start">
+    <div class="col-12 col-sm-12 col-md-12 text-center col-lg-6 col-xl-6 text-start">
        <p style="font-size:xx-large;">
            <strong>Search result: </strong>{{searchedRecipes.length}}
        </p> 
     </div>
-    <div class="col-6 text-end">
+    <div class="col-12 col-sm-12 col-md-12 text-center col-lg-6 col-xl-6 text-end">
         <button type="button" class="btn btn-primary" (click)="exitSearchMode()">Back to recipes</button>
     </div>
     <hr>
 </div>
 <!-- Result -->
 <div *ngIf="searchMode" class="row" >
-    <div class="col-4" *ngFor="let r of searchedRecipes">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4" *ngFor="let r of searchedRecipes">
         <div class="card-deck">
             <app-recipes-item [recipe]="r"></app-recipes-item>
         </div>
@@ -42,7 +42,7 @@
 
  <!-- Full list -->
 <div *ngIf="!searchMode" class="row" >
-    <div class="col-4" *ngFor="let r of recipes">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4" *ngFor="let r of recipes">
         <div class="card-deck">
             <app-recipes-item [recipe]="r"></app-recipes-item>
             <br>
@@ -59,10 +59,14 @@
 <h3>TODO</h3>
 <ul>
     <li>
-        przeglądanie listy z przepisami, 
+        <s>
+            przeglądanie listy z przepisami, 
+        </s>
     </li>
     <li>
-        przepisy mają swoje opisy, listę składników, sposoby przygotowania, wartości odżywcze i średni koszt przygotowania oraz swoje zdjęcia. 
+        <s>
+            przepisy mają swoje opisy, listę składników, sposoby przygotowania, wartości odżywcze i średni koszt przygotowania oraz swoje zdjęcia. 
+        </s>
     </li>
     <li>
         zapisać danie w swoim harmonogramie żywieniowym
