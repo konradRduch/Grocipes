@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroceriesService } from 'src/app/groceries.service';
-import { Product } from 'src/app/product.model';
+import { GroceriesService } from 'src/app/service/groceries.service';
+import { Product } from 'src/app/model/product.model';
 
 @Component({
   selector: 'app-groceries-item-details',
@@ -16,10 +16,16 @@ export class GroceriesItemDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // Wywołujemy pobranie danych przed próbą wyświetlenia szczegółów
+    this.groceriesService.fetchData();
+
     this.route.paramMap.subscribe(params => {
       const productName = params.get('name');
       if (productName) {
-        this.product = this.groceriesService.getProductByName(productName);
+        // Subskrybujemy Observable, aby pobrać produkt po załadowaniu danych
+        this.groceriesService.getProductByName(productName).subscribe(product => {
+          this.product = product;
+        });
       }
     });
   }

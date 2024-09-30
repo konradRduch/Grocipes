@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GroceriesService } from '../groceries.service';
-import { Product } from '../product.model';
+import { GroceriesService } from '../service/groceries.service';
+import { Product } from '../model/product.model';
 
 @Component({
   selector: 'app-groceries',
@@ -13,8 +13,18 @@ export class GroceriesComponent implements OnInit {
   constructor(private groceriesService: GroceriesService){
   }
 
+  
   ngOnInit(): void {
-    this.groceries = this.groceriesService.getGroceries();
+    this.groceriesService.fetchData();
+    this.groceriesService.getGroceries().subscribe(
+      (data: Product[]) => {
+        this.groceries = data;  
+        // Przypisanie danych po subskrypcji Observable
+      },
+      (error) => {
+        console.error('Error fetching groceries', error);
+      }
+    );
   }
 
 

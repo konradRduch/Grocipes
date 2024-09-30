@@ -1,0 +1,8 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=grocipesdb'
+      - 'MYSQL_ROOT_PASSWORD=1234'
+    ports:
+      - '33062:3306'

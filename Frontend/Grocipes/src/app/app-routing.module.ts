@@ -8,6 +8,7 @@ import { HomepageComponent } from "./homepage/homepage.component";
 import { GroceriesItemDetailsComponent } from "./groceries/groceries-item/groceries-item-details/groceries-item-details.component";
 import { RecipesItemDetailsComponent } from "./recipes/recipes-item/recipes-item-details/recipes-item-details.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { ShopListItemDetailsComponent } from "./shop-list-item/shop-list-item-details/shop-list-item-details.component";
 
 const appRoutes: Routes = [
     {path: '', component: HomepageComponent},
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
     {path: 'groceries/:name', component: GroceriesItemDetailsComponent},
     {path: 'nutritionSchedule', component: NutritionScheduleComponent},
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent},
+    {path: 'shopListDetails', component: ShopListItemDetailsComponent},
     {path: 'profile', component: ProfileComponent}
 ];
 

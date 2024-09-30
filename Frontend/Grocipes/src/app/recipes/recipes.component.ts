@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { RecipesService } from '../recepies.service';
-import { Recipe } from '../recepie.model';
+import { RecipesService } from '../service/recepies.service';
+import { Recipe } from '../model/recepie.model';
 
 @Component({
   selector: 'app-recipes',

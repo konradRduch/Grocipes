@@ -18,6 +18,9 @@ import { GroceriesItemDetailsComponent } from './groceries/groceries-item/grocer
 import { RecipesItemComponent } from './recipes/recipes-item/recipes-item.component';
 import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item-details/recipes-item-details.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ShopListItemDetailsComponent } from './shop-list-item/shop-list-item-details/shop-list-item-details.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -34,13 +37,15 @@ import { ProfileComponent } from './profile/profile.component';
     GroceriesItemDetailsComponent,
     RecipesItemComponent,
     RecipesItemDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ShopListItemDetailsComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

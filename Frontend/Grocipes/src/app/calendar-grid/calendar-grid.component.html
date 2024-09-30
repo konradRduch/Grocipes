@@ -1,6 +1,6 @@
-<div class="row h-100 m-1 d-flex flex-column">
+<div class="row h-100 d-flex flex-column" style="margin-left: 5px;">
 
-    <div class="row" style="height: 8%;">
+    <div class="row" style="margin-bottom: 50px;">
         <div class="col text-center">
             <button class="btn btn-light m-2" (click)="previous()"> <  </button>
             {{ today | date:'MMMM YYYY' }}
@@ -8,18 +8,18 @@
         </div>
     </div>
 
-    <div class="row" style="height: 5%;">
-        <div class="col text-center">MONDAY</div>
-        <div class="col text-center">TUESDAY</div>
-        <div class="col text-center">WEDNESDAY</div>
-        <div class="col text-center">THURSDAY</div>
-        <div class="col text-center">FRIDAY</div>
-        <div class="col text-center">SATURDAY</div>
-        <div class="col text-center">SUNDAY</div>
+    <div class="row  flex-nowrap" style="margin-bottom: 5px;">
+        <div class="col text-center text-truncate overflow-hidden" style="min-width: 1rem;">MONDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">TUESDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">WEDNESDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">THURSDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">FRIDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">SATURDAY</div>
+        <div class="col text-center text-truncate" style="min-width: 1rem;">SUNDAY</div>
     </div>
 
-    <div *ngFor="let week of weeks; let weekIndex = index" class="row flex-grow-1">
-        <div *ngFor="let day of days; let dayIndex = index" class="col border d-flex justify-content-center">
+    <div *ngFor="let week of weeks; let weekIndex = index" class="row flex-grow-1 flex-nowrap">
+        <div *ngFor="let day of days; let dayIndex = index" class="col border d-flex justify-content-center" style="min-width: 1rem;">
             <span *ngIf="weekIndex === 0 && dayIndex < firstDayOffset">{{ previousMonthDays[dayIndex] }}</span>
             <span *ngIf="weekIndex === 0 && dayIndex >= firstDayOffset">{{ currentMonthDays[dayIndex - firstDayOffset] }}</span>
             <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) < currentMonthDays.length">{{ currentMonthDays[weekIndex * days.length + dayIndex - firstDayOffset] }}</span>
