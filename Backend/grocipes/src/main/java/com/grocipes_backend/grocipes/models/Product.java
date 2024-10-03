@@ -1,6 +1,10 @@
 package com.grocipes_backend.grocipes.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -15,9 +19,17 @@ public class Product {
     private String image_url;
     private Integer calories;
 
+
+    // Relacja z NutritionFactNutrient
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<NutritionFactNutrient> nutritionFacts = new ArrayList<>();
+
+
     public Product() {
     }
-    public Product(String name, double weight, double price, String image_url, Integer calories) {
+
+    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories) {
+        this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
