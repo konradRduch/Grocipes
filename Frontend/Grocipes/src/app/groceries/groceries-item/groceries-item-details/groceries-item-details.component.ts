@@ -25,6 +25,7 @@ export class GroceriesItemDetailsComponent implements OnInit{
         // Subskrybujemy Observable, aby pobrać produkt po załadowaniu danych
         this.groceriesService.getProductByName(productName).subscribe(product => {
           this.product = product;
+          console.log(this.product)
         });
       }
     });
