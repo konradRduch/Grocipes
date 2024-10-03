@@ -14,6 +14,15 @@ public class NutritionFactNutrientDTO {
         this.dailyValue = dailyValue;
     }
 
+    public NutritionFactNutrientDTO(Integer nutrientId, Integer amount, Integer dailyValue) {
+        this.nutrientId = nutrientId;
+        this.amount = amount;
+        this.dailyValue = dailyValue;
+    }
+
+    public NutritionFactNutrientDTO() {
+    }
+
     public Integer getProductId() {
         return productId;
     }

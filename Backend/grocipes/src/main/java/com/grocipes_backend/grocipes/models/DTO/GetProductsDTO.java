@@ -1,43 +1,28 @@
-package com.grocipes_backend.grocipes.models;
+package com.grocipes_backend.grocipes.models.DTO;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Product {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GetProductsDTO {
     private Integer id;
-
     private String name;
     private double weight;
     private double price;
     private String image_url;
     private Integer calories;
+    private List<NutrientDTO> nutrient;
 
-
-    // Relacja z NutritionFactNutrient
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<NutritionFactNutrient> nutritionFacts = new ArrayList<>();
-
-
-    public Product() {
-    }
-
-    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories) {
+    public GetProductsDTO(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutrientDTO> nutrient) {
         this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.image_url = image_url;
         this.calories = calories;
+        this.nutrient = nutrient;
     }
 
-    public Product(String name, double weight, double price, String image_url, Integer calories) {
+    public GetProductsDTO(Integer id, String name, double weight, double price, String image_url, Integer calories) {
+        this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
@@ -91,5 +76,13 @@ public class Product {
 
     public void setCalories(Integer calories) {
         this.calories = calories;
+    }
+
+    public List<NutrientDTO> getNutrient() {
+        return nutrient;
+    }
+
+    public void setNutrient(List<NutrientDTO> nutrient) {
+        this.nutrient = nutrient;
     }
 }
