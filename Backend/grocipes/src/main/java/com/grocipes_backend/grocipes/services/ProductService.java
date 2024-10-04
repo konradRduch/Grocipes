@@ -27,27 +27,11 @@ public class ProductService {
 
     public Integer getProductIdByName(String name){
         List<Product> products = productRepository.findByName(name);
-
         if (products.isEmpty()) {
-            // Możesz rzucić wyjątek lub zwrócić null/wartość domyślną
             throw new RuntimeException("Product not found");
         }
         return products.get(0).getId();
     }
-
-//    public void getProducts(){
-//       List<Object[]> objects = productRepository.findproducts();
-//       List<GetProductsDTO> products = new ArrayList<>();
-//
-//
-//       for(Object[] o : objects){
-//           GetProductsDTO getProductsDTO = new GetProductsDTO((Integer) o[0],(String)o[1], (double)o[2], (double)o[3], (String)o[4], (Integer)o[5],  new ArrayList<>());
-//           NutrientDTO nutrientDTO = new NutrientDTO((String)o[8],(Integer) o[6], (Integer) o[7]);
-//           getProductsDTO.getNutrient().add(nutrientDTO);
-//           products.add(getProductsDTO);
-//       }
-//
-//    }
 
     public List<GetProductsDTO> getProducts() {
         List<Object[]> objects = productRepository.findproducts();

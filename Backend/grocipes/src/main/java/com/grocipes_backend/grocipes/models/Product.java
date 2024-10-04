@@ -24,6 +24,8 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<NutritionFactNutrient> nutritionFacts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<RecipeProduct> recipeProducts = new ArrayList<>();
 
     public Product() {
     }
@@ -43,6 +45,17 @@ public class Product {
         this.price = price;
         this.image_url = image_url;
         this.calories = calories;
+    }
+
+    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.price = price;
+        this.image_url = image_url;
+        this.calories = calories;
+        this.nutritionFacts = nutritionFacts;
+        this.recipeProducts = recipeProducts;
     }
 
     public Integer getId() {
@@ -91,5 +104,21 @@ public class Product {
 
     public void setCalories(Integer calories) {
         this.calories = calories;
+    }
+
+    public List<NutritionFactNutrient> getNutritionFacts() {
+        return nutritionFacts;
+    }
+
+    public void setNutritionFacts(List<NutritionFactNutrient> nutritionFacts) {
+        this.nutritionFacts = nutritionFacts;
+    }
+
+    public List<RecipeProduct> getRecipeProducts() {
+        return recipeProducts;
+    }
+
+    public void setRecipeProducts(List<RecipeProduct> recipeProducts) {
+        this.recipeProducts = recipeProducts;
     }
 }

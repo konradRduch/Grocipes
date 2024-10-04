@@ -1,41 +1,36 @@
-package com.grocipes_backend.grocipes.models;
+package com.grocipes_backend.grocipes.models.DTO;
 
-import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Recipe {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GetRecipesDTO {
     private Integer id;
     private String title;
     private String description;
     private String preparation_method;
     private String image_url;
+    List<ProductWithUnitDTO> products;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private List<RecipeProduct> recipeProducts = new ArrayList<>();
-    public Recipe() {
+    public GetRecipesDTO() {
     }
 
-    public Recipe(String title, String description, String preparation_method, String image_url) {
-        this.title = title;
-        this.description = description;
-        this.preparation_method = preparation_method;
-        this.image_url = image_url;
-    }
-
-    public Recipe(Integer id, String title, String description, String preparation_method, String image_url, List<RecipeProduct> recipeProducts) {
+    public GetRecipesDTO(Integer id, String title, String description, String preparation_method, String image_url, List<ProductWithUnitDTO> products) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.preparation_method = preparation_method;
         this.image_url = image_url;
-        this.recipeProducts = recipeProducts;
+        this.products = products;
     }
+
+    public GetRecipesDTO(Integer id, String title, String description, String preparation_method, String image_url) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.preparation_method = preparation_method;
+        this.image_url = image_url;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -77,12 +72,11 @@ public class Recipe {
         this.image_url = image_url;
     }
 
-    public List<RecipeProduct> getRecipeProducts() {
-        return recipeProducts;
+    public List<ProductWithUnitDTO> getProducts() {
+        return products;
     }
 
-    public void setRecipeProducts(List<RecipeProduct> recipeProducts) {
-        this.recipeProducts = recipeProducts;
+    public void setProducts(List<ProductWithUnitDTO> products) {
+        this.products = products;
     }
-
 }
