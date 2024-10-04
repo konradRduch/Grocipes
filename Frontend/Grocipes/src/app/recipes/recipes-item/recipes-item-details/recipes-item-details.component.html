@@ -15,12 +15,12 @@
                 </div>
             </div>
             <div class="row g-1 justify-content-center">
-                <div class="col-auto" *ngFor="let i of recipe?.ingredients">
-                    <p><strong> &#8226; {{i.name}} {{i.weight}} g</strong></p>
+                <div class="col-auto" *ngFor="let i of recipe?.products">
+                    <p><strong> &#8226; {{i.name}} {{i.unitValue}} {{i.unitName}}</strong></p>
                 </div>
             </div>
             <div class="row text-center" style="margin-top: 25px;margin-bottom: 25px;">
-                <p>{{recipe?.preparation_methhod}}</p>
+                <p>{{recipe?.preparation_method}}</p>
             </div>
 
             <div class="row align-self-end" style="margin-top: 25px;margin-bottom: 25px;margin-left: 15px;"> 

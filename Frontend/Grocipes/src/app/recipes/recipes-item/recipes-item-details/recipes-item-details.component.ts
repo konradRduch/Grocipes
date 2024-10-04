@@ -12,14 +12,17 @@ import { Recipe } from '../../../model/recepie.model';
 export class RecipesItemDetailsComponent implements OnInit{
   @Input() recipe: Recipe | undefined;
 
-  constructor(private route: ActivatedRoute, private groceriesService: RecipesService){
+  constructor(private route: ActivatedRoute, private recipesService: RecipesService){
   }
   ngOnInit(): void {
+    this.recipesService.fetchData();
     this.route.paramMap.subscribe(params => {
-      const productTitle = params.get('title');
-      if (productTitle) {
-        this.recipe = this.groceriesService.getRecipeByName(productTitle);
-        console.log(this.recipe);
+      const recipeTitle = params.get('title');
+      if (recipeTitle) {
+        this.recipesService.getRecipeByName(recipeTitle).subscribe((recipe) => {
+          this.recipe = recipe;
+          console.log(this.recipe);
+        });
       }
     });
   }
