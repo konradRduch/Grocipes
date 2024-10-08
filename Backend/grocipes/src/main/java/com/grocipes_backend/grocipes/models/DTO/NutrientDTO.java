@@ -3,10 +3,10 @@ package com.grocipes_backend.grocipes.models.DTO;
 public class NutrientDTO {
 
     private String name;
-    private Integer amount;
-    private Integer dailyValue;
+    private double amount;
+    private double dailyValue;
 
-    public NutrientDTO(String name, Integer amount, Integer dailyValue) {
+    public NutrientDTO(String name, double amount, double dailyValue) {
         this.name = name;
         this.amount = amount;
         this.dailyValue = dailyValue;
@@ -20,19 +20,19 @@ public class NutrientDTO {
         this.name = name;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Integer getDailyValue() {
+    public double getDailyValue() {
         return dailyValue;
     }
 
-    public void setDailyValue(Integer dailyValue) {
+    public void setDailyValue(double dailyValue) {
         this.dailyValue = dailyValue;
     }
 }

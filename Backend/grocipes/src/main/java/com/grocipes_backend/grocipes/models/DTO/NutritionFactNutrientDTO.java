@@ -4,17 +4,17 @@ public class NutritionFactNutrientDTO {
 
     private Integer productId;
     private Integer nutrientId;
-    private Integer amount;
-    private Integer dailyValue;
+    private double amount;
+    private double dailyValue;
 
-    public NutritionFactNutrientDTO(Integer productId, Integer nutrientId, Integer amount, Integer dailyValue) {
+    public NutritionFactNutrientDTO(Integer productId, Integer nutrientId, double amount, double dailyValue) {
         this.productId = productId;
         this.nutrientId = nutrientId;
         this.amount = amount;
         this.dailyValue = dailyValue;
     }
 
-    public NutritionFactNutrientDTO(Integer nutrientId, Integer amount, Integer dailyValue) {
+    public NutritionFactNutrientDTO(Integer nutrientId, double amount, double dailyValue) {
         this.nutrientId = nutrientId;
         this.amount = amount;
         this.dailyValue = dailyValue;
@@ -39,19 +39,19 @@ public class NutritionFactNutrientDTO {
         this.nutrientId = nutrientId;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Integer getDailyValue() {
+    public double getDailyValue() {
         return dailyValue;
     }
 
-    public void setDailyValue(Integer dailyValue) {
+    public void setDailyValue(double dailyValue) {
         this.dailyValue = dailyValue;
     }
 }

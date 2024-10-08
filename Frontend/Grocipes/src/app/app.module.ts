@@ -20,6 +20,7 @@ import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item
 import { ProfileComponent } from './profile/profile.component';
 import { ShopListItemDetailsComponent } from './shop-list-item/shop-list-item-details/shop-list-item-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     RecipesItemComponent,
     RecipesItemDetailsComponent,
     ProfileComponent,
-    ShopListItemDetailsComponent
+    ShopListItemDetailsComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,

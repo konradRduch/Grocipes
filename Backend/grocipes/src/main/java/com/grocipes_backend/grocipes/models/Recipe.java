@@ -12,7 +12,9 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    @Column(columnDefinition="varchar(1000)")
     private String description;
+    @Column(columnDefinition="varchar(1000)")
     private String preparation_method;
     private String image_url;
 

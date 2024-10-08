@@ -56,8 +56,8 @@ public class ProductService {
             // Tworzenie NutrientDTO
             NutrientDTO nutrientDTO = new NutrientDTO(
                     (String) o[8],   // Nazwa składnika odżywczego
-                    (Integer) o[6],  // Ilość składnika
-                    (Integer) o[7]   // Wartość dzienna
+                    (double) o[6],  // Ilość składnika
+                    (double) o[7]   // Wartość dzienna
             );
 
             // Dodajemy nutrientDTO do listy w GetProductsDTO

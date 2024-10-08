@@ -9,6 +9,7 @@ import { GroceriesItemDetailsComponent } from "./groceries/groceries-item/grocer
 import { RecipesItemDetailsComponent } from "./recipes/recipes-item/recipes-item-details/recipes-item-details.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ShopListItemDetailsComponent } from "./shop-list-item/shop-list-item-details/shop-list-item-details.component";
+import { AuthenticationComponent } from "./authentication/authentication.component";
 
 const appRoutes: Routes = [
     {path: '', component: HomepageComponent},
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
     {path: 'nutritionSchedule', component: NutritionScheduleComponent},
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent},
-    {path: 'profile', component: ProfileComponent}
+    {path: 'profile', component: ProfileComponent},
+    {path: 'auth', component: AuthenticationComponent}
 ];
 
 @NgModule({

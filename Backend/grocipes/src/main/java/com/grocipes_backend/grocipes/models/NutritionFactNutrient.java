@@ -17,13 +17,13 @@ public class NutritionFactNutrient {
     @MapsId("nutrientId")
     @JoinColumn(name = "nutrient_id")
     private Nutrient nutrient;
-    private Integer amount;
-    private Integer dailyValue;
+    private double amount;
+    private double dailyValue;
 
     public NutritionFactNutrient() {
     }
 
-    public NutritionFactNutrient(NutritionFactNutrientId id, Product product, Nutrient nutrient, Integer amount, Integer dailyValue) {
+    public NutritionFactNutrient(NutritionFactNutrientId id, Product product, Nutrient nutrient, double amount, double dailyValue) {
         this.id = id;
         this.product = product;
         this.nutrient = nutrient;
@@ -55,19 +55,19 @@ public class NutritionFactNutrient {
         this.nutrient = nutrient;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Integer getDailyValue() {
+    public double getDailyValue() {
         return dailyValue;
     }
 
-    public void setDailyValue(Integer dailyValue) {
+    public void setDailyValue(double dailyValue) {
         this.dailyValue = dailyValue;
     }
 }
