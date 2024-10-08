@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http'
+import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { BehaviorSubject, map, tap } from "rxjs";
 import { Product } from "../model/product.model";
 import { Injectable } from '@angular/core';
@@ -20,12 +20,15 @@ export class GroceriesService{
     constructor(private http: HttpClient){
 
     }
-
+      
 
     fetchData(){
         const url = 'http://localhost:8080/products'; // Adres API, z którego pobierasz dane
-
-    this.http.get<Product[]>(url).pipe(
+        const token = localStorage.getItem("token");
+    this.http.get<Product[]>(url, {
+      headers: new HttpHeaders().set('Authorization',  `Bearer ${token}`),
+      withCredentials: false
+    }).pipe(
       tap((products: Product[]) => {
         this._groceries = products; // Zaktualizuj lokalną kopię danych
         this.groceries.next(this._groceries); // Zaktualizuj BehaviorSubject, aby poinformować subskrybentów o zmianach

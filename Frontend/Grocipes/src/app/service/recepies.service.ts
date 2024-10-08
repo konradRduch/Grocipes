@@ -1,7 +1,7 @@
 import { BehaviorSubject, map,Observable,tap} from "rxjs";
 import { Product } from "../model/product.model";
 import { Recipe } from "../model/recepie.model";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -41,14 +41,14 @@ export class RecipesService{
     
     constructor(private http: HttpClient){
 
-    }
-
-
-    
+    }    
     fetchData(){
         const url = 'http://localhost:8080/recipes'; // Adres API, z którego pobierasz dane
-
-    this.http.get<Recipe[]>(url).pipe(
+        const token = localStorage.getItem("token");
+    this.http.get<Recipe[]>(url, {
+        headers:  new HttpHeaders().set('Authorization',  `Bearer ${token}`),
+        withCredentials: false
+    }).pipe(
       tap((products: Recipe[]) => {
         this._recipes = products; // Zaktualizuj lokalną kopię danych
         this.recipes.next(this._recipes); // Zaktualizuj BehaviorSubject, aby poinformować subskrybentów o zmianach

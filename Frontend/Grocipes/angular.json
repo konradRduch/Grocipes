@@ -64,6 +64,7 @@
           "configurations": {
             "production": {
               "browserTarget": "Grocipes:build:production"
+            
             },
             "development": {
               "browserTarget": "Grocipes:build:development"
