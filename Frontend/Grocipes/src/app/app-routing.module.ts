@@ -10,17 +10,19 @@ import { RecipesItemDetailsComponent } from "./recipes/recipes-item/recipes-item
 import { ProfileComponent } from "./profile/profile.component";
 import { ShopListItemDetailsComponent } from "./shop-list-item/shop-list-item-details/shop-list-item-details.component";
 import { AuthenticationComponent } from "./authentication/authentication.component";
+import { AuthGuard } from "./auth-guard";
 
 const appRoutes: Routes = [
-    {path: '', component: HomepageComponent},
-    {path: 'recipes', component: RecipesComponent},
-    {path: 'recipes/:title', component: RecipesItemDetailsComponent},
-    {path: 'groceries', component: GroceriesComponent},
-    {path: 'groceries/:name', component: GroceriesItemDetailsComponent},
-    {path: 'nutritionSchedule', component: NutritionScheduleComponent},
-    {path: 'shoppingSchedule', component: ShoppingScheduleComponent},
-    {path: 'shopListDetails', component: ShopListItemDetailsComponent},
-    {path: 'profile', component: ProfileComponent},
+    {path: '', redirectTo: 'home',pathMatch: 'full'},
+    {path: 'home', component: HomepageComponent, canActivate: [AuthGuard]},
+    {path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard]},
+    {path: 'recipes/:title', component: RecipesItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'groceries', component: GroceriesComponent, canActivate: [AuthGuard]},
+    {path: 'groceries/:name', component: GroceriesItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'nutritionSchedule', component: NutritionScheduleComponent, canActivate: [AuthGuard]},
+    {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
+    {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'auth', component: AuthenticationComponent}
 ];
 

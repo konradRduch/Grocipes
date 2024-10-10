@@ -1,4 +1,4 @@
-import { BehaviorSubject, map,Observable,tap} from "rxjs";
+import { BehaviorSubject, map, Observable, Subject, tap } from "rxjs";
 import { Product } from "../model/product.model";
 import { Recipe } from "../model/recepie.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -6,10 +6,10 @@ import { Injectable } from "@angular/core";
 
 @Injectable({
     providedIn: 'root' // To sprawia, że serwis będzie dostępny globalnie
-  })
-export class RecipesService{
-
-    _recipes: Recipe[] = [
+})
+export class RecipesService {
+    recipesChanged = new Subject<Recipe[]>();
+    private recipes: Recipe[] = [
         // new Recipe(1,'Fruid salad', 'A fruit salad is a refreshing, colorful, and healthy dish that can be enjoyed at any time of the day. Whether youre looking for a nutritious breakfast, a light snack, or a vibrant side dish for a meal, fruit salad is a versatile option that brings together the natural sweetness and flavors of fresh fruits. This recipe combines a variety of seasonal fruits to create a well-balanced and flavorful salad, packed with vitamins, minerals, and antioxidants. Best of all, its quick and easy to prepare.',
         // [
         //     new Product(2,'Apple',50,0.99,100,'https://m.media-amazon.com/images/I/918YNa3bAaL.jpg','g',1,[]),
@@ -22,7 +22,7 @@ export class RecipesService{
         // [
         //     new Product(1,'Cheese',100,4.99,100,'https://t3.ftcdn.net/jpg/05/66/02/98/360_F_566029808_X7praimuCQt0MsLCmw5d65Pp5KqmTS8e.jpg','g',1,[]),
         //     new Product(6,'Bread',100,1.00,100,'https://i5.walmartimages.com/seo/Freshness-Guaranteed-French-Bread-14-oz_fd51f0c3-4eea-4ff1-8109-7770339b6d85.fdba2ce348744cde3840700f5e33f3d3.jpeg','g',1,[])
-         
+
         // ]
         //     ,'Begin by preheating your oven or toaster oven to 375°F (190°C). Slice the bread, if needed, and place the slices on a baking tray. Layer each slice with your favorite type of cheese—cheddar, mozzarella, or even a mix of both for extra flavor. Optionally, you can add a pinch of seasoning, such as garlic powder or black pepper, to enhance the taste. Bake the toast in the oven for about 5-7 minutes, or until the cheese is melted and bubbly. For an extra crispy top, switch to broil for an additional minute, but be careful not to burn the edges. Once done, remove the toast from the oven and let it cool slightly before serving. Enjoy your warm and cheesy delight, possibly with a side of tomato soup or a sprinkle of fresh herbs!','https://i.ytimg.com/vi/PcFQnteNwvo/maxresdefault.jpg'),
 
@@ -30,62 +30,54 @@ export class RecipesService{
         // [
         //     new Product(1,'Cheese',100,4.99,100,'https://t3.ftcdn.net/jpg/05/66/02/98/360_F_566029808_X7praimuCQt0MsLCmw5d65Pp5KqmTS8e.jpg','g',1,[]),
         //     new Product(6,'Bread',100,1.00,100,'https://i5.walmartimages.com/seo/Freshness-Guaranteed-French-Bread-14-oz_fd51f0c3-4eea-4ff1-8109-7770339b6d85.fdba2ce348744cde3840700f5e33f3d3.jpeg','g',1,[])
-         
+
         // ]
         //     ,'Start by shaping your ground beef into evenly sized patties, seasoning both sides with salt, pepper, and any additional seasonings like garlic powder or paprika. Heat a grill or a skillet over medium-high heat. Once hot, cook the patties for about 4-5 minutes per side, depending on your preferred doneness. In the final minute of cooking, place a slice of cheese on top of each patty, allowing it to melt. While the patties are cooking, lightly toast the hamburger buns on the grill or in a toaster. Once the patties are cooked and the buns are toasted, assemble the burgers by placing the patty on the bottom bun, adding any desired toppings (lettuce, tomato, onion, pickles), and finally placing the top bun. Serve with a side of fries, salad, or your favorite condiments.','https://images.anovaculinary.com/sous-vide-hamburger/header/sous-vide-hamburger-header-og.jpg'),
     ]
 
 
-    recipes = new BehaviorSubject<Recipe[]>(this._recipes);
+    //recipes = new BehaviorSubject<Recipe[]>(this._recipes);
 
-    
-    constructor(private http: HttpClient){
-
-    }    
-    fetchData(){
-        const url = 'http://localhost:8080/recipes'; // Adres API, z którego pobierasz dane
-        const token = localStorage.getItem("token");
-    this.http.get<Recipe[]>(url, {
-        headers:  new HttpHeaders().set('Authorization',  `Bearer ${token}`),
-        withCredentials: false
-    }).pipe(
-      tap((products: Recipe[]) => {
-        this._recipes = products; // Zaktualizuj lokalną kopię danych
-        this.recipes.next(this._recipes); // Zaktualizuj BehaviorSubject, aby poinformować subskrybentów o zmianach
-      })
-    ).subscribe(
-      () => {
-      },
-      (error) => {
-        console.error('Error fetching data', error);
-      }
-    );
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
     }
 
-    getRecipes(){
-        return this.recipes.asObservable();
+    getRecipes() {
+        return this.recipes.slice();
     }
 
-    getRecipeByName(recipeTitle: string): Observable<Recipe | undefined> {
-        return this.recipes.pipe(
-            map((recipes: Recipe[]) =>
-                recipes.find(recipe => recipe.title.toLowerCase() === recipeTitle.toLowerCase())
-            )
+    getRecipe(index: number) {
+        return this.recipes[index];
+    }
+
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    getRecipeByName(recipeTitle: string): Recipe | undefined {
+        return this.recipes.find((recipe: Recipe)=> recipe.title.toLowerCase() === recipeTitle.toLowerCase());  
+    }
+    // find(product => product.title.toLowerCase() === recipeTitle.toLowerCase());
+
+    searchedRecipes(searchedName: string): Recipe[] {
+        let filteredRecipes: Recipe[] = [];
+        filteredRecipes = this.recipes.filter(recipe =>
+            recipe.title.toLowerCase().includes(searchedName.toLowerCase())
         );
+        return filteredRecipes;
     }
-   // find(product => product.title.toLowerCase() === recipeTitle.toLowerCase());
-    
-   searchedRecipes(searchedName: string): Recipe[] {
-    let filteredRecipes: Recipe[] = [];
-    this.recipes.pipe(
-        map((recipes: Recipe[]) => 
-            recipes.filter(recipe => recipe.title.toLowerCase().includes(searchedName.toLowerCase()))
-        )
-    ).subscribe(result => {
-        filteredRecipes = result;
-    });
-    return filteredRecipes;
-}
-    
+
 
 }

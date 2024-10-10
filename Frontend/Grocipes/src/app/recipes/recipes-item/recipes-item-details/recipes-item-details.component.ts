@@ -1,29 +1,48 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { RecipesService } from 'src/app/service/recepies.service';
 import { Recipe } from '../../../model/recepie.model';
+import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/service/data-storage.service';
 
 @Component({
   selector: 'app-recipes-item-details',
   templateUrl: './recipes-item-details.component.html',
-  styleUrls: ['./recipes-item-details.component.css'],
-  providers: [RecipesService]
+  styleUrls: ['./recipes-item-details.component.css']
 })
-export class RecipesItemDetailsComponent implements OnInit{
-  @Input() recipe: Recipe | undefined;
+export class RecipesItemDetailsComponent implements OnInit {
+  recipe: Recipe | undefined;
+  title: string | undefined;
 
-  constructor(private route: ActivatedRoute, private recipesService: RecipesService){
+  recipes: Recipe[] | undefined;
+  subscription: Subscription = new Subscription;
+
+  constructor(private route: ActivatedRoute, private recipesService: RecipesService, private dataStorageService: DataStorageService) {
   }
   ngOnInit(): void {
-    this.recipesService.fetchData();
-    this.route.paramMap.subscribe(params => {
-      const recipeTitle = params.get('title');
-      if (recipeTitle) {
-        this.recipesService.getRecipeByName(recipeTitle).subscribe((recipe) => {
-          this.recipe = recipe;
-          console.log(this.recipe);
-        });
-      }
-    });
+    this.dataStorageService.fetchRecipes().subscribe();
+    this.subscription = this.recipesService.recipesChanged
+      .subscribe(
+        (data: Recipe[]) => {
+          this.recipes = data;
+        }
+      );
+    this.recipes = this.recipesService.getRecipes();
+
+
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.title = params['title'];
+          this.recipe = this.recipesService.getRecipeByName(this.title!);
+          
+          if (!this.recipe) {
+            this.dataStorageService.fetchRecipes().subscribe((recipes: Recipe[]) => {
+              this.recipe = this.recipesService.getRecipeByName(this.title!);
+            });
+          }
+        }
+      );
   }
+
 }
