@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">Grocipes</a>
+        <a class="navbar-brand" routerLink="/home">Grocipes</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAuthenticated">
                 <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/recipes">Recipes</a>
                 </li>
@@ -19,7 +19,7 @@
                     <a class="nav-link" routerLink="/shoppingSchedule">Shopping schedule</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="isAuthenticated">
                 <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" style="margin-right: 10px;">
                     <a class="nav-link" routerLink="/profile">Profile</a>
                 </li>

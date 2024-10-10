@@ -1,30 +1,35 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RecipesService } from '../service/recepies.service';
 import { Recipe } from '../model/recepie.model';
+import { DataStorageService } from '../service/data-storage.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css'],
-  providers: [RecipesService]
+  styleUrls: ['./recipes.component.css']
+  //usunac provider
 })
 export class RecipesComponent implements OnInit{
-  recipes: Recipe[] = [];
+  recipes: Recipe[] | undefined;
+  subscription: Subscription = new Subscription;
   @ViewChild('searchtext', { static: false }) searchtext!: ElementRef<HTMLInputElement>;
   searchedRecipe: String = "";
   searchedRecipes: Recipe[] = [];
   searchMode: boolean = false;
 
-  constructor(private recipesService: RecipesService){
+  constructor(private recipesService: RecipesService, private dataStorageService: DataStorageService){
   }
 
-  
   ngOnInit(): void {
-    this.recipesService.fetchData();
-    this.recipesService.getRecipes().subscribe((recipes: Recipe[]) => {
-      this.recipes = recipes;
-      console.log(this.recipes);
-    });
+    this.dataStorageService.fetchRecipes().subscribe();
+    this.subscription = this.recipesService.recipesChanged
+      .subscribe(
+        (data: Recipe[])=>{
+          this.recipes = data;
+        }
+      );
+      this.recipes = this.recipesService.getRecipes();
   }
 
   search(){

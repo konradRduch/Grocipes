@@ -21,8 +21,6 @@ public class JWTGenerator {
 
         String username = authentication.getName();
 
-
-
         // Pobierz role użytkownika
         String roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)

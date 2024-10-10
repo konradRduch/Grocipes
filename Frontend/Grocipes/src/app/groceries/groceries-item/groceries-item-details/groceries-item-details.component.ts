@@ -1,33 +1,36 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { GroceriesService } from 'src/app/service/groceries.service';
 import { Product } from 'src/app/model/product.model';
+import { DataStorageService } from 'src/app/service/data-storage.service';
+
 
 @Component({
   selector: 'app-groceries-item-details',
   templateUrl: './groceries-item-details.component.html',
-  styleUrls: ['./groceries-item-details.component.css'],
-  providers: [GroceriesService]
+  styleUrls: ['./groceries-item-details.component.css']
 })
 export class GroceriesItemDetailsComponent implements OnInit{
-  @Input() product: Product | undefined;
+  product: Product | undefined;
+  name: string | undefined;
 
-  constructor(private route: ActivatedRoute, private groceriesService: GroceriesService){
+  constructor(private route: ActivatedRoute, private groceriesService: GroceriesService, private dataStorageService: DataStorageService){
   }
 
   ngOnInit(): void {
-    // Wywołujemy pobranie danych przed próbą wyświetlenia szczegółów
-    this.groceriesService.fetchData();
+    this.route.params
+      .subscribe(
+        (params: Params) =>{
+          this.name = params['name'];
+          this.product = this.groceriesService.getProductByName(this.name!);
 
-    this.route.paramMap.subscribe(params => {
-      const productName = params.get('name');
-      if (productName) {
-        // Subskrybujemy Observable, aby pobrać produkt po załadowaniu danych
-        this.groceriesService.getProductByName(productName).subscribe(product => {
-          this.product = product;
-          console.log(this.product)
-        });
-      }
-    });
-  }
+          if (!this.product) {
+            this.dataStorageService.fetchGroceries().subscribe((recipes: Product[]) => {
+              this.product = this.groceriesService.getProductByName(this.name!);
+            });
+          }
+
+        }
+      );
+   }
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthResponseData, AuthService } from '../service/auth.service';
 import { jwtDecode } from "jwt-decode";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -13,7 +14,7 @@ export class AuthenticationComponent  {
 
   @Output() authMode: boolean = true;
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private router: Router){}
 
   onSwitchMode() {
     this.authMode = !this.authMode;
@@ -25,13 +26,9 @@ export class AuthenticationComponent  {
     }
     const email = form.value.email;
     const password = form.value.password;
-    
-    //console.log(email);
-    //console.log(password);
-    
+   
     let authObs: Observable<AuthResponseData>;
 
-    
     if (this.authMode) {
       authObs = this.authService.login(email, password);
     } else {
@@ -40,21 +37,12 @@ export class AuthenticationComponent  {
 
     authObs.subscribe(
       resData => {
-        console.log(resData);
-         const token: string= resData.accessToken;
-         localStorage.setItem("token", token);
-         const decodedToken: any = jwtDecode(token);
-         console.log(decodedToken);
+         this.router.navigate(['/home']);
       },
       errorMessage => {
         console.log(errorMessage);
       }
     );
-
-
-    
-    
-
     form.reset();
   }
 

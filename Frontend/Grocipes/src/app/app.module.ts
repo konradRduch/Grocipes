@@ -19,8 +19,11 @@ import { RecipesItemComponent } from './recipes/recipes-item/recipes-item.compon
 import { RecipesItemDetailsComponent } from './recipes/recipes-item/recipes-item-details/recipes-item-details.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShopListItemDetailsComponent } from './shop-list-item/shop-list-item-details/shop-list-item-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { AuthInterceptorService } from './service/auth-interceptor.service';
+import { GroceriesService } from './service/groceries.service';
+import { RecipesService } from './service/recepies.service';
 
 
 @NgModule({
@@ -49,7 +52,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [GroceriesService,RecipesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
