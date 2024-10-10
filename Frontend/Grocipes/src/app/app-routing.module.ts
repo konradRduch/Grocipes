@@ -11,6 +11,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ShopListItemDetailsComponent } from "./shop-list-item/shop-list-item-details/shop-list-item-details.component";
 import { AuthenticationComponent } from "./authentication/authentication.component";
 import { AuthGuard } from "./auth-guard";
+import { AuthReverseGuard } from "./authReverse-guard";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    {path: 'auth', component: AuthenticationComponent}
+    {path: 'auth', component: AuthenticationComponent, canActivate:[AuthReverseGuard] }
 ];
 
 @NgModule({
