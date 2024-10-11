@@ -1,20 +1,70 @@
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
-    <br><br>
+    <!-- <br><br>
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let g of groceries">
             <app-groceries-item [product]="g"></app-groceries-item>
             <br>
         </div>
+    </div> -->
+    <br>
+    <div *ngIf="!searchMode" class="row sticky-top" style="background-color: white">
+        <div class="col col-sm col-md col-lg-4 col-lg-4"></div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4 sticky-top">
+            <div class="input-group mb-3">
+                <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+                    aria-describedby="basic-addon2" #searchtext (input)="onSearchInput()">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="search()"
+                        [disabled]="searchtext.value === ''"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm col-md col-lg-4 col-lg-4"></div>
     </div>
+
+
+    <!-- No results -->
+    <div *ngIf="searchMode" class="row text-center">
+        <div class="col-12 col-sm-12 col-md-12 text-center col-lg-6 col-xl-6 text-start">
+            <p style="font-size:xx-large;">
+                <strong>Search result: </strong>{{searchedProduts.length}}
+            </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 text-center col-lg-6 col-xl-6 text-end">
+            <button type="button" class="btn btn-primary" (click)="exitSearchMode()">Back to groceries</button>
+        </div>
+        <hr>
+    </div>
+    <!-- Result -->
+    <div *ngIf="searchMode" class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let g of searchedProduts">
+            <div class="card-deck">
+                <app-groceries-item [product]="g"></app-groceries-item>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Full list -->
+    <div *ngIf="!searchMode" class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let g of groceries">
+            <div class="card-deck">
+                <app-groceries-item [product]="g"></app-groceries-item>
+                <br>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <h3>TODO</h3>
 <ul>
     <li><s>listę produktów spożywczych.</s></li>
-    <li><s>Produkty będą się charakteryzowały swoją wagą, wartością odżywczą i średnią ceną oraz będą posiadały zdjęcie.</s> </li>
-    <li>Użytkownik będzie mógł dodawać produkty spożywcze do listy z zakupami  lub je usuwać.</li>
+    <li><s>Produkty będą się charakteryzowały swoją wagą, wartością odżywczą i średnią ceną oraz będą posiadały
+            zdjęcie.</s> </li>
+    <li>Użytkownik będzie mógł dodawać produkty spożywcze do listy z zakupami lub je usuwać.</li>
     <li>W liście zakupowej będzie także możliwość odhaczania produktów, które już są w koszyku sklepowym.</li>
 </ul>
-
-   

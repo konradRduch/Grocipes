@@ -24,6 +24,9 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { AuthInterceptorService } from './service/auth-interceptor.service';
 import { GroceriesService } from './service/groceries.service';
 import { RecipesService } from './service/recepies.service';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
+import { ShoppingListItemDetailsComponent } from './shopping-list/shopping-list-item/shopping-list-item-details/shopping-list-item-details.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { RecipesService } from './service/recepies.service';
     RecipesItemDetailsComponent,
     ProfileComponent,
     ShopListItemDetailsComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    ShoppingListComponent,
+    ShoppingListItemComponent,
+    ShoppingListItemDetailsComponent
   ],
   imports: [
     BrowserModule,

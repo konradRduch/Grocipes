@@ -39,5 +39,12 @@ export class GroceriesService {
     });
   }
 
+  searchedProduts(searchedName: string): Product[] {
+    let filteredProduts: Product[] = [];
+    filteredProduts = this.groceries.filter(product =>
+      product.name.toLowerCase().includes(searchedName.toLowerCase())
+    );
+    return  filteredProduts;
+}
 
 }

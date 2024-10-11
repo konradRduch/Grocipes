@@ -12,6 +12,7 @@ import { ShopListItemDetailsComponent } from "./shop-list-item/shop-list-item-de
 import { AuthenticationComponent } from "./authentication/authentication.component";
 import { AuthGuard } from "./auth-guard";
 import { AuthReverseGuard } from "./authReverse-guard";
+import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     {path: 'recipes/:title', component: RecipesItemDetailsComponent, canActivate: [AuthGuard]},
     {path: 'groceries', component: GroceriesComponent, canActivate: [AuthGuard]},
     {path: 'groceries/:name', component: GroceriesItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'shopping-list',component: ShoppingListComponent, canActivate: [AuthGuard]},
     {path: 'nutritionSchedule', component: NutritionScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},
