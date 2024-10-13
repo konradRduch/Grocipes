@@ -3,6 +3,9 @@ package com.grocipes_backend.grocipes.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class NutritionFactNutrient {
 
@@ -17,6 +20,11 @@ public class NutritionFactNutrient {
     @MapsId("nutrientId")
     @JoinColumn(name = "nutrient_id")
     private Nutrient nutrient;
+
+    // Relacja z NutritionFactNutrient
+    @OneToMany(mappedBy = "nutrient", cascade = CascadeType.ALL)
+    private List<DailyDemand>dailyDemands  = new ArrayList<>();
+
     private double amount;
     private double dailyValue;
 
@@ -27,6 +35,15 @@ public class NutritionFactNutrient {
         this.id = id;
         this.product = product;
         this.nutrient = nutrient;
+        this.amount = amount;
+        this.dailyValue = dailyValue;
+    }
+
+    public NutritionFactNutrient(NutritionFactNutrientId id, Product product, Nutrient nutrient, List<DailyDemand> dailyDemands, double amount, double dailyValue) {
+        this.id = id;
+        this.product = product;
+        this.nutrient = nutrient;
+        this.dailyDemands = dailyDemands;
         this.amount = amount;
         this.dailyValue = dailyValue;
     }
@@ -69,5 +86,13 @@ public class NutritionFactNutrient {
 
     public void setDailyValue(double dailyValue) {
         this.dailyValue = dailyValue;
+    }
+
+    public List<DailyDemand> getDailyDemands() {
+        return dailyDemands;
+    }
+
+    public void setDailyDemands(List<DailyDemand> dailyDemands) {
+        this.dailyDemands = dailyDemands;
     }
 }

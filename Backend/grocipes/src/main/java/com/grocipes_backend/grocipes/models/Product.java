@@ -26,7 +26,10 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<RecipeProduct> recipeProducts = new ArrayList<>();
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductShoppingList> productShoppingLists;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Image>images;
     public Product() {
     }
 
@@ -47,7 +50,7 @@ public class Product {
         this.calories = calories;
     }
 
-    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts) {
+    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts, List<ProductShoppingList> productShoppingLists) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -56,6 +59,28 @@ public class Product {
         this.calories = calories;
         this.nutritionFacts = nutritionFacts;
         this.recipeProducts = recipeProducts;
+        this.productShoppingLists = productShoppingLists;
+    }
+
+    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts, List<ProductShoppingList> productShoppingLists, List<Image> images) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.price = price;
+        this.image_url = image_url;
+        this.calories = calories;
+        this.nutritionFacts = nutritionFacts;
+        this.recipeProducts = recipeProducts;
+        this.productShoppingLists = productShoppingLists;
+        this.images = images;
+    }
+
+    public List<ProductShoppingList> getProductShoppingLists() {
+        return productShoppingLists;
+    }
+
+    public void setProductShoppingLists(List<ProductShoppingList> productShoppingLists) {
+        this.productShoppingLists = productShoppingLists;
     }
 
     public Integer getId() {
@@ -120,5 +145,13 @@ public class Product {
 
     public void setRecipeProducts(List<RecipeProduct> recipeProducts) {
         this.recipeProducts = recipeProducts;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
