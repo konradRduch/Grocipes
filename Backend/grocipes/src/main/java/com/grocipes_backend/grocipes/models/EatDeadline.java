@@ -21,16 +21,20 @@ public class EatDeadline {
     @ManyToOne
     @JoinColumn(name="recipe_id")
     private Recipe recipe;
+    @OneToMany(mappedBy = "eatDeadline", cascade = CascadeType.ALL)
+    private List<Image>image;
     public EatDeadline() {
     }
 
-    public EatDeadline(Integer id, LocalDateTime eating_date, boolean done, int rate, String comment, NutritionSchedule nutritionSchedule) {
+    public EatDeadline(Integer id, LocalDateTime eating_date, boolean done, int rate, String comment, NutritionSchedule nutritionSchedule, Recipe recipe, List<Image> image) {
         this.id = id;
         this.eating_date = eating_date;
         this.done = done;
         this.rate = rate;
         this.comment = comment;
         this.nutritionSchedule = nutritionSchedule;
+        this.recipe = recipe;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -79,5 +83,21 @@ public class EatDeadline {
 
     public void setNutritionSchedule(NutritionSchedule nutritionSchedule) {
         this.nutritionSchedule = nutritionSchedule;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public List<Image> getImage() {
+        return image;
+    }
+
+    public void setImage(List<Image> image) {
+        this.image = image;
     }
 }
