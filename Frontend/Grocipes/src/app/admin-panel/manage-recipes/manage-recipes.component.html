@@ -1,21 +1,37 @@
-<!-- przepisy -->
-<div class="row">
-    <div class="col">
-        lista wszystkich przepisów
+<div class="container" *ngIf="show">
+    <!-- Lista wszystkich produktów -->
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4" *ngFor="let r of recipes">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <img class="card-img-top img-fluid zoom" src="{{r.image_url}}" alt="image not found">
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="row text-truncate">
+                            <div class="col">
+                                <h5 class="card-title">{{r.title}}</h5>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" (click)="editRecipe(r)" style="margin-right: 5px;">Edit</button>
+                        <button class="btn btn-danger" (click)="deleteRecipe(r.id)">X</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col">
+            <button class="btn btn-success" (click)="addRecipe()">Add recipe</button>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        dodawanie przepisów
-    </div>
+
+<div class="container" *ngIf="!show">
+    <router-outlet></router-outlet>
 </div>
-<div class="row">
-    <div class="col">
-        usuwanie przepisów
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        edytowanie przepisów
-    </div>
-</div>
+
+

@@ -18,6 +18,8 @@ import { ManageProductsComponent } from "./admin-panel/manage-products/manage-pr
 import { ManageRecipesComponent } from "./admin-panel/manage-recipes/manage-recipes.component";
 import { AddProductComponent } from "./admin-panel/manage-products/add-product/add-product.component";
 import { EditProductComponent } from "./admin-panel/manage-products/edit-product/edit-product.component";
+import { AddRecipeComponent } from "./admin-panel/manage-recipes/add-recipe/add-recipe.component";
+import { EditRecipeComponent } from "./admin-panel/manage-recipes/edit-recipe/edit-recipe.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -26,13 +28,18 @@ const appRoutes: Routes = [
         component: AdminPanelComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: 'manage-products', component: ManageProductsComponent, 
+          { path: 'manage-products', component: ManageProductsComponent, canActivate: [AuthGuard], 
             children: [
               {path: 'add-product', component: AddProductComponent,canActivate: [AuthGuard]},
               {path: 'edit-product/:id', component: EditProductComponent,canActivate: [AuthGuard]}
             ]
           },
-          { path: 'manage-recipes', component: ManageRecipesComponent }
+          { path: 'manage-recipes', component: ManageRecipesComponent, canActivate: [AuthGuard], 
+            children: [
+              {path: 'add-recipe', component: AddRecipeComponent,canActivate: [AuthGuard]},
+              {path: 'edit-recipe/:id', component: EditRecipeComponent,canActivate: [AuthGuard]}
+            ]
+           }
         ]
       },
     {path: 'home', component: HomepageComponent, canActivate: [AuthGuard]},

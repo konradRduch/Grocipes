@@ -26,7 +26,7 @@ export class Groceries2Service {
   }
 
   getProduct(id: number): Observable<Product>{
-    return this.http.get<Product>(`http://localhost:8080/products/${id}`)
+    return this.http.get<Product>(`http://localhost:8080/products/${id}`);
   }
 
   addProduct(product: Product) {

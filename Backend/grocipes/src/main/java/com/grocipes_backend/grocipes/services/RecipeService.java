@@ -3,6 +3,7 @@ package com.grocipes_backend.grocipes.services;
 import com.grocipes_backend.grocipes.models.DTO.*;
 import com.grocipes_backend.grocipes.models.Recipe;
 import com.grocipes_backend.grocipes.repositories.RecipeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -80,6 +81,17 @@ public class RecipeService {
             recipesMap.put(recipeId, getRecipesDTO);
         }
         return new ArrayList<>(recipesMap.values());
+    }
+    @Transactional
+    public void deleteRecipeById(Integer id) {
+        recipeRepository.deleteById(id);
+    }
+
+    public Recipe findById(Integer id){
+        return this.recipeRepository.findRecipeById(id);
+    }
+    public void save(Recipe recipe){
+        this.recipeRepository.save(recipe);
     }
 }
 

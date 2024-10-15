@@ -1,0 +1,75 @@
+<div class="container">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="title">Title</label>
+            <div class="input-group">
+              <input id="title" formControlName="title" class="form-control" placeholder="title" />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="image_url">Image URL</label>
+            <div class="input-group">
+              <input id="image_url" formControlName="image_url" type="url" class="form-control" placeholder="image url" />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description">Description</label>
+            <div class="input-group">
+              <!-- <input id="description" formControlName="description" class="form-control" placeholder="description"/> -->
+              <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="preparation_method">Preparation method</label>
+            <div class="input-group">
+              <!-- <input id="preparation_method" formControlName="preparation_method" class="form-control" placeholder="preparation method" /> -->
+              <textarea class="form-control" id="preparation_method" rows="5" formControlName="preparation_method"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div formArrayName="products">
+            <div class="row" *ngFor="let product of products.controls; let i = index" [formGroupName]="i" >
+                    <div class="col">
+                        <label>Product</label>
+                        <select formControlName="id" class="form-select">
+                          <option *ngFor="let product of availableProducts" [value]="product.id">
+                            {{ product.name }}
+                          </option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="quantity">Quantity</label>
+                        <input id="quantity" type="number" formControlName="unitValue" class="form-control" placeholder="quantity" min="0"/>
+                    </div>
+                    <div class="col">
+                        <label>Unit</label>
+                        <select formControlName="unit_id" class="form-select">
+                          <option *ngFor="let u of availableUnit" [value]="u.id">
+                            {{ u.name }}
+                          </option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" (click)="removeProduct(i)">X</button>
+                    </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary mt-2" (click)="addProduct()">Add Product</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid">
+            Save
+          </button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()" style="margin-left: 5px;">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

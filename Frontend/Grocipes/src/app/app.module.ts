@@ -32,6 +32,8 @@ import { ManageProductsComponent } from './admin-panel/manage-products/manage-pr
 import { ManageRecipesComponent } from './admin-panel/manage-recipes/manage-recipes.component';
 import { AddProductComponent } from './admin-panel/manage-products/add-product/add-product.component';
 import { EditProductComponent } from './admin-panel/manage-products/edit-product/edit-product.component';
+import { EditRecipeComponent } from './admin-panel/manage-recipes/edit-recipe/edit-recipe.component';
+import { AddRecipeComponent } from './admin-panel/manage-recipes/add-recipe/add-recipe.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { EditProductComponent } from './admin-panel/manage-products/edit-product
     ManageProductsComponent,
     ManageRecipesComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditRecipeComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,

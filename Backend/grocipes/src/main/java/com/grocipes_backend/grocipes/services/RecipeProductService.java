@@ -7,6 +7,7 @@ import com.grocipes_backend.grocipes.repositories.ProductRepository;
 import com.grocipes_backend.grocipes.repositories.RecipeProductRepository;
 import com.grocipes_backend.grocipes.repositories.RecipeRepository;
 import com.grocipes_backend.grocipes.repositories.UnitRecipeProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -42,4 +43,8 @@ public class RecipeProductService {
         return Optional.of(recipeProductRepository.save(entity));
     }
 
+    @Transactional
+    public void deleteRecipeProductByProductId(Integer id) {
+        recipeProductRepository.deleteByRecipeId(id);
+    }
 }
