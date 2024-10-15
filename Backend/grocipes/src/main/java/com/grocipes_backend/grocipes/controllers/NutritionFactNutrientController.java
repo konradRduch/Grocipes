@@ -18,12 +18,10 @@ public class NutritionFactNutrientController {
     }
 
     @PostMapping("/add")
-    public String addNutrient(@RequestBody NutritionFactNutrientDTO request) {
+    public ResponseEntity<Void> addNutrient(@RequestBody NutritionFactNutrientDTO request) {
         // Zapis encji w serwisie
-        nutritionFactNutrientService.addNutrionFactNutrient(request)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.badRequest().build());
+        nutritionFactNutrientService.addNutrionFactNutrient(request);
 
-        return "redirect:/nutritionFactNutrient";
+        return ResponseEntity.ok().build();
     }
 }

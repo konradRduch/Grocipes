@@ -10,6 +10,7 @@ import { DataStorageService } from '../service/data-storage.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy{
   isAuthenticated: boolean = false;
+  isAdmin: boolean = false;
   private userSub: Subscription  = new Subscription();
 
   constructor(private authService: AuthService,private dataStorageService: DataStorageService){
@@ -18,6 +19,11 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(user =>{
         this.isAuthenticated = !!user;
+        if(user?.roles==="ADMIN"){
+          this.isAdmin = true;
+        }else{
+          this.isAdmin = false;
+        }
       }
     );
   }

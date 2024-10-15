@@ -1,0 +1,36 @@
+<div class="container">
+    <br>
+    <div *ngIf="showCards">
+        <div class="row">
+            <div class="col">
+                <a routerLink="manage-products" style="text-decoration: none; color: white;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage products</h5>
+                            <p class="card-text">Create product or modify or delete existing product</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <a routerLink="manage-recipes" style="text-decoration: none; color: white;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage recipes</h5>
+                            <p class="card-text">Create recipe or modify or delete existing recipe</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Miejsce na renderowanie podstron -->
+    <router-outlet></router-outlet>
+
+ 
+    
+</div>

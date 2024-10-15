@@ -8,8 +8,10 @@ import com.grocipes_backend.grocipes.models.Product;
 import com.grocipes_backend.grocipes.repositories.NutrientRepository;
 import com.grocipes_backend.grocipes.repositories.NutritionFactNutrientRepository;
 import com.grocipes_backend.grocipes.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +28,7 @@ public class NutritionFactNutrientService {
         this.productRepository = productRepository;
     }
 
-    public Optional<NutritionFactNutrient> addNutrionFactNutrient(NutritionFactNutrientDTO dto) {
+    public NutritionFactNutrient addNutrionFactNutrient(NutritionFactNutrientDTO dto) {
         // Sprawdź, czy nutrient i product są poprawnie przypisane
         Nutrient nutrient = nutrientRepository.findById(dto.getNutrientId())
                 .orElseThrow(() -> new RuntimeException("Nutrient not found"));
@@ -41,9 +43,13 @@ public class NutritionFactNutrientService {
 
         NutritionFactNutrient entity = new NutritionFactNutrient(id,product, nutrient,dto.getAmount(), dto.getDailyValue());
 
-        return Optional.of(nutritionFactNutrientRepository.save(entity));
+        return nutritionFactNutrientRepository.save(entity);
     }
 
+    @Transactional
+    public void deleteNutritionFactsByProductId(Integer productId) {
+        nutritionFactNutrientRepository.deleteByProductId(productId);
+    }
 
 
 }

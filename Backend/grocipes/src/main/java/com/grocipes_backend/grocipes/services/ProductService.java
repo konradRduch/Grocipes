@@ -5,6 +5,7 @@ import com.grocipes_backend.grocipes.models.DTO.NutrientDTO;
 import com.grocipes_backend.grocipes.models.DTO.ProductDTO;
 import com.grocipes_backend.grocipes.models.Product;
 import com.grocipes_backend.grocipes.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,6 +21,10 @@ public class ProductService {
        return productRepository.findAll();
     }
 
+    @Transactional
+    public void deleteProductById(Integer id) {
+        productRepository.deleteById(id);
+    }
     public Optional<Product>addProduct(ProductDTO dto){
         Product product = new Product(dto.getName(),dto.getWeight(),dto.getPrice(),dto.getImage_url(),dto.getCalories());
         return Optional.of(productRepository.save(product));
@@ -71,4 +76,11 @@ public class ProductService {
         return new ArrayList<>(productsMap.values());
     }
 
+    public Product findById(Integer id) {
+        return this.productRepository.findProductById(id);
+    }
+
+    public void save(Product product) {
+        this.productRepository.save(product);
+    }
 }

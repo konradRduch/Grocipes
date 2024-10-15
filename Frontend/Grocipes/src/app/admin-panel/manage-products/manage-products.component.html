@@ -1,0 +1,28 @@
+<div class="container" *ngIf="show">
+    <!-- Lista wszystkich produktów -->
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let g of groceries">
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" [src]="g.image_url" alt="Card image cap" style="min-height: 200px; max-height: 200px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">{{ g.name }}</h5>
+                        <button class="btn btn-primary" (click)="editProduct(g)" style="margin-right: 5px;">Edit</button>
+                        <button class="btn btn-danger" (click)="deleteProduct(g.id)">X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="row text-center">
+        <div class="col">
+            <button class="btn btn-success" (click)="addProduct()">Add product</button>
+        </div>
+    </div>    
+</div>
+
+<div class="container" *ngIf="!show">
+    <router-outlet></router-outlet>
+</div>

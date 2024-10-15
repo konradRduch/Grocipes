@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product>findByName(String name);
+    Product findProductById(Integer id);
 
     @Query("SELECT (p.id,p.name,p.weight, p.price,p.image_url,p.calories,nfn.amount, nfn.dailyValue,n.name) " +
             "FROM NutritionFactNutrient nfn " +

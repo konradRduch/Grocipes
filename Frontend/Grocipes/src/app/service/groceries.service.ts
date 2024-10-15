@@ -1,4 +1,4 @@
-import {  Observable, of, Subject } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { Product } from "../model/product.model";
 import { Injectable } from '@angular/core';
 
@@ -19,19 +19,32 @@ export class GroceriesService {
   getGroceries() {
     return this.groceries.slice();
   }
-  setGroceries(products: Product[]){
+  setGroceries(products: Product[]) {
     this.groceries = products;
     this.groceriesChanged.next(this.groceries.slice());
   }
 
-  getProduct(index: number){
+  getProduct(index: number) {
     console.log(index);
     return this.groceries[index];
   }
-  addProduct(product: Product){
+  addProduct(product: Product) {
     this.groceries.push(product);
     this.groceriesChanged.next(this.groceries.slice());
   }
+
+
+  updateRecipe(index: number, newProduct: Product) {
+    this.groceries[index] = newProduct;
+    this.groceriesChanged.next(this.groceries.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.groceries.splice(index, 1);
+    this.groceriesChanged.next(this.groceries.slice());
+  }
+
+
 
   getProductByName(productName: string): Product | undefined {
     return this.groceries.find((product: Product) => {
@@ -44,7 +57,7 @@ export class GroceriesService {
     filteredProduts = this.groceries.filter(product =>
       product.name.toLowerCase().includes(searchedName.toLowerCase())
     );
-    return  filteredProduts;
-}
+    return filteredProduts;
+  }
 
 }

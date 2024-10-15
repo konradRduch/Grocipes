@@ -10,4 +10,7 @@ public class BodyMeasurementsService {
     public BodyMeasurementsService(BodyMeasurementsRepository bodyMeasurementsRepository) {
         this.bodyMeasurementsRepository = bodyMeasurementsRepository;
     }
+
+    
+
 }

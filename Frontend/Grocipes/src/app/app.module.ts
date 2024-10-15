@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesComponent } from './recipes/recipes.component';
 import { GroceriesComponent } from './groceries/groceries.component';
 import { NutritionScheduleComponent } from './nutrition-schedule/nutrition-schedule.component';
@@ -27,6 +27,11 @@ import { RecipesService } from './service/recepies.service';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 import { ShoppingListItemDetailsComponent } from './shopping-list/shopping-list-item/shopping-list-item-details/shopping-list-item-details.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ManageProductsComponent } from './admin-panel/manage-products/manage-products.component';
+import { ManageRecipesComponent } from './admin-panel/manage-recipes/manage-recipes.component';
+import { AddProductComponent } from './admin-panel/manage-products/add-product/add-product.component';
+import { EditProductComponent } from './admin-panel/manage-products/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -49,14 +54,20 @@ import { ShoppingListItemDetailsComponent } from './shopping-list/shopping-list-
     AuthenticationComponent,
     ShoppingListComponent,
     ShoppingListItemComponent,
-    ShoppingListItemDetailsComponent
+    ShoppingListItemDetailsComponent,
+    AdminPanelComponent,
+    ManageProductsComponent,
+    ManageRecipesComponent,
+    AddProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [GroceriesService,RecipesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]

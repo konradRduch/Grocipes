@@ -51,4 +51,32 @@ export class DataStorageService {
     )
   }
 
+ 
+  fetchProduct(product: Product) {
+ console.log(product);
+
+    // Stwórz obiekt zgodny z wymaganą strukturą JSON
+    const payload = {
+      productDTO: {
+        name: product.name,
+        weight: product.weight,
+        price: product.price,
+        image_url: product.image_url,
+        calories: product.calories
+      },
+      nutritionFactNutrientDTO: product.nutrient.map(nutrient => ({
+        nutrientId: nutrient.id,
+        amount: nutrient.amount,
+        dailyValue: nutrient.dailyValue
+      }))
+    };
+    
+    console.log(payload);
+    // Wyślij zapytanie POST z utworzonym obiektem payload
+    return this.http.post<Product>('http://localhost:8080/products/add', payload).pipe(
+    );
+  }
+
+
+
 }
