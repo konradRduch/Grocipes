@@ -2,22 +2,53 @@ package com.grocipes_backend.grocipes.models.DTO;
 
 public class ProductWithUnitDTO {
 
+    private Integer id;
     private String name;
     private double weight;
     private double price;
     private String image_url;
     private Integer calories;
+    private Integer unit_id;
     private String unitName;
     private double unitValue;
 
-    public ProductWithUnitDTO(String name, double weight, double price, String image_url, Integer calories, String unitName, double unitValue) {
+//    public ProductWithUnitDTO(String name, double weight, double price, String image_url, Integer calories, String unitName, double unitValue) {
+//        this.name = name;
+//        this.weight = weight;
+//        this.price = price;
+//        this.image_url = image_url;
+//        this.calories = calories;
+//        this.unitName = unitName;
+//        this.unitValue = unitValue;
+//    }
+
+
+    public ProductWithUnitDTO(Integer id, String name, double weight, double price, String image_url, Integer calories, Integer unit_id, String unitName, double unitValue) {
+        this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.image_url = image_url;
         this.calories = calories;
+        this.unit_id = unit_id;
         this.unitName = unitName;
         this.unitValue = unitValue;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUnit_id() {
+        return unit_id;
+    }
+
+    public void setUnit_id(Integer unit_id) {
+        this.unit_id = unit_id;
     }
 
     public ProductWithUnitDTO() {

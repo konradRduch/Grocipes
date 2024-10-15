@@ -65,12 +65,14 @@ public class RecipeService {
             );
 
             ProductWithUnitDTO productWithUnitDTO = new ProductWithUnitDTO(
+                    (Integer) o[5],
                     (String) o[6],
                     (double) o[7],
                     (double) o[8],
                     (String) o[9],
                     (Integer) o[10],
-                    (String)o[12],
+                    (Integer) o[12],
+                    (String)o[13],
                     (double)o[11]
             );
 

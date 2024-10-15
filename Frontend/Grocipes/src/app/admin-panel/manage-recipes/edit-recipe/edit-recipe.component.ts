@@ -58,8 +58,8 @@ export class EditRecipeComponent implements OnInit {
     console.log(product);
     return new FormGroup({
       id: new FormControl(product?.id, Validators.required), // Użyj ID produktu lub pierwszego produktu jako domyślnego
-      unitValue: new FormControl(product?.unitValue || 1, [Validators.required, Validators.min(1)]), // Użyj unitValue lub 1 jako domyślną ilość
-      unit_id: new FormControl(product?.unit_id || this.availableUnit[0]?.id, Validators.required) // Użyj unit_id lub pierwszej jednostki jako domyślnej
+      unitValue: new FormControl(product?.unitValue ,[Validators.required, Validators.min(1)]), // Użyj unitValue lub 1 jako domyślną ilość
+      unit_id: new FormControl(product?.unit_id , Validators.required) // Użyj unit_id lub pierwszej jednostki jako domyślnej
     });
   }
 
