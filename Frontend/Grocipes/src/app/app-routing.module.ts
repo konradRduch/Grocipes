@@ -20,6 +20,10 @@ import { AddProductComponent } from "./admin-panel/manage-products/add-product/a
 import { EditProductComponent } from "./admin-panel/manage-products/edit-product/edit-product.component";
 import { AddRecipeComponent } from "./admin-panel/manage-recipes/add-recipe/add-recipe.component";
 import { EditRecipeComponent } from "./admin-panel/manage-recipes/edit-recipe/edit-recipe.component";
+import { ShoppingListItemComponent } from "./shopping-list/shopping-list-item/shopping-list-item.component";
+import { ShoppingListItemDetailsComponent } from "./shopping-list/shopping-list-item/shopping-list-item-details/shopping-list-item-details.component";
+import { ShoppingListEditComponent } from "./shopping-list/shopping-list-edit/shopping-list-edit.component";
+import { ShoppingListAddComponent } from "./shopping-list/shopping-list-add/shopping-list-add.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -48,6 +52,9 @@ const appRoutes: Routes = [
     {path: 'groceries', component: GroceriesComponent, canActivate: [AuthGuard]},
     {path: 'groceries/:name', component: GroceriesItemDetailsComponent, canActivate: [AuthGuard]},
     {path: 'shopping-list',component: ShoppingListComponent, canActivate: [AuthGuard]},
+    {path: 'shopping-list/shopping-list-item-details/:id', component: ShoppingListItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'shopping-list/shopping-list-edit/:id', component: ShoppingListEditComponent, canActivate: [AuthGuard]},
+    {path: 'shopping-list/shopping-list-add', component: ShoppingListAddComponent, canActivate: [AuthGuard]},
     {path: 'nutritionSchedule', component: NutritionScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},

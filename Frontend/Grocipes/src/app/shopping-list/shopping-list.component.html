@@ -1,3 +1,27 @@
-<p>shopping-list works!</p>
+
+<div class="container">
+    <br>
+    <div class="row" >
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4" *ngFor="let s of shoppingList">
+            <div class="card-deck">
+                <app-shopping-list-item [shoppList]="s" ></app-shopping-list-item>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <button class="btn btn-light btn-outline-dark btn-lg" (click)="onAdd()">
+                <i class="fas fa-add"></i>
+              </button>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+            </div>
+        </div>
+    </div>
+    <br>
+
+    
+
+
 
 

@@ -7,7 +7,7 @@
         <div class="col"></div>
     </div>
     <div class="row text-center" style="margin-top: 25px;">
-        <h1>Jan Kowalski</h1>
+        <h1>{{userData?.name}} {{userData?.surname}}</h1>
         <hr>
     </div>
     <div class="row">
@@ -15,7 +15,25 @@
             <p class="fs-3">Email </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userName}}</p>
+             <p class="fs-3">{{userData?.email}}</p>
+         </div>  
+         <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center col-lg-6 text-center">
+            <p class="fs-3">Gender </p> 
+         </div>
+         <div class="col-12 text-center col-lg-6 text-center">
+             <p class="fs-3">{{ userData?.gender === 'M' ? 'male' : 'female' }}</p>
+         </div>  
+         <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center col-lg-6 text-center">
+            <p class="fs-3">Birthday </p> 
+         </div>
+         <div class="col-12 text-center col-lg-6 text-center">
+             <p class="fs-3">{{userData?.birthday}}</p>
          </div>  
          <hr>
     </div>
@@ -24,7 +42,7 @@
             <p class="fs-3">Height </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">185[cm]</p>
+             <p class="fs-3">184[cm]</p>
          </div>  
          <hr>
     </div>

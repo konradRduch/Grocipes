@@ -17,10 +17,14 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) { }
 
-    signUp(email: String, password: String) {
+    signUp(name: String,surname: String,birthday: String, gender: String ,email: String, password: String) {
         const url = 'http://localhost:8080/auth/register';
         return this.http.post<AuthResponseData>(url,
             {
+                "name": name,
+                "surname": surname,
+                "birthday": birthday,
+                "gender": gender,
                 "email": email,
                 "password": password
             }
@@ -129,6 +133,7 @@ export class AuthService {
     }
 
 
+    
    
 
 }

@@ -1,14 +1,16 @@
 package com.grocipes_backend.grocipes.models.DTO;
 
+import java.time.LocalDate;
+
 public class RegisterDTO {
     private String name;
     private String surname;
+    private LocalDate birthday;
+    private String gender;
     private String email;
     private String password;
-    private String image_url;
-    private String role;
-    private double weight;
-    private double height;
+
+
 
     public RegisterDTO() {
     }
@@ -18,15 +20,29 @@ public class RegisterDTO {
         this.password = password;
     }
 
-    public RegisterDTO(String name, String surname, String email, String password, String image_url, String role, double weight, double height) {
+    public RegisterDTO(String name, String surname, LocalDate birthday, String gender, String email, String password) {
         this.name = name;
         this.surname = surname;
+        this.birthday = birthday;
+        this.gender = gender;
         this.email = email;
         this.password = password;
-        this.image_url = image_url;
-        this.role = role;
-        this.weight = weight;
-        this.height = height;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
@@ -61,35 +77,5 @@ public class RegisterDTO {
         this.surname = surname;
     }
 
-    public String getImage_url() {
-        return image_url;
-    }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
 }

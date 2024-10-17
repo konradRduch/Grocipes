@@ -24,7 +24,35 @@
                 name="surname"
               />
             </div>
+        
+            <div class="col-12" *ngIf="!authMode">
+              <label for="surname">Birthday</label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="dd-MM-yyyy"
+                  name="dp"
+                  [(ngModel)]="model"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  [value]="getFormattedDate()"
+                />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
 
+            <div class="col-12" *ngIf="!authMode">
+              <label for="gender">Gender:</label>
+              <select
+                class="form-select"
+                id="gender"
+                name="gender"
+                [(ngModel)]="gender"
+              >
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </div>
 
             <div class="form-group">
               <label for="email">E-Mail</label>

@@ -1,1 +1,56 @@
-<p>shopping-list-item works!</p>
+<div class="container">
+    <div class="card text-white mb-3 text-truncate"  [ngClass]="{
+    'bg-primary': enum.BLUE===cardColor?true :false, 
+    'bg-secondary': enum.GRAY===cardColor?true :false,
+    'bg-success': enum.GREEN===cardColor?true :false, 
+    'bg-warning': enum.YELLOW===cardColor?true :false,
+    'bg-info': enum.TURQUOISE===cardColor?true :false, 
+    'bg-dark': enum.BLACK===cardColor?true :false,
+    }">
+        <a [routerLink]="['shopping-list-item-details/',shoppList?.id]" style=" text-decoration: none;color: white;">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{shoppList?.name}}</h5>
+                <ul style="color:white">
+                    <li class="card-text">
+                        <div class="row">
+                            <div class="col col-lg-6 text-start"><s>Milk</s></div>
+                            <div class="col col-lg-6 text-end">4</div>
+                        </div>
+                    </li>
+                    <li class="card-text">
+                        <div class="row">
+                            <div class="col-6 text-start"><s>Bread</s></div>
+                            <div class="col-6 text-end">1</div>
+                        </div>
+                    </li>
+                    <li class="card-text">
+                        <div class="row">
+                            <div class="col-6 text-start">Apple</div>
+                            <div class="col-6 text-end">2</div>
+                        </div>
+                    </li>
+                    <li class="card-text">
+                        <div class="row">
+                            <div class="col-6 text-start">Onion</div>
+                            <div class="col-6 text-end">3</div>
+                        </div>
+                    </li>
+                    <li class="card-text">
+                        <div class="row">
+                            <div class="col-6 text-start">Onion</div>
+                            <div class="col-6 text-end">3</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </a>
+            <div class="card-footer text-center border-top ">
+                <button class="btn btn-light" style="margin-right: 5px;" (click)="onEdit()" >
+                    <i class="fas fa-edit"></i>
+                </button>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                <button class="btn btn-danger" (click)="onDelete()">X</button>
+            </div>
+        
+    </div>
+</div>

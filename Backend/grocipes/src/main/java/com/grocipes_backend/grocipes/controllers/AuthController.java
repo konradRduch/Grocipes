@@ -50,6 +50,10 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         Role roles = roleRepository.findByName("USER").get();
         user.setRoles(Collections.singletonList(roles));
+        user.setName(request.getName());
+        user.setSurname(request.getSurname());
+        user.setBirthday(request.getBirthday());
+        user.setGender(request.getGender());
         userEntityRepository.save(user);
 
         Authentication authentication = authenticationManager.authenticate(
