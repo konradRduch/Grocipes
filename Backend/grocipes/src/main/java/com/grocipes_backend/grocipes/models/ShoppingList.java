@@ -12,6 +12,7 @@ public class ShoppingList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private Integer cardColor;
     private LocalDateTime shopping_date;
 
     @ManyToOne
@@ -22,12 +23,21 @@ public class ShoppingList {
     public ShoppingList() {
     }
 
-    public ShoppingList(Integer id, String name, LocalDateTime shopping_date, ShoppingSchedule shoppingList, List<ProductShoppingList> productShoppingLists) {
+    public ShoppingList(Integer id, String name, Integer cardColor, LocalDateTime shopping_date, ShoppingSchedule shoppingList, List<ProductShoppingList> productShoppingLists) {
         this.id = id;
         this.name = name;
+        this.cardColor = cardColor;
         this.shopping_date = shopping_date;
         this.shoppingList = shoppingList;
         this.productShoppingLists = productShoppingLists;
+    }
+
+    public Integer getCardColor() {
+        return cardColor;
+    }
+
+    public void setCardColor(Integer cardColor) {
+        this.cardColor = cardColor;
     }
 
     public Integer getId() {

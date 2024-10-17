@@ -25,7 +25,8 @@ export class ShoppingListService {
     addProductToShoppingList(){
 
     }
-    addProductFromRecipeToShoppingList(){
+    
+    deleteProductFromShoppingList(){
         
     }
 
