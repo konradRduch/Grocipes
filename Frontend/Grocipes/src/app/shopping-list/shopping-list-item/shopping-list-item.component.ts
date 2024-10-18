@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProductShoppingLists } from 'src/app/model/productShoppingList.model';
 import { ShoppingList } from 'src/app/model/shopping-list.model';
 
 
@@ -23,6 +24,9 @@ export class ShoppingListItemComponent implements OnInit{
   active: boolean = true;
   enum: typeof Color = Color;
 
+
+  productShoppingLists: ProductShoppingLists[] |undefined;
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute){
 
   }
@@ -31,10 +35,9 @@ export class ShoppingListItemComponent implements OnInit{
     this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        console.log(this.id);
       }
     )
-    this.cardColor = this.shoppList?.color;
+    this.cardColor = this.shoppList?.cardColor;
     this.id = this.shoppList?.id;
   }
 

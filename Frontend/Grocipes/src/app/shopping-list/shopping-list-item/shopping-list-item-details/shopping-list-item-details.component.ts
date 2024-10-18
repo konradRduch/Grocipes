@@ -20,7 +20,7 @@ onAddProductToShhopingList() {
 throw new Error('Method not implemented.');
 }
 
-  shoppList: ShoppingList = new ShoppingList(1,"Daily product", 0);
+  shoppList: ShoppingList |undefined;
   id: number | undefined;
   cardColor: number| undefined;
   active: boolean = true;
@@ -37,7 +37,7 @@ throw new Error('Method not implemented.');
         
       }
     )
-    this.cardColor = this.shoppList?.color;
+    this.cardColor = this.shoppList?.cardColor;
   }
 
 }

@@ -8,8 +8,6 @@ export class UserDataService{
     constructor(private http: HttpClient){
 
     }
-
-
     fetchUser(email: string): Observable<UserData>{
         return this.http.get<UserData>(`http://localhost:8080/userData/${email}`);
     }

@@ -1,27 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ShoppingList } from '../model/shopping-list.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserDataService } from '../service/user-data.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../service/auth.service';
+import { UserData } from '../model/userData.model';
+import { ShoppingListService } from '../service/shopping-list.service';
+import { ShoppingSchedule } from '../model/shoppingSchedule.model';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent {
+export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute){}
-
-  shoppingList: ShoppingList[] = [ 
-    new ShoppingList(1,"Daily product", 0),
-    new ShoppingList(2,"BBQ product", 1),
-    new ShoppingList(3,"Gym product", 2),
-    new ShoppingList(4,"Birthday party product", 3),
-    new ShoppingList(5,"Gym product", 4),
-    new ShoppingList(6,"Gym product", 5)
-  ];
+  userData: UserData | undefined;
+  userName: string | undefined;
+  id: number | undefined;
+  shoppingList: ShoppingList[] | undefined;
+  shoppingSchedule: ShoppingSchedule | undefined;
+  private userSub: Subscription = new Subscription();
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService, private userService: UserDataService, private shoppingListService: ShoppingListService) { }
 
 
-  onAdd(){
+  ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.userName = user?.email
+    }
+    );
+    this.userService.fetchUser(this.userName!).subscribe(
+      (user: UserData) => {
+        this.userData = user;
+        this.shoppingListService.fetchShoppingLists(this.userData.id).subscribe(
+          (data: ShoppingSchedule[]) => {
+            //this.shoppingList = data;
+            this.shoppingSchedule = data[0];
+            this.shoppingList = [...this.shoppingSchedule.shoppingList];
+          }
+        );
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
+  }
+  onAdd() {
     this.router.navigate(['shopping-list/shopping-list-add']);
   }
 

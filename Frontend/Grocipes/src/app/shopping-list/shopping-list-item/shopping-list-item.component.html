@@ -10,35 +10,13 @@
         <a [routerLink]="['shopping-list-item-details/',shoppList?.id]" style=" text-decoration: none;color: white;">
             <div class="card-body">
                 <h5 class="card-title text-center">{{shoppList?.name}}</h5>
+                <p>{{shoppList?.shopping_date}}</p>
                 <ul style="color:white">
-                    <li class="card-text">
+                    <li class="card-text" *ngFor="let s of shoppList?.productShoppingLists">
                         <div class="row">
-                            <div class="col col-lg-6 text-start"><s>Milk</s></div>
-                            <div class="col col-lg-6 text-end">4</div>
-                        </div>
-                    </li>
-                    <li class="card-text">
-                        <div class="row">
-                            <div class="col-6 text-start"><s>Bread</s></div>
-                            <div class="col-6 text-end">1</div>
-                        </div>
-                    </li>
-                    <li class="card-text">
-                        <div class="row">
-                            <div class="col-6 text-start">Apple</div>
-                            <div class="col-6 text-end">2</div>
-                        </div>
-                    </li>
-                    <li class="card-text">
-                        <div class="row">
-                            <div class="col-6 text-start">Onion</div>
-                            <div class="col-6 text-end">3</div>
-                        </div>
-                    </li>
-                    <li class="card-text">
-                        <div class="row">
-                            <div class="col-6 text-start">Onion</div>
-                            <div class="col-6 text-end">3</div>
+                            <div class="col col-lg-6 text-start" *ngIf="s.done">{{s.name}}</div>
+                            <div class="col col-lg-6 text-start" *ngIf="!s.done"><s>{{s.name}}</s></div>
+                            <div class="col col-lg-6 text-end">{{s.quantity}}</div>
                         </div>
                     </li>
                 </ul>
