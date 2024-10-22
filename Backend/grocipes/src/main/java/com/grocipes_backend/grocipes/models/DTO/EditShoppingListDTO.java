@@ -3,27 +3,30 @@ package com.grocipes_backend.grocipes.models.DTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ShoppingListCreationDTO {
-    private Integer userId;
+public class EditShoppingListDTO {
+    private Integer id;
     private String name;
     private LocalDateTime shopping_date;
     private Integer cardColor;
     private List<ProductShoppingListCreationDTO> productShoppingLists;
 
-    public ShoppingListCreationDTO(Integer userId, String name, LocalDateTime shopping_date, Integer cardColor, List<ProductShoppingListCreationDTO> productShoppingLists) {
-        this.userId = userId;
+    public EditShoppingListDTO() {
+    }
+
+    public EditShoppingListDTO(Integer id, String name, LocalDateTime shopping_date, Integer cardColor, List<ProductShoppingListCreationDTO> productShoppingLists) {
+        this.id = id;
         this.name = name;
         this.shopping_date = shopping_date;
         this.cardColor = cardColor;
         this.productShoppingLists = productShoppingLists;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -9,6 +9,7 @@ import com.grocipes_backend.grocipes.repositories.ProductRepository;
 import com.grocipes_backend.grocipes.repositories.ProductShoppingListRepository;
 import com.grocipes_backend.grocipes.repositories.ShoppingListRepository;
 import com.grocipes_backend.grocipes.repositories.UnitProductShoppingListRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,4 +48,19 @@ public class ProductShoppingListService {
     public List<ProductShoppingList> findProductShoppingListByShoppingList(ShoppingList shoppingList){
        return productShoppingListRepository.findProductShoppingListByShoppingList(shoppingList);
     }
+    @Transactional
+    public void deleteProductShoppingListByProductId(Integer productId){
+        productShoppingListRepository.deleteByProductId(productId);
+    }
+    @Transactional
+    public void deleteAllByShoppingListId(Integer shoppingListId) {
+        productShoppingListRepository.deleteByShoppingListId(shoppingListId);
+    }
+
+//    public void toggleProductDoneStatus(Integer productId){
+//        ProductShoppingList productShoppingList = productShoppingListRepository.findById(productId)
+//                .orElseThrow(NoSuchElementException::new);
+//        productShoppingList.setDone(!productShoppingList.isDone());
+//        productShoppingListRepository.save(productShoppingList);
+//    }
 }

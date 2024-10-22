@@ -4,7 +4,10 @@
     <div class="row" >
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-lg-4" *ngFor="let s of shoppingList">
             <div class="card-deck">
-                <app-shopping-list-item [shoppList]="s" ></app-shopping-list-item>
+                <app-shopping-list-item 
+                [shoppList]="s" 
+                (shoppingListDeleted)="onShoppingListDeleted($event)"
+                ></app-shopping-list-item>
                 <br>
             </div>
         </div>

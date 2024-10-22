@@ -7,9 +7,19 @@ public class ProductShoppingListCreationDTO {
     private Integer unit_id;
     private boolean done;
 
+    public ProductShoppingListCreationDTO() {
+    }
+
     public ProductShoppingListCreationDTO(Integer product_id, Integer shop_list_id, Double quantity, Integer unit_id, boolean done) {
         this.product_id = product_id;
         this.shop_list_id = shop_list_id;
+        this.quantity = quantity;
+        this.unit_id = unit_id;
+        this.done = done;
+    }
+
+    public ProductShoppingListCreationDTO(Integer product_id, Double quantity, Integer unit_id, boolean done) {
+        this.product_id = product_id;
         this.quantity = quantity;
         this.unit_id = unit_id;
         this.done = done;

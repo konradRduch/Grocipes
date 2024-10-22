@@ -1,9 +1,6 @@
 package com.grocipes_backend.grocipes.controllers;
 
-import com.grocipes_backend.grocipes.models.DTO.ProductShoppingListCreationDTO;
-import com.grocipes_backend.grocipes.models.DTO.ShoppingListCreationDTO;
-import com.grocipes_backend.grocipes.models.DTO.ShoppingListDTO;
-import com.grocipes_backend.grocipes.models.DTO.ShoppingScheduleDTO;
+import com.grocipes_backend.grocipes.models.DTO.*;
 import com.grocipes_backend.grocipes.models.ProductShoppingList;
 import com.grocipes_backend.grocipes.models.ShoppingList;
 import com.grocipes_backend.grocipes.models.ShoppingSchedule;
@@ -29,7 +26,7 @@ public class ShoppingListController {
         this.shoppingScheduleService = shoppingScheduleService;
         this.productShoppingListService = productShoppingListService;
     }
-    @GetMapping("/{id}")
+    @GetMapping("shoppingSchedules/{id}")
     public List<ShoppingScheduleDTO>getAllShoppingList(@PathVariable Integer id){
         List<ShoppingScheduleDTO> shoppingSchedules = shoppingScheduleService.findByUserId(id);
 
@@ -40,15 +37,18 @@ public class ShoppingListController {
         return shoppingSchedules;
        // return shoppingListService.getAllByUserId(id);
     }
-
+    @GetMapping("/{id}")
+    public ShoppingListDTO getShoppingList(@PathVariable Integer id){
+        return shoppingListService.findShoppingListDTOById(id);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Void> addShoppingList(@RequestBody ShoppingListCreationDTO request){
 
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setName(request.getName());
-        shoppingList.setShopping_date(request.getShoppingDate());
-        shoppingList.setCardColor(request.getColorCard());
+        shoppingList.setShopping_date(request.getShopping_date());
+        shoppingList.setCardColor(request.getCardColor());
 
         ShoppingSchedule shoppingSchedule = shoppingScheduleService.findShoppingScheduleByUserId(request.getUserId());
         shoppingList.setShoppingList(shoppingSchedule);
@@ -56,11 +56,14 @@ public class ShoppingListController {
 
 
 
-        List<ProductShoppingListCreationDTO> products = request.getProducts();
-        for(ProductShoppingListCreationDTO product: products){
-            product.setShop_list_id(shoppingList.getId());
-            productShoppingListService.save(product);
+        List<ProductShoppingListCreationDTO> products = request.getProductShoppingLists();
+        if(products!=null){
+            for(ProductShoppingListCreationDTO product: products){
+                product.setShop_list_id(shoppingList.getId());
+                productShoppingListService.save(product);
+            }
         }
+
         return ResponseEntity.ok().build();
     }
 
@@ -68,6 +71,47 @@ public class ShoppingListController {
     public ResponseEntity<Void> addProductToShoppingList(){
 
 
+        return ResponseEntity.ok().build();
+    }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteShoppingList(@PathVariable Integer id) {
+        // Usuwanie wszystkich powiązanych rekordów z ProductShoppingList na podstawie shoppingListId
+        productShoppingListService.deleteAllByShoppingListId(id);
+
+        // Usunięcie samej listy zakupowej
+        shoppingListService.deleteShoppingListById(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<Void> toggleProductsInShoppingList(){
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("edit/{id}")
+    public ResponseEntity<Void>editShoppingList(@PathVariable Integer id, @RequestBody EditShoppingListDTO request){
+
+        ShoppingList shoppingList = shoppingListService.findShoppingListById(id);
+
+        // Ustawienie nowych wartości dla listy zakupowej
+        shoppingList.setName(request.getName());
+        shoppingList.setCardColor(request.getCardColor());
+        shoppingList.setShopping_date(request.getShopping_date());
+
+        // Usuwanie wszystkich powiązanych rekordów z ProductShoppingList
+        productShoppingListService.deleteAllByShoppingListId(shoppingList.getId());
+
+        // Dodawanie nowych rekordów do ProductShoppingList
+        List<ProductShoppingListCreationDTO> products = request.getProductShoppingLists();
+        if (products != null) {
+            for (ProductShoppingListCreationDTO product : products) {
+                product.setShop_list_id(shoppingList.getId());
+                productShoppingListService.save(product);
+            }
+        }
+
+        // Zapisanie zaktualizowanej listy zakupowej
+        shoppingListService.save(shoppingList);
         return ResponseEntity.ok().build();
     }
 

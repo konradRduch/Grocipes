@@ -4,33 +4,33 @@
         <div class="col-3"></div>
         <div class="col-5 text-center">
             <h2>{{shoppList?.name}}</h2>
+            <p>{{shoppList?.shopping_date}}</p>
         </div>
         <div class="col-3"></div>
         
     </div>
     <hr>
-    <div class="row">
+    <div class="row" *ngFor="let sl of shoppList?.productShoppingLists">
         <div class="col-3"></div>
         <div class="col-5">
             <div class="row">
                 <div class="col-4 text-start">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="" 
+                    id="flexCheckDefault"
+                    [checked]="sl.done" (change)="onToggleDone(sl)"
+                    >
                 </div>
-                <div class="col-4 text-center"><s>Milk</s></div>
-                <div class="col-4 text-end">3</div>
-            </div>
-
-            <div class="row">
-                <div class="col-4 text-start">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                </div>
-                <div class="col-4 text-center">Onion</div>
-                <div class="col-4 text-end">3</div>
+                <div class="col-4 text-center"  *ngIf="!sl.done">{{sl.name}}</div>
+                <div class="col-4 text-center"  *ngIf="sl.done"><s>{{sl.name}}</s></div>
+                <div class="col-4 text-end">{{sl.quantity}}</div>
             </div>
         </div>
         <div class="col-3"></div>
     </div>
-    <br>
+    <!-- <br>
     <div class="row text-center">
         <div class="col-3"></div>
         <div class="col-5">
@@ -40,7 +40,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         </div>
         <div class="col-3"></div>
-    </div>
+    </div> -->
 
 
 

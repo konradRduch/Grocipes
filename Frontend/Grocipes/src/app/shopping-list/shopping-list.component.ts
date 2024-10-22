@@ -37,16 +37,36 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
             //this.shoppingList = data;
             this.shoppingSchedule = data[0];
             this.shoppingList = [...this.shoppingSchedule.shoppingList];
+            //console.log(this.shoppingSchedule);
           }
         );
       }
     );
+
+    if(this.shoppingList !==undefined){
+      this.shoppingListService.shoppingListChanged$.subscribe(
+        (data: ShoppingSchedule[]) => {
+          this.shoppingSchedule = data[0];
+          this.shoppingList = [...this.shoppingSchedule.shoppingList];
+        }
+      );
+    }
+    
+
   }
+
+
+  
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
   }
   onAdd() {
     this.router.navigate(['shopping-list/shopping-list-add']);
   }
+
+  onShoppingListDeleted(id: number) {
+    this.shoppingList = this.shoppingList?.filter(list => list.id !== id);
+  }
+
 
 }

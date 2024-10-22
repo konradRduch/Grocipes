@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingList } from 'src/app/model/shopping-list.model';
+import { ShoppingListService } from 'src/app/service/shopping-list.service';
 
 enum Color {
   BLUE,
@@ -16,17 +17,16 @@ enum Color {
   styleUrls: ['./shopping-list-item-details.component.css']
 })
 export class ShoppingListItemDetailsComponent {
-onAddProductToShhopingList() {
-throw new Error('Method not implemented.');
-}
+
 
   shoppList: ShoppingList |undefined;
+  
   id: number | undefined;
   cardColor: number| undefined;
   active: boolean = true;
   enum: typeof Color = Color;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute){
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private shoppingListService: ShoppingListService){
 
   }
 
@@ -34,10 +34,20 @@ throw new Error('Method not implemented.');
     this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        
+        this.shoppingListService.getShoppingList(this.id).subscribe(
+          (data: ShoppingList)=>{
+            this.shoppList = data;
+          }
+        );
       }
     )
     this.cardColor = this.shoppList?.cardColor;
+    console.log(this.shoppList);
+  }
+
+
+  onToggleDone(productShoppingList: any){
+    console.log("change");
   }
 
 }

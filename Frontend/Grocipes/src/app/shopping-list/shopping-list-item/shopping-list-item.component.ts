@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductShoppingLists } from 'src/app/model/productShoppingList.model';
 import { ShoppingList } from 'src/app/model/shopping-list.model';
+import { ShoppingListService } from 'src/app/service/shopping-list.service';
 
 
 enum Color {
@@ -24,10 +25,11 @@ export class ShoppingListItemComponent implements OnInit{
   active: boolean = true;
   enum: typeof Color = Color;
 
+  @Output() shoppingListDeleted = new EventEmitter<number>();
 
   productShoppingLists: ProductShoppingLists[] |undefined;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute){
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private shoppingListService: ShoppingListService){
 
   }
 
@@ -46,7 +48,9 @@ export class ShoppingListItemComponent implements OnInit{
     this.router.navigate(['shopping-list/shopping-list-edit/',`${this.id}`]);
   }
   onDelete(){
-
+    this.shoppingListService.deleteShoppingList(this.id!).subscribe(() => {
+      this.shoppingListDeleted.emit(this.id!);
+    });
   }
 
 }

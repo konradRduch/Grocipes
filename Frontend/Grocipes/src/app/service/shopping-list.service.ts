@@ -1,33 +1,93 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { ShoppingSchedule } from "../model/shoppingSchedule.model";
+import { ShoppingList } from "../model/shopping-list.model";
 
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService {
 
+    shoppingListChanged =  new BehaviorSubject<ShoppingSchedule[]>([]);
+    // groceriesChanged$ = this.groceriesChanged.asObservable();
+    shoppingListChanged$ = this.shoppingListChanged.asObservable();
     constructor(private http: HttpClient){
 
     }
 
     fetchShoppingLists(userId: number): Observable<ShoppingSchedule[]>{
-        return this.http.get<ShoppingSchedule[]>(`http://localhost:8080/shoppingList/${userId}`);
+        return this.http.get<ShoppingSchedule[]>(`http://localhost:8080/shoppingList/shoppingSchedules/${userId}`).pipe(
+            tap(data =>{
+                this.shoppingListChanged.next(data);
+            })
+        );
     }
 
-    getShoppingList(){
-
+    getShoppingList(shoppingListId: number): Observable<ShoppingList>{
+        return this.http.get<ShoppingList>(`http://localhost:8080/shoppingList/${shoppingListId}`);
     }
 
-    addShoppingList(){
-
+    addShoppingList(userid:number ,dto: any){
+        console.log(dto);
+        const addShoppingListDTO = {
+              userId: userid,
+              name: dto.name,
+              shopping_date: dto.shoppingDate,
+              cardColor: dto.colorCard,
+              productShoppingLists: dto.products.map((data: any) => ({
+                product_id: data.id,
+                quantity: data.unitValue,
+                unit_id: data.unit_id,
+                done: false
+              }))
+            //   productShoppingLists: dto.produts.map(
+            //       (data: any) => ({
+            //           product_id: data.id,
+            //           quantity: data.unitValue,
+            //           unit_id: data.unit_id,
+            //           done: false
+            //       }))
+                //    {
+                //     product_id: 48,
+                //     quantity: 1,
+                //     unit_id: 1,
+                //     done: false
+                //    }
+        };
+            // },
+            // nutritionFactNutrientDTO: product.nutrient.map(nutrient => ({
+            //   nutrientId: nutrient.id,
+            //   amount: nutrient.amount,
+            //   dailyValue: nutrient.dailyValue
+            // }))
+        //   };
+        console.log("po");
+        console.log(addShoppingListDTO);
+        return this.http.post("http://localhost:8080/shoppingList/add",addShoppingListDTO);
     }
 
-    deleteShoppingList(){
-
+    deleteShoppingList(shoppingListId: number){
+        return this.http.delete(`http://localhost:8080/shoppingList/delete/${shoppingListId}`);
     }
 
-    editShoppingList(){
+    editShoppingList(shoppingListId: number,dto: any){
 
+        console.log(dto);
+        const editShoppingListDTO = {
+              id: shoppingListId,
+              name: dto.name,
+              shopping_date: dto.shoppingDate,
+              cardColor: dto.colorCard,
+              productShoppingLists: dto.products.map((data: any) => ({
+                product_id: data.id,
+                quantity: data.unitValue,
+                unit_id: data.unit_id,
+                done: false
+              }))
+        };
+
+        console.log("edit!!!!!!!!!!!");
+        console.log(editShoppingListDTO);
+        return this.http.patch(`http://localhost:8080/shoppingList/edit/${shoppingListId}`,editShoppingListDTO);
     }
 
     addProductToShoppingList(){
