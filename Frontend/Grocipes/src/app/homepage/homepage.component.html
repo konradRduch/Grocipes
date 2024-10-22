@@ -1,22 +1,8 @@
 <div class="container-fluid" style="height: 100vh;">
     <div class="row overflow-x-auto flex-nowrap" style="min-height: 12rem; max-height: 12rem; margin-top: 25px;">
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
-        </div>
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
-        </div>
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
-        </div>
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
-        </div>
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
-        </div>
-        <div class="col-auto">
-            <app-shop-list-item></app-shop-list-item>
+        <div class="col-auto" *ngFor="let sl of shoppingList">
+            <app-shop-list-item 
+            [shoppList]="sl"></app-shop-list-item>
         </div>
     </div>
     <div class="row">

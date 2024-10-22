@@ -46,9 +46,18 @@ export class ShoppingListItemDetailsComponent {
     console.log(this.shoppList);
   }
 
+  exit(){
+    this.router.navigate(['shopping-list']);
+  }
 
   onToggleDone(id: number, productShoppingList: any) {
     this.shoppingListService.toggleProduct(id, productShoppingList.id).subscribe(() => {
+      this.refreshShoppingList();
+    });
+  }
+
+  likeShoppingList(productShoppingList: any){
+    this.shoppingListService.likeShoppingList(productShoppingList.id).subscribe(() => {
       this.refreshShoppingList();
     });
   }

@@ -33,6 +33,7 @@ export class ShoppingListService {
               name: dto.name,
               shopping_date: dto.shoppingDate,
               cardColor: dto.colorCard,
+              likedList: false,
               productShoppingLists: dto.products.map((data: any) => ({
                 product_id: data.id,
                 quantity: data.unitValue,
@@ -58,6 +59,7 @@ export class ShoppingListService {
               name: dto.name,
               shopping_date: dto.shoppingDate,
               cardColor: dto.colorCard,
+              likedList: dto.likedList,
               productShoppingLists: dto.products.map((data: any) => ({
                 product_id: data.id,
                 quantity: data.unitValue,
@@ -82,5 +84,10 @@ export class ShoppingListService {
     toggleProduct(shoppingListId: number, productshoppinglistId: number){
         const emptyBody ={}
       return this.http.patch(`http://localhost:8080/shoppingList/toggle/${shoppingListId}/${productshoppinglistId}`, emptyBody);  
+    }
+
+    likeShoppingList(shoppingListId: number){
+        const emptyBody ={}
+        return this.http.patch(`http://localhost:8080/shoppingList/like/${shoppingListId}`, emptyBody);  
     }
 }

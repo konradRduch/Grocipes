@@ -14,6 +14,7 @@ public class ShoppingList {
     private String name;
     private Integer cardColor;
     private LocalDateTime shopping_date;
+    private boolean likedList;
 
     @ManyToOne
     @JoinColumn(name="shopping_schedule_id")
@@ -23,13 +24,22 @@ public class ShoppingList {
     public ShoppingList() {
     }
 
-    public ShoppingList(Integer id, String name, Integer cardColor, LocalDateTime shopping_date, ShoppingSchedule shoppingList, List<ProductShoppingList> productShoppingLists) {
+    public ShoppingList(Integer id, String name, Integer cardColor, LocalDateTime shopping_date, boolean likedList, ShoppingSchedule shoppingList, List<ProductShoppingList> productShoppingLists) {
         this.id = id;
         this.name = name;
         this.cardColor = cardColor;
         this.shopping_date = shopping_date;
+        this.likedList = likedList;
         this.shoppingList = shoppingList;
         this.productShoppingLists = productShoppingLists;
+    }
+
+    public boolean isLikedList() {
+        return likedList;
+    }
+
+    public void setLikedList(boolean likedList) {
+        this.likedList = likedList;
     }
 
     public Integer getCardColor() {

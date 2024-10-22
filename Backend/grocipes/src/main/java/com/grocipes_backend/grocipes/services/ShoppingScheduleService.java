@@ -54,7 +54,7 @@ public class ShoppingScheduleService {
     private List<ShoppingListDTO> convertToDto(List<ShoppingList> shoppingLists){
         List<ShoppingListDTO> converted = shoppingLists.stream()
                 .map(shoppingList -> {
-                    ShoppingListDTO dto = new ShoppingListDTO(shoppingList.getId(),shoppingList.getName(), shoppingList.getShopping_date(), shoppingList.getCardColor(),convertToProductShoppingListDTO(shoppingList.getProductShoppingLists()));
+                    ShoppingListDTO dto = new ShoppingListDTO(shoppingList.getId(),shoppingList.getName(), shoppingList.getShopping_date(), shoppingList.getCardColor(),shoppingList.isLikedList(),convertToProductShoppingListDTO(shoppingList.getProductShoppingLists()));
                     return dto;
                 })
                 .collect(Collectors.toList());

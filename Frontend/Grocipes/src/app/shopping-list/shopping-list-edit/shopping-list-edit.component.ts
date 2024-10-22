@@ -109,6 +109,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
         Validators.required
       ),
       colorCard: new FormControl(this.getEnumNumberValue(shoppingList?.cardColor), Validators.required),
+      likedList: new FormControl(shoppingList?.likedList),
       products: new FormArray(shoppingList?.productShoppingLists ? shoppingList.productShoppingLists.map(product => this.createProductGroup(product)) : [])
     });
   }

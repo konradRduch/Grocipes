@@ -10,13 +10,13 @@
         <a [routerLink]="['shopping-list-item-details/',shoppList?.id]" style=" text-decoration: none;color: white;">
             <div class="card-body">
                 <h5 class="card-title text-center">{{shoppList?.name}}</h5>
-                {{shoppList?.shopping_date}}
+                {{shoppList?.shopping_date | date:"MMM dd, yyyy 'at' hh:mm a"}}
                 <ul style="color:white">
                     <li class="card-text" *ngFor="let s of shoppList?.productShoppingLists | slice:0:4">
                         <div class="row">
                             <div class="col col-lg-6 text-start" *ngIf="!s.done">{{s.name}}</div>
                             <div class="col col-lg-6 text-start" *ngIf="s.done"><s>{{s.name}}</s></div>
-                            <div class="col col-lg-6 text-end">{{s.quantity}}</div>
+                            <div class="col col-lg-6 text-end" *ngIf="!s.done">{{s.quantity}}</div>
                         </div>
                     </li>
                 </ul>

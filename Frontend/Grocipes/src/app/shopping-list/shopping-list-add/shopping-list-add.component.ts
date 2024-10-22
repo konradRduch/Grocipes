@@ -82,6 +82,7 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
       shoppingDate: new FormControl(null, Validators.required),
       shoppingTime: new FormControl(null, Validators.required),
       colorCard: new FormControl(null, Validators.required),
+      likedList: new FormControl(false),
       products: new FormArray([])
     });
   }

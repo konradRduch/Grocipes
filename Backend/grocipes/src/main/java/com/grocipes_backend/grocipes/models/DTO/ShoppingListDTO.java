@@ -8,17 +8,25 @@ public class ShoppingListDTO {
     private String name;
     private LocalDateTime shopping_date;
     private Integer cardColor;
-
+    private boolean likedList;
     private List<ProductShoppingListDTO> productShoppingLists;
 
-    public ShoppingListDTO(Integer id, String name, LocalDateTime shopping_date, Integer cardColor, List<ProductShoppingListDTO> productShoppingLists) {
+    public ShoppingListDTO(Integer id, String name, LocalDateTime shopping_date, Integer cardColor, boolean likedList, List<ProductShoppingListDTO> productShoppingLists) {
         this.id = id;
         this.name = name;
         this.shopping_date = shopping_date;
         this.cardColor = cardColor;
+        this.likedList = likedList;
         this.productShoppingLists = productShoppingLists;
     }
 
+    public boolean isLikedList() {
+        return likedList;
+    }
+
+    public void setLikedList(boolean likedList) {
+        this.likedList = likedList;
+    }
 
     public Integer getId() {
         return id;

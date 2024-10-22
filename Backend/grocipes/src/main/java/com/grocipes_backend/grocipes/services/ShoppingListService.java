@@ -35,7 +35,7 @@ public class ShoppingListService {
 
     public ShoppingListDTO findShoppingListDTOById(Integer id){
        ShoppingList shoppingList =  shoppingListRepository.findShoppingListById(id);
-       ShoppingListDTO shoppingListDTO = new ShoppingListDTO(shoppingList.getId(), shoppingList.getName(), shoppingList.getShopping_date(), shoppingList.getCardColor(),convertToProductShoppingListDTO(shoppingList.getProductShoppingLists()));
+       ShoppingListDTO shoppingListDTO = new ShoppingListDTO(shoppingList.getId(), shoppingList.getName(), shoppingList.getShopping_date(), shoppingList.getCardColor(),shoppingList.isLikedList(),convertToProductShoppingListDTO(shoppingList.getProductShoppingLists()));
        return shoppingListDTO;
     }
 
@@ -69,4 +69,7 @@ public class ShoppingListService {
     public void deleteShoppingListById(Integer id) {
         this.shoppingListRepository.deleteById(id);
     }
+
+
+
 }

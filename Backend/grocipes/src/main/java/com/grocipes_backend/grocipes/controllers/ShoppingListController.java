@@ -49,6 +49,7 @@ public class ShoppingListController {
         shoppingList.setName(request.getName());
         shoppingList.setShopping_date(request.getShopping_date());
         shoppingList.setCardColor(request.getCardColor());
+        shoppingList.setLikedList(request.isLikedList());
 
         ShoppingSchedule shoppingSchedule = shoppingScheduleService.findShoppingScheduleByUserId(request.getUserId());
         shoppingList.setShoppingList(shoppingSchedule);
@@ -88,6 +89,13 @@ public class ShoppingListController {
         productShoppingListService.toggleProductDoneStatus(productshoppinglistId);
         return ResponseEntity.ok().build();
     }
+    @PatchMapping("like/{id}")
+    public ResponseEntity<Void> likeShoppingList(@PathVariable Integer id){
+        ShoppingList shoppingList = shoppingListService.findShoppingListById(id);
+        shoppingList.setLikedList(!shoppingList.isLikedList());
+        shoppingListService.save(shoppingList);
+        return ResponseEntity.ok().build();
+    }
 
     @PatchMapping("edit/{id}")
     public ResponseEntity<Void>editShoppingList(@PathVariable Integer id, @RequestBody EditShoppingListDTO request){
@@ -98,6 +106,7 @@ public class ShoppingListController {
         shoppingList.setName(request.getName());
         shoppingList.setCardColor(request.getCardColor());
         shoppingList.setShopping_date(request.getShopping_date());
+        shoppingList.setLikedList(request.isLikedList());
 
         // Usuwanie wszystkich powiązanych rekordów z ProductShoppingList
         productShoppingListService.deleteAllByShoppingListId(shoppingList.getId());
