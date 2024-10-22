@@ -11,4 +11,6 @@ public interface ProductShoppingListRepository extends JpaRepository<ProductShop
     void deleteByProductId(Integer id);
 
     void deleteByShoppingListId(Integer shoppingListId);
+
+
 }

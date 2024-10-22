@@ -3,6 +3,7 @@ import { AuthService } from '../service/auth.service';
 import { Subscription } from 'rxjs';
 import { UserData } from '../model/userData.model';
 import { UserDataService } from '../service/user-data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userName: string | undefined;
   private userSub: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private userDataService: UserDataService) {
+  constructor(private authService: AuthService, private userDataService: UserDataService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,4 +39,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   logOut() {
     this.authService.logout();
   }
+
+  update(){
+    this.router.navigate(['profile/body-parameters-update']);
+    //profile/body-parameters-update
+  }
+  history(){
+    this.router.navigate(['profile/body-parameters-history']);
+  }
+
 }

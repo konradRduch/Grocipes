@@ -37,6 +37,7 @@ export class ShoppingListItemDetailsComponent {
         this.shoppingListService.getShoppingList(this.id).subscribe(
           (data: ShoppingList)=>{
             this.shoppList = data;
+            console.log(this.shoppList)
           }
         );
       }
@@ -46,8 +47,17 @@ export class ShoppingListItemDetailsComponent {
   }
 
 
-  onToggleDone(productShoppingList: any){
-    console.log("change");
+  onToggleDone(id: number, productShoppingList: any) {
+    this.shoppingListService.toggleProduct(id, productShoppingList.id).subscribe(() => {
+      this.refreshShoppingList();
+    });
   }
 
+  private refreshShoppingList() {
+    if (this.id) {
+      this.shoppingListService.getShoppingList(this.id).subscribe((data: ShoppingList) => {
+        this.shoppList = data;
+      });
+    }
+  }
 }

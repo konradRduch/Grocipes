@@ -20,7 +20,7 @@
                     type="checkbox" 
                     value="" 
                     id="flexCheckDefault"
-                    [checked]="sl.done" (change)="onToggleDone(sl)"
+                    [checked]="sl.done" (change)="onToggleDone(shoppList?.id!,sl)"
                     >
                 </div>
                 <div class="col-4 text-center"  *ngIf="!sl.done">{{sl.name}}</div>

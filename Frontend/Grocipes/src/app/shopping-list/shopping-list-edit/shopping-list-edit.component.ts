@@ -122,7 +122,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
       id: new FormControl(null, Validators.required),
       unitValue: new FormControl(null, [Validators.required, Validators.min(1)]),
       unit_id: new FormControl(null, Validators.required),
-      done: new FormControl(false)
+      done: new FormControl(null)
     });
     this.products.push(productGroup);
   }
@@ -134,7 +134,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
       id: new FormControl(product?.productId, Validators.required), // Użyj ID produktu lub pierwszego produktu jako domyślnego
       unitValue: new FormControl(product?.quantity ,[Validators.required, Validators.min(1)]), // Użyj unitValue lub 1 jako domyślną ilość
       unit_id: new FormControl(product?.unitId , Validators.required), // Użyj unit_id lub pierwszej jednostki jako domyślnej
-      done: new FormControl(false)
+      done: new FormControl(product?.done)
     });
   }
 

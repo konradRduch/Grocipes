@@ -39,27 +39,8 @@ export class ShoppingListService {
                 unit_id: data.unit_id,
                 done: false
               }))
-            //   productShoppingLists: dto.produts.map(
-            //       (data: any) => ({
-            //           product_id: data.id,
-            //           quantity: data.unitValue,
-            //           unit_id: data.unit_id,
-            //           done: false
-            //       }))
-                //    {
-                //     product_id: 48,
-                //     quantity: 1,
-                //     unit_id: 1,
-                //     done: false
-                //    }
         };
-            // },
-            // nutritionFactNutrientDTO: product.nutrient.map(nutrient => ({
-            //   nutrientId: nutrient.id,
-            //   amount: nutrient.amount,
-            //   dailyValue: nutrient.dailyValue
-            // }))
-        //   };
+ 
         console.log("po");
         console.log(addShoppingListDTO);
         return this.http.post("http://localhost:8080/shoppingList/add",addShoppingListDTO);
@@ -81,7 +62,7 @@ export class ShoppingListService {
                 product_id: data.id,
                 quantity: data.unitValue,
                 unit_id: data.unit_id,
-                done: false
+                done: data.done
               }))
         };
 
@@ -98,4 +79,8 @@ export class ShoppingListService {
         
     }
 
+    toggleProduct(shoppingListId: number, productshoppinglistId: number){
+        const emptyBody ={}
+      return this.http.patch(`http://localhost:8080/shoppingList/toggle/${shoppingListId}/${productshoppinglistId}`, emptyBody);  
+    }
 }

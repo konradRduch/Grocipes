@@ -83,8 +83,9 @@ public class ShoppingListController {
 
         return ResponseEntity.ok().build();
     }
-
-    public ResponseEntity<Void> toggleProductsInShoppingList(){
+    @PatchMapping("toggle/{id}/{productshoppinglistId}")
+    public ResponseEntity<Void> toggleProductsInShoppingList(@PathVariable Integer id, @PathVariable Integer productshoppinglistId) {
+        productShoppingListService.toggleProductDoneStatus(productshoppinglistId);
         return ResponseEntity.ok().build();
     }
 

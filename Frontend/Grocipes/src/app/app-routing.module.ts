@@ -24,6 +24,8 @@ import { ShoppingListItemComponent } from "./shopping-list/shopping-list-item/sh
 import { ShoppingListItemDetailsComponent } from "./shopping-list/shopping-list-item/shopping-list-item-details/shopping-list-item-details.component";
 import { ShoppingListEditComponent } from "./shopping-list/shopping-list-edit/shopping-list-edit.component";
 import { ShoppingListAddComponent } from "./shopping-list/shopping-list-add/shopping-list-add.component";
+import { BodyParametersHistoryComponent } from "./profile/body-parameters-history/body-parameters-history.component";
+import { UpdateBodyParametersComponent } from "./profile/update-body-parameters/update-body-parameters.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -59,6 +61,8 @@ const appRoutes: Routes = [
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    {path: 'profile/body-parameters-history', component: BodyParametersHistoryComponent, canActivate: [AuthGuard]},
+    {path: 'profile/body-parameters-update', component: UpdateBodyParametersComponent, canActivate: [AuthGuard]},
     {path: 'auth', component: AuthenticationComponent, canActivate:[AuthReverseGuard] }
 ];
 

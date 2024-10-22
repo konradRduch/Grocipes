@@ -57,10 +57,10 @@ public class ProductShoppingListService {
         productShoppingListRepository.deleteByShoppingListId(shoppingListId);
     }
 
-//    public void toggleProductDoneStatus(Integer productId){
-//        ProductShoppingList productShoppingList = productShoppingListRepository.findById(productId)
-//                .orElseThrow(NoSuchElementException::new);
-//        productShoppingList.setDone(!productShoppingList.isDone());
-//        productShoppingListRepository.save(productShoppingList);
-//    }
+    public void toggleProductDoneStatus(Integer productshoppinglistId){
+        ProductShoppingList productShoppingList = productShoppingListRepository.findById(productshoppinglistId)
+                .orElseThrow(() -> new IllegalArgumentException("Product with ID " + productshoppinglistId + " not found."));
+        productShoppingList.setDone(!productShoppingList.isDone());
+        productShoppingListRepository.save(productShoppingList);
+    }
 }

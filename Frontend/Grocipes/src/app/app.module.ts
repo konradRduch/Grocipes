@@ -36,6 +36,8 @@ import { EditRecipeComponent } from './admin-panel/manage-recipes/edit-recipe/ed
 import { AddRecipeComponent } from './admin-panel/manage-recipes/add-recipe/add-recipe.component';
 import { ShoppingListAddComponent } from './shopping-list/shopping-list-add/shopping-list-add.component';
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
+import { BodyParametersHistoryComponent } from './profile/body-parameters-history/body-parameters-history.component';
+import { UpdateBodyParametersComponent } from './profile/update-body-parameters/update-body-parameters.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
     EditRecipeComponent,
     AddRecipeComponent,
     ShoppingListAddComponent,
-    ShoppingListEditComponent
+    ShoppingListEditComponent,
+    BodyParametersHistoryComponent,
+    UpdateBodyParametersComponent
   ],
   imports: [
     BrowserModule,

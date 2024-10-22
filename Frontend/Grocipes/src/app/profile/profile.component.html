@@ -95,10 +95,10 @@
     <div class="row" style="margin-bottom: 15px; margin-top: 15px;">
         <div class="col"></div>
         <div class="col-12 text-center col-lg-6 text-center">
-            <button type="button" class="btn btn-success" style="margin-bottom: 25px;">Update body parameters</button>     
+            <button type="button" class="btn btn-success" style="margin-bottom: 25px; margin-right: 5px;" (click)="update()">Update body parameters</button>     
+            <button type="button" class="btn btn-primary" style="margin-bottom: 25px;" (click)="history()">Body parameters history</button>     
         </div>
         <div class="col"></div>
-
     </div>
 
     
@@ -106,7 +106,7 @@
     <div class="row" style="margin-bottom: 15px; margin-top: 25px;">
         <div class="col"></div>
         <div class="col-12 text-center col-lg-6 text-center">
-            <button type="button" class="btn btn-secondary" (click)="logOut()">Log out</button>     
+            <button type="button" class="btn btn-danger" (click)="logOut()">Log out</button>     
         </div>
         <div class="col"></div>
     </div>
