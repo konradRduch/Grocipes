@@ -5,6 +5,7 @@ export class UserData {
     public email: string;
     public gender: string;
     public birthday: string;
+    
 
     constructor(id: number,name: string,surname: string,email: string,gender: string,birthday: string) {
         this.id = id;

@@ -1,5 +1,6 @@
 package com.grocipes_backend.grocipes.controllers;
 
+import com.grocipes_backend.grocipes.models.DTO.ProfileInfoDTO;
 import com.grocipes_backend.grocipes.security.JWTGenerator;
 import com.grocipes_backend.grocipes.models.DTO.BodyMeasurementsDTO;
 import com.grocipes_backend.grocipes.models.DTO.UserDataDTO;
@@ -66,6 +67,18 @@ public class UserDataController {
             token = token.substring(7);
             Integer userId = jwtGenerator.getUserIdFromJWT(token);
             return bodyMeasurementsService.getBodyMeasurements(userId);
+        } else {
+            throw new RuntimeException("Token not found or invalid");
+        }
+    }
+    @GetMapping("getUserProfileInfo")
+    public ProfileInfoDTO getUserProfileInfo(HttpServletRequest request){
+        String token = request.getHeader("Authorization"); // Odczytaj token z nagłówka
+
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            Integer userId = jwtGenerator.getUserIdFromJWT(token);
+            return bodyMeasurementsService.getUserProfileInfo(userId);
         } else {
             throw new RuntimeException("Token not found or invalid");
         }

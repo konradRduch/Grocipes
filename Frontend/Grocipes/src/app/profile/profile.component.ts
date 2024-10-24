@@ -12,39 +12,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  userData: UserData | undefined;
-  userName: string | undefined;
-  private userSub: Subscription = new Subscription();
+  userProfileInfo: any = {}
 
   constructor(private authService: AuthService, private userDataService: UserDataService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
-      this.userName = user?.email
-    }
-  );
-  this.userDataService.fetchUser().subscribe(
-  (user: UserData) => {
-    this.userData = user;
+    this.userDataService.getUserProfileInfo().subscribe(
+      (userProfileInfo: any) => {
+       this.userProfileInfo = userProfileInfo;
+      }
+    );
   }
-  );
-  }
+
   ngOnDestroy(): void {
-    this.userSub.unsubscribe();
   }
-
-
 
   logOut() {
     this.authService.logout();
   }
 
-  update(){
+  update() {
     this.router.navigate(['profile/body-parameters-update']);
     //profile/body-parameters-update
   }
-  history(){
+  history() {
     this.router.navigate(['profile/body-parameters-history']);
   }
 
