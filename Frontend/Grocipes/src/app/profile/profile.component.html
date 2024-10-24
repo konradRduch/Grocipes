@@ -7,7 +7,7 @@
         <div class="col"></div>
     </div>
     <div class="row text-center" style="margin-top: 25px;">
-        <h1>{{userData?.name}} {{userData?.surname}}</h1>
+        <h1>{{userProfileInfo?.name}} {{userProfileInfo?.surname}}</h1>
         <hr>
     </div>
     <div class="row">
@@ -15,7 +15,7 @@
             <p class="fs-3">Email </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userData?.email}}</p>
+             <p class="fs-3">{{userProfileInfo?.email}}</p>
          </div>  
          <hr>
     </div>
@@ -24,7 +24,7 @@
             <p class="fs-3">Gender </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{ userData?.gender === 'M' ? 'male' : 'female' }}</p>
+             <p class="fs-3">{{ userProfileInfo?.gender === 'M' ? 'male' : 'female' }}</p>
          </div>  
          <hr>
     </div>
@@ -33,7 +33,7 @@
             <p class="fs-3">Birthday </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userData?.birthday}}</p>
+             <p class="fs-3">{{userProfileInfo?.birthday}}</p>
          </div>  
          <hr>
     </div>
@@ -49,7 +49,7 @@
             <p class="fs-3">Height </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">184[cm]</p>
+             <p class="fs-3">{{userProfileInfo?.height}} [kg]</p>
          </div>  
          <hr>
     </div>
@@ -58,7 +58,7 @@
             <p class="fs-3">Weight </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">80[kg]</p>
+             <p class="fs-3">{{userProfileInfo?.weight}} [cm]</p>
          </div>  
          <hr>
     </div>
@@ -67,7 +67,7 @@
             <p class="fs-3">Body fat level </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">15 %</p>
+             <p class="fs-3">{{userProfileInfo?.body_fat_leve}} %</p>
          </div>  
          <hr>
     </div>
@@ -76,7 +76,7 @@
             <p class="fs-3">Abdominal circumference </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">60 cm</p>
+             <p class="fs-3">{{userProfileInfo?.abdominal_circumference}} [cm]</p>
          </div>  
          <hr>
     </div>
@@ -87,7 +87,7 @@
          <!-- niska umiarkowana duza -->
           <!--low active, Moderately active, high active -->
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">High active</p>
+             <p class="fs-3">{{userProfileInfo?.physical_activity}}</p>
          </div>  
          <hr>
     </div>

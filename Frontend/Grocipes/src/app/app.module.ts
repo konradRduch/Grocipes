@@ -38,6 +38,7 @@ import { ShoppingListAddComponent } from './shopping-list/shopping-list-add/shop
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
 import { BodyParametersHistoryComponent } from './profile/body-parameters-history/body-parameters-history.component';
 import { UpdateBodyParametersComponent } from './profile/update-body-parameters/update-body-parameters.component';
+import { BodyParametersChartComponent } from './profile/body-parameters-chart/body-parameters-chart.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { UpdateBodyParametersComponent } from './profile/update-body-parameters/
     ShoppingListAddComponent,
     ShoppingListEditComponent,
     BodyParametersHistoryComponent,
-    UpdateBodyParametersComponent
+    UpdateBodyParametersComponent,
+    BodyParametersChartComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,7 @@ import { UpdateBodyParametersComponent } from './profile/update-body-parameters/
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [GroceriesService,RecipesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]

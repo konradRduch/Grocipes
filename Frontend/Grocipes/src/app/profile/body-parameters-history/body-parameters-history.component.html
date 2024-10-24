@@ -1,1 +1,61 @@
-<p>body-parameters-history works!</p>
+<div class="container">
+    <br>
+    <div class="row text-center">
+        <h4>Body parameters history </h4>
+    </div>
+    <ul class="list-group" *ngFor="let bm of bodyMeasurement" style="margin-top: 15px;">
+        <li class="list-group-item list-group-item-primary" style="margin-bottom: 15px;">
+            <div class="row text-center">
+                <p >Measurement taken at {{bm.measurement_date | date:"hh:mm MMM dd, yyyy" }}</p>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="row text-center">
+                <p> Physical acivity: {{bm.physical_activity}}</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p >Weight:</p>
+                </div>
+                <div class="col text-center">
+                    {{bm.weight}}
+                </div>
+                <div class="col text-end">
+                    [kg]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p > Height:</p>
+                </div>
+                <div class="col text-center">
+                    {{bm.height}}
+                </div>
+                <div class="col text-end">
+                    [cm]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p > Abdominal circumference:</p>
+                </div>
+                <div class="col text-center">
+                    {{bm.abdominal_circumference}}
+                </div>
+                <div class="col text-end">
+                    [cm]
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p > Body fat level:</p>
+                </div>
+                <div class="col text-center">
+                    {{bm.body_fat_leve}}
+                </div>
+                <div class="col text-end">
+                    %
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
