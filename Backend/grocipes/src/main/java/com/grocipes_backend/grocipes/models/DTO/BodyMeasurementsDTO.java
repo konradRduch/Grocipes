@@ -37,6 +37,15 @@ public class BodyMeasurementsDTO {
         this.userId = userId;
     }
 
+    public BodyMeasurementsDTO(double weight, double height, double abdominal_circumference, double body_fat_leve, String physical_activity, Integer userId) {
+        this.weight = weight;
+        this.height = height;
+        this.abdominal_circumference = abdominal_circumference;
+        this.body_fat_leve = body_fat_leve;
+        this.physical_activity = physical_activity;
+        this.userId = userId;
+    }
+
     public BodyMeasurementsDTO() {
     }
 

@@ -7,6 +7,8 @@ import com.grocipes_backend.grocipes.repositories.BodyMeasurementsRepository;
 import com.grocipes_backend.grocipes.repositories.UserEntityRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BodyMeasurementsService {
     private final BodyMeasurementsRepository bodyMeasurementsRepository;
@@ -18,7 +20,7 @@ public class BodyMeasurementsService {
         this.userEntityRepository = userEntityRepository;
     }
 
-    public void addBodyMeasurements(BodyMeasurementsDTO bodyMeasurementsDTO){
+    public void save(BodyMeasurementsDTO bodyMeasurementsDTO){
         UserEntity user = userEntityRepository.findById(bodyMeasurementsDTO.getUserId()).orElseThrow(() -> new IllegalArgumentException("User not found."));
         bodyMeasurementsRepository.save(new BodyMeasurements(
                 bodyMeasurementsDTO.getId(),
@@ -31,6 +33,11 @@ public class BodyMeasurementsService {
                 user
         ));
     }
-    
+
+
+
+    public List<BodyMeasurementsDTO> getBodyMeasurements(Integer userId){
+        return bodyMeasurementsRepository.findUserBodyMeasurements(userId);
+    }
 
 }
