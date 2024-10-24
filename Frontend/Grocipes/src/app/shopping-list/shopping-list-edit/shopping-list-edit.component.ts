@@ -34,12 +34,9 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   enum: typeof Color = Color;
   availableUnit: { id: number, name: string }[] = [];
 
-  userData: UserData | undefined;
-  userName: string | undefined;
-
   id: number | undefined;
   shoppingList: ShoppingList | undefined;
-  private userSub: Subscription = new Subscription();
+
 
 
   constructor(
@@ -47,8 +44,6 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private shoppingListService: ShoppingListService,
-    private authService: AuthService,
-    private userService: UserDataService
   ) {
 
   }
@@ -70,20 +65,10 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
       );
     });
 
-    this.userSub = this.authService.user.subscribe(user => {
-      this.userName = user?.email
-    }
-    );
-    this.userService.fetchUser(this.userName!).subscribe(
-      (user: UserData) => {
-        this.userData = user;
-      }
-    );
 
   }
   ngOnDestroy(): void {
-    console.log("list add component destruktor");
-    this.userSub.unsubscribe();
+
   }
 
   getEnumKeys(): string[] {
@@ -179,7 +164,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
       formValues.colorCard = this.getEnumValue(formValues.colorCard);
 
       this.shoppingListService.editShoppingList(this.id!, formValues).pipe(
-        switchMap(() => this.shoppingListService.fetchShoppingLists(this.userData?.id!))
+        switchMap(() => this.shoppingListService.fetchShoppingLists())
       ).subscribe(
         (updatedShoppingSchedules: ShoppingSchedule[]) => {
           this.shoppingListService.shoppingListChanged.next(updatedShoppingSchedules);

@@ -21,5 +21,9 @@ public class UserDataService {
         UserEntity user = this.userEntityRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Email not found"));
         return new UserDataDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(),user.getGender(), user.getBirthday());
     }
+    public UserDataDTO getUserById(Integer userId){
+        UserEntity user = this.userEntityRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("Email not found"));
+        return new UserDataDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(),user.getGender(), user.getBirthday());
+    }
 
 }

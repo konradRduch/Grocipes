@@ -4,9 +4,11 @@ import com.grocipes_backend.grocipes.models.DTO.*;
 import com.grocipes_backend.grocipes.models.ProductShoppingList;
 import com.grocipes_backend.grocipes.models.ShoppingList;
 import com.grocipes_backend.grocipes.models.ShoppingSchedule;
+import com.grocipes_backend.grocipes.security.JWTGenerator;
 import com.grocipes_backend.grocipes.services.ProductShoppingListService;
 import com.grocipes_backend.grocipes.services.ShoppingListService;
 import com.grocipes_backend.grocipes.services.ShoppingScheduleService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,23 +21,31 @@ public class ShoppingListController {
 
     private ShoppingListService shoppingListService;
     private ShoppingScheduleService shoppingScheduleService;
+    private JWTGenerator jwtGenerator;
     private ProductShoppingListService productShoppingListService;
 
-    public ShoppingListController(ShoppingListService shoppingListService, ShoppingScheduleService shoppingScheduleService, ProductShoppingListService productShoppingListService) {
+    public ShoppingListController(ShoppingListService shoppingListService, ShoppingScheduleService shoppingScheduleService, JWTGenerator jwtGenerator, ProductShoppingListService productShoppingListService) {
         this.shoppingListService = shoppingListService;
         this.shoppingScheduleService = shoppingScheduleService;
+        this.jwtGenerator = jwtGenerator;
         this.productShoppingListService = productShoppingListService;
     }
-    @GetMapping("shoppingSchedules/{id}")
-    public List<ShoppingScheduleDTO>getAllShoppingList(@PathVariable Integer id){
-        List<ShoppingScheduleDTO> shoppingSchedules = shoppingScheduleService.findByUserId(id);
 
-        ShoppingScheduleDTO shoppingSchedule = shoppingSchedules.stream()
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+    @GetMapping("getUserShoppingSchedules")
+    public List<ShoppingScheduleDTO>getAllShoppingList(HttpServletRequest request){
+        String token = request.getHeader("Authorization"); // Odczytaj token z nagłówka
 
-        return shoppingSchedules;
-       // return shoppingListService.getAllByUserId(id);
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            Integer userId = jwtGenerator.getUserIdFromJWT(token);
+            List<ShoppingScheduleDTO> shoppingSchedules = shoppingScheduleService.findByUserId(userId);
+            ShoppingScheduleDTO shoppingSchedule = shoppingSchedules.stream()
+                    .findFirst()
+                    .orElseThrow(NoSuchElementException::new);
+            return shoppingSchedules;
+        } else {
+            throw new RuntimeException("Token not found or invalid");
+        }
     }
     @GetMapping("/{id}")
     public ShoppingListDTO getShoppingList(@PathVariable Integer id){
@@ -43,29 +53,36 @@ public class ShoppingListController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addShoppingList(@RequestBody ShoppingListCreationDTO request){
+    public ResponseEntity<Void> addShoppingList(@RequestBody ShoppingListCreationDTO shoppingListCreationDTO ,HttpServletRequest request){
 
-        ShoppingList shoppingList = new ShoppingList();
-        shoppingList.setName(request.getName());
-        shoppingList.setShopping_date(request.getShopping_date());
-        shoppingList.setCardColor(request.getCardColor());
-        shoppingList.setLikedList(request.isLikedList());
+        String token = request.getHeader("Authorization"); // Odczytaj token z nagłówka
 
-        ShoppingSchedule shoppingSchedule = shoppingScheduleService.findShoppingScheduleByUserId(request.getUserId());
-        shoppingList.setShoppingList(shoppingSchedule);
-        shoppingListService.save(shoppingList);
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            Integer userId = jwtGenerator.getUserIdFromJWT(token);
 
+            shoppingListCreationDTO.setUserId(userId);
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.setName(shoppingListCreationDTO.getName());
+            shoppingList.setShopping_date(shoppingListCreationDTO.getShopping_date());
+            shoppingList.setCardColor(shoppingListCreationDTO.getCardColor());
+            shoppingList.setLikedList(shoppingListCreationDTO.isLikedList());
 
+            ShoppingSchedule shoppingSchedule = shoppingScheduleService.findShoppingScheduleByUserId(shoppingListCreationDTO.getUserId());
+            shoppingList.setShoppingList(shoppingSchedule);
+            shoppingListService.save(shoppingList);
 
-        List<ProductShoppingListCreationDTO> products = request.getProductShoppingLists();
-        if(products!=null){
-            for(ProductShoppingListCreationDTO product: products){
-                product.setShop_list_id(shoppingList.getId());
-                productShoppingListService.save(product);
+            List<ProductShoppingListCreationDTO> products = shoppingListCreationDTO.getProductShoppingLists();
+            if(products!=null){
+                for(ProductShoppingListCreationDTO product: products){
+                    product.setShop_list_id(shoppingList.getId());
+                    productShoppingListService.save(product);
+                }
             }
+            return ResponseEntity.ok().build();
+        } else {
+            throw new RuntimeException("Token not found or invalid");
         }
-
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/addProductToShoppingList")
@@ -119,7 +136,6 @@ public class ShoppingListController {
                 productShoppingListService.save(product);
             }
         }
-
         // Zapisanie zaktualizowanej listy zakupowej
         shoppingListService.save(shoppingList);
         return ResponseEntity.ok().build();

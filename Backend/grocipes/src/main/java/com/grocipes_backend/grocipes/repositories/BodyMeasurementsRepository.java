@@ -20,11 +20,4 @@ public interface BodyMeasurementsRepository extends JpaRepository<BodyMeasuremen
     )
     List<BodyMeasurementsDTO>findUserBodyMeasurements(@Param("userId") Integer userId);
 
-//    @Query("SELECT new com.grocipes_backend.grocipes.models.DTO.BodyMeasurementsDTO(" +
-//            "bm.id, bm.weight, bm.height, bm.abdominal_circumference, bm.body_fat_level, " +
-//            "bm.physical_activity, bm.measurement_date, u.id) " +
-//            "FROM BodyMeasurements bm " +
-//            "JOIN bm.userEntity u " +
-//            "WHERE u.id = :userId"
-//    )
 }

@@ -15,31 +15,18 @@ import { ShoppingSchedule } from '../model/shoppingSchedule.model';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  userData: UserData | undefined;
-  userName: string | undefined;
   id: number | undefined;
   shoppingList: ShoppingList[] | undefined;
   shoppingSchedule: ShoppingSchedule | undefined;
-  private userSub: Subscription = new Subscription();
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService, private userService: UserDataService, private shoppingListService: ShoppingListService) { }
+
+  constructor(private router: Router, private shoppingListService: ShoppingListService) { }
 
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
-      this.userName = user?.email
-    }
-    );
-    this.userService.fetchUser(this.userName!).subscribe(
-      (user: UserData) => {
-        this.userData = user;
-        this.shoppingListService.fetchShoppingLists(this.userData.id).subscribe(
-          (data: ShoppingSchedule[]) => {
-            //this.shoppingList = data;
-            this.shoppingSchedule = data[0];
-            this.shoppingList = [...this.shoppingSchedule.shoppingList];
-            //console.log(this.shoppingSchedule);
-          }
-        );
+    this.shoppingListService.fetchShoppingLists().subscribe(
+      (data: ShoppingSchedule[]) => {
+        this.shoppingSchedule = data[0];
+        this.shoppingList = [...this.shoppingSchedule.shoppingList];
       }
     );
 
@@ -51,14 +38,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         }
       );
     }
-    
-
   }
 
-
-  
   ngOnDestroy(): void {
-    this.userSub.unsubscribe();
+
   }
   onAdd() {
     this.router.navigate(['shopping-list/shopping-list-add']);

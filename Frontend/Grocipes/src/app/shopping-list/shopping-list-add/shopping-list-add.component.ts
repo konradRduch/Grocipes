@@ -32,40 +32,25 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
   enum: typeof Color = Color;
   availableUnit: {id: number, name: string }[] = [];
 
-  userData: UserData | undefined;
-  userName: string | undefined;
-  private userSub: Subscription = new Subscription();
+  // userData: UserData | undefined;
+  // userName: string | undefined;
 
 
   constructor(
     private groceries2Service: Groceries2Service, 
     private router: Router, 
     private shoppingListService: ShoppingListService,
-    private authService: AuthService,
-    private userService: UserDataService
   ) {
 
   }
  
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
-      this.userName = user?.email
-    }
-    );
-
-    this.userService.fetchUser(this.userName!).subscribe(
-      (user: UserData) => {
-        this.userData = user;
-      }
-    );
     this.initForm();
     this.loadAvailableProducts();
     this.loadAvailableUnit();
   }
   ngOnDestroy(): void {
-    console.log("list add component destruktor");
-    this.userSub.unsubscribe();
   }
 
   getEnumKeys(): string[] {
@@ -128,31 +113,6 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
     this.router.navigate(['shopping-list']);
   }
 
-  // onSubmit() {
-  //   console.log(this.shoppingListForm.value);
-  //   if (this.shoppingListForm.valid) {
-  //     const formValues = this.shoppingListForm.value;
-  //     const date = formValues.shoppingDate;
-  //     const time = formValues.shoppingTime;
-
-  //     // Połącz datę i godzinę w LocalDateTime
-  //     const localDateTime = `${date}T${time}`;
-
-    
-  //     formValues.shoppingDate = localDateTime;
-  //     formValues.colorCard = this.getEnumValue(formValues.colorCard);
-      
-      
-  //     this.shoppingListService.addShoppingList(this.userData?.id!,formValues).pipe(
-  //       switchMap(() => this.shoppingListService.fetchShoppingLists(this.userData?.id!))
-  //     ).subscribe();
-  //     this.onCancel()
-  //   } else {
-  //     this.router.navigate(['shopping-list']);
-  //   }
-  // }
-
-
   onSubmit() {
     console.log(this.shoppingListForm.value);
     if (this.shoppingListForm.valid) {
@@ -166,8 +126,8 @@ export class ShoppingListAddComponent implements OnInit, OnDestroy {
       formValues.shoppingDate = localDateTime;
       formValues.colorCard = this.getEnumValue(formValues.colorCard);
   
-      this.shoppingListService.addShoppingList(this.userData?.id!, formValues).pipe(
-        switchMap(() => this.shoppingListService.fetchShoppingLists(this.userData?.id!))
+      this.shoppingListService.addShoppingList(formValues).pipe(
+        switchMap(() => this.shoppingListService.fetchShoppingLists())
       ).subscribe(
         (updatedShoppingSchedules: ShoppingSchedule[]) => {
           this.shoppingListService.shoppingListChanged.next(updatedShoppingSchedules);

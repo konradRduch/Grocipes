@@ -14,8 +14,8 @@ export class ShoppingListService {
 
     }
 
-    fetchShoppingLists(userId: number): Observable<ShoppingSchedule[]>{
-        return this.http.get<ShoppingSchedule[]>(`http://localhost:8080/shoppingList/shoppingSchedules/${userId}`).pipe(
+    fetchShoppingLists(): Observable<ShoppingSchedule[]>{
+        return this.http.get<ShoppingSchedule[]>(`http://localhost:8080/shoppingList/getUserShoppingSchedules`).pipe(
             tap(data =>{
                 this.shoppingListChanged.next(data);
             })
@@ -26,10 +26,9 @@ export class ShoppingListService {
         return this.http.get<ShoppingList>(`http://localhost:8080/shoppingList/${shoppingListId}`);
     }
 
-    addShoppingList(userid:number ,dto: any){
+    addShoppingList(dto: any){
         console.log(dto);
         const addShoppingListDTO = {
-              userId: userid,
               name: dto.name,
               shopping_date: dto.shoppingDate,
               cardColor: dto.colorCard,
