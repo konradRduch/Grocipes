@@ -13,14 +13,17 @@
                     <a class="nav-link" routerLink="/groceries">Groceries</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
-                    <a class="nav-link" routerLink="/shopping-list">Shopping list</a>
+                    <a class="nav-link" routerLink="/shopping-list">Shopping lists</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
-                    <a class="nav-link" routerLink="/nutritionSchedule">Nutrition schedule</a>
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:false}">
+                    <a class="nav-link" routerLink="/nutritional-goal">Nutritional goals</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:false}">
+                    <a class="nav-link" routerLink="/schedules">Schedules</a>
+                </li>
+                <!-- <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
                     <a class="nav-link" routerLink="/shoppingSchedule">Shopping schedule</a>
-                </li>
+                </li> -->
                 <li class="nav-item" 
                 routerLinkActive="active-link" 
                 [routerLinkActiveOptions]="{ exact: false }" 

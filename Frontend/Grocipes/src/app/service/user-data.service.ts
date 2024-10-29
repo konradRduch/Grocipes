@@ -25,7 +25,14 @@ export class UserDataService{
         return this.http.get<any>('http://localhost:8080/userData/getUserProfileInfo')
     }
 
-    addBodyMeasurement(){
-
+    addBodyMeasurement(formValues: any){
+        const bodyMeasurementDTO = {
+            weight: formValues.weight,
+            height: formValues.height,
+            abdominal_circumference: formValues.abdominal_circumference,
+            body_fat_leve: formValues.body_fat_level,
+            physical_activity: formValues.physical_activity
+        }
+        return this.http.post('http://localhost:8080/userData/add/bodyMeasurment', bodyMeasurementDTO);
     }
 }

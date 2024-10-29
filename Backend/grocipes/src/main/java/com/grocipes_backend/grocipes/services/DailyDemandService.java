@@ -10,4 +10,10 @@ public class DailyDemandService {
     public DailyDemandService(DailyDemandRepository demandRepository) {
         this.demandRepository = demandRepository;
     }
+
+
+
+
+
+
 }

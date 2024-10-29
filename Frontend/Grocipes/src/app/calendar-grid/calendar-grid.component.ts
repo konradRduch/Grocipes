@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar-grid',
@@ -17,8 +18,14 @@ export class CalendarGridComponent {
   firstDayOffset: number |any;
 
   monthOffset: number = 0; // Offset do przewijania miesięcy
+  @Input() scheduleType: any|string;
+  show: boolean = true;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
-  constructor() {
+    this.router.events.subscribe(() => {
+      this.show = !this.router.url.includes('day-details')
+    
+  });
     this.generateCalendar();
   }
 
@@ -67,4 +74,65 @@ export class CalendarGridComponent {
     this.today = new Date(year, month);
 
   }
+
+
+  // getDayDate(weekIndex: number, dayIndex: number): string {
+  //   // Obliczamy dzień miesiąca na podstawie tygodnia, dnia i przesunięcia pierwszego dnia.
+  //   let dayNumber: number;
+  
+  //   if (weekIndex === 0 && dayIndex < this.firstDayOffset) {
+  //     // Dni z poprzedniego miesiąca
+  //     dayNumber = this.previousMonthDays[dayIndex];
+  //     return new Date(this.today.getFullYear(), this.today.getMonth() - 1, dayNumber).toISOString().split('T')[0];
+  //   } else if (weekIndex === 0 && dayIndex >= this.firstDayOffset) {
+  //     // Dni bieżącego miesiąca, pierwszy tydzień
+  //     dayNumber = this.currentMonthDays[dayIndex - this.firstDayOffset];
+  //   } else if ((weekIndex * this.days.length + dayIndex - this.firstDayOffset) < this.currentMonthDays.length) {
+  //     // Dni bieżącego miesiąca, kolejne tygodnie
+  //     dayNumber = this.currentMonthDays[weekIndex * this.days.length + dayIndex - this.firstDayOffset];
+  //   } else {
+  //     // Dni następnego miesiąca
+  //     dayNumber = this.nextMonthDays[(weekIndex * this.days.length + dayIndex - this.firstDayOffset) - this.currentMonthDays.length];
+  //     return new Date(this.today.getFullYear(), this.today.getMonth() + 1, dayNumber).toISOString().split('T')[0];
+  //   }
+  
+  //   // Zwracamy datę w formacie 'YYYY-MM-DD'
+  //   return new Date(this.today.getFullYear(), this.today.getMonth(), dayNumber).toISOString().split('T')[0];
+  // }
+  getDayDate(weekIndex: number, dayIndex: number): string {
+    let year = this.today.getFullYear();
+    let month = this.today.getMonth();
+    let dayNumber: number;
+  
+    if (weekIndex === 0 && dayIndex < this.firstDayOffset) {
+      // Dni z poprzedniego miesiąca
+      dayNumber = this.previousMonthDays[dayIndex];
+      month -= 1;
+      if (month < 0) {
+        month = 11; // Poprzedni miesiąc to grudzień
+        year -= 1;  // Poprzedni rok
+      }
+    } else if (weekIndex === 0 && dayIndex >= this.firstDayOffset) {
+      // Dni bieżącego miesiąca, pierwszy tydzień
+      dayNumber = this.currentMonthDays[dayIndex - this.firstDayOffset];
+    } else if ((weekIndex * this.days.length + dayIndex - this.firstDayOffset) < this.currentMonthDays.length) {
+      // Dni bieżącego miesiąca, kolejne tygodnie
+      dayNumber = this.currentMonthDays[weekIndex * this.days.length + dayIndex - this.firstDayOffset];
+    } else {
+      // Dni następnego miesiąca
+      dayNumber = this.nextMonthDays[(weekIndex * this.days.length + dayIndex - this.firstDayOffset) - this.currentMonthDays.length];
+      month += 1;
+      if (month > 11) {
+        month = 0; // Następny miesiąc to styczeń
+        year += 1;  // Następny rok
+      }
+    }
+  
+    // Tworzymy datę w formacie 'YYYY-MM-DD' bez przesunięcia czasowego
+    const formattedMonth = (month + 1).toString().padStart(2, '0'); // Miesiące są indeksowane od 0, więc dodajemy 1
+    const formattedDay = dayNumber.toString().padStart(2, '0');
+  
+    return `${year}-${formattedMonth}-${formattedDay}`;
+  }
+
 }

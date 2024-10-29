@@ -26,6 +26,12 @@ import { ShoppingListEditComponent } from "./shopping-list/shopping-list-edit/sh
 import { ShoppingListAddComponent } from "./shopping-list/shopping-list-add/shopping-list-add.component";
 import { BodyParametersHistoryComponent } from "./profile/body-parameters-history/body-parameters-history.component";
 import { UpdateBodyParametersComponent } from "./profile/update-body-parameters/update-body-parameters.component";
+import { SchedulesComponent } from "./schedules/schedules.component";
+import { NutritionComponent } from "./schedules/nutrition/nutrition.component";
+import { ShoppingComponent } from "./schedules/shopping/shopping.component";
+import { NutritionalGoalComponent } from "./nutritional-goal/nutritional-goal.component";
+import { NutritionDayDetailsComponent } from "./schedules/nutrition/nutrition-day-details/nutrition-day-details.component";
+import { ShoppingDayDetailsComponent } from "./schedules/shopping/shopping-day-details/shopping-day-details.component";
 
 const appRoutes: Routes = [
     {path: '', redirectTo: 'home',pathMatch: 'full'},
@@ -59,7 +65,26 @@ const appRoutes: Routes = [
     {path: 'shopping-list/shopping-list-add', component: ShoppingListAddComponent, canActivate: [AuthGuard]},
     {path: 'nutritionSchedule', component: NutritionScheduleComponent, canActivate: [AuthGuard]},
     {path: 'shoppingSchedule', component: ShoppingScheduleComponent, canActivate: [AuthGuard]},
+    {path: 'schedules', component: SchedulesComponent, canActivate: [AuthGuard], children: [
+      { 
+        path: 'nutrition', 
+        component: NutritionComponent, 
+        canActivate: [AuthGuard],
+        children: [
+          { path: 'day-details/:date', component: NutritionDayDetailsComponent, canActivate: [AuthGuard] }
+        ]
+      },
+      { 
+        path: 'shopping', 
+        component: ShoppingComponent, 
+        canActivate: [AuthGuard],
+        children: [
+          { path: 'day-details/:date', component: ShoppingDayDetailsComponent, canActivate: [AuthGuard] }
+        ]
+      }
+    ]},
     {path: 'shopListDetails', component: ShopListItemDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'nutritional-goal', component: NutritionalGoalComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'profile/body-parameters-history', component: BodyParametersHistoryComponent, canActivate: [AuthGuard]},
     {path: 'profile/body-parameters-update', component: UpdateBodyParametersComponent, canActivate: [AuthGuard]},

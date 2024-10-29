@@ -1,1 +1,59 @@
-<p>update-body-parameters works!</p>
+<div class="container">
+    <form [formGroup]="bodyParametersForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-6">
+
+          <div class="form-group">
+            <label for="weight">Weight[kg]:</label>
+            <input id="weight" type="number" class="form-control" formControlName="weight" placeholder="weight" min="0" />
+            <div *ngIf="bodyParametersForm.get('weight')?.invalid && bodyParametersForm.get('weight')?.touched">
+              <small class="text-danger">Weight is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="height">Height[cm]:</label>
+            <input id="height" type="number" class="form-control" formControlName="height" placeholder="height" min="0" max="370"/>
+            <div *ngIf="bodyParametersForm.get('height')?.invalid && bodyParametersForm.get('height')?.touched">
+              <small class="text-danger">Height is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="abdominal_circumference">Abdominal circumference[cm]:</label>
+            <input id="abdominal_circumference" type="number" class="form-control" formControlName="abdominal_circumference" placeholder="abdominal circumference"  min="0" max="200"/>
+            <div *ngIf="bodyParametersForm.get('abdominal_circumference')?.invalid && bodyParametersForm.get('abdominal_circumference')?.touched">
+              <small class="text-danger">Abdominal circumference is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="body_fat_level">Body fat level[%]:</label>
+            <input id="weight" type="number" class="form-control" formControlName="body_fat_level" placeholder="body_fat_level"  min="0" max="100"/>
+            <div *ngIf="bodyParametersForm.get('body_fat_level')?.invalid && bodyParametersForm.get('body_fat_level')?.touched">
+              <small class="text-danger">Body fat level is required.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="physical_activity">Physical activity:</label>
+            <select id="physical_activity" class="form-control" formControlName="physical_activity" >
+              <option value="" disabled selected>Choose activity</option>
+              <option *ngFor="let status of allStatuses" [value]="status">
+                {{ getDisplayName(status) }}
+              </option>
+            </select>
+            <div *ngIf="bodyParametersForm.get('physical_activity')?.invalid && bodyParametersForm.get('physical_activity')?.touched">
+              <small class="text-danger">Physical activity status is required.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <button class="btn btn-success" type="submit" [disabled]="!bodyParametersForm.valid">
+            Save
+          </button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()" style="margin-left: 5px;">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>

@@ -39,6 +39,16 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
 import { BodyParametersHistoryComponent } from './profile/body-parameters-history/body-parameters-history.component';
 import { UpdateBodyParametersComponent } from './profile/update-body-parameters/update-body-parameters.component';
 import { BodyParametersChartComponent } from './profile/body-parameters-chart/body-parameters-chart.component';
+import { SchedulesComponent } from './schedules/schedules.component';
+import { NutritionComponent } from './schedules/nutrition/nutrition.component';
+import { ShoppingComponent } from './schedules/shopping/shopping.component';
+import { NutritionalGoalComponent } from './nutritional-goal/nutritional-goal.component';
+import { ShoppingDayDetailsComponent } from './schedules/shopping/shopping-day-details/shopping-day-details.component';
+import { NutritionDayDetailsComponent } from './schedules/nutrition/nutrition-day-details/nutrition-day-details.component';
+import { NutritionalGoalAddComponent } from './nutritional-goal/nutritional-goal-add/nutritional-goal-add.component';
+import { NutritionalGoalEditComponent } from './nutritional-goal/nutritional-goal-edit/nutritional-goal-edit.component';
+import { NutritionalGoalItemComponent } from './nutritional-goal/nutritional-goal-item/nutritional-goal-item.component';
+import { NutritionalGoalItemDetailsComponent } from './nutritional-goal/nutritional-goal-item/nutritional-goal-item-details/nutritional-goal-item-details.component';
 
 
 @NgModule({
@@ -73,7 +83,17 @@ import { BodyParametersChartComponent } from './profile/body-parameters-chart/bo
     ShoppingListEditComponent,
     BodyParametersHistoryComponent,
     UpdateBodyParametersComponent,
-    BodyParametersChartComponent
+    BodyParametersChartComponent,
+    SchedulesComponent,
+    NutritionComponent,
+    ShoppingComponent,
+    NutritionalGoalComponent,
+    ShoppingDayDetailsComponent,
+    NutritionDayDetailsComponent,
+    NutritionalGoalAddComponent,
+    NutritionalGoalEditComponent,
+    NutritionalGoalItemComponent,
+    NutritionalGoalItemDetailsComponent,
   ],
   imports: [
     BrowserModule,
