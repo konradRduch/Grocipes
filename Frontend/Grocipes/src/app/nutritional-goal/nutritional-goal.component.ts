@@ -13,6 +13,7 @@ export class NutritionalGoalComponent implements OnInit, OnDestroy{
   id: number | undefined;
   nutritionalGoals: NutritionalGoal[]| undefined;
   nutritionalGoal: NutritionalGoal| undefined;
+ 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private nutritionalGoalService: NutritionalGoalService){
     
@@ -30,6 +31,7 @@ export class NutritionalGoalComponent implements OnInit, OnDestroy{
       this.nutritionalGoalService.nutritionalGoalChanged$.subscribe(
         (data: NutritionalGoal[]) => {
           this.nutritionalGoals = [...data];
+          
         }
       );
     }
@@ -61,6 +63,10 @@ export class NutritionalGoalComponent implements OnInit, OnDestroy{
   getCompletedGoals(): NutritionalGoal[] {
     const today = new Date();
     return this.nutritionalGoals?.filter(goal => new Date(goal.goalEndDate) < today) || [];
+  }
+
+  isActive(): boolean {
+    return this.nutritionalGoals?.some(goal => goal.active === true) || false;
   }
 
   refreshGoals() {

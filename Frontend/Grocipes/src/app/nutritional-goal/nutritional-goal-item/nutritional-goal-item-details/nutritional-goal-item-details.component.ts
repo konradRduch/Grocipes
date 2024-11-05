@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NutritionalGoal } from 'src/app/model/nutritional-goal.model';
 import { NutritionalGoalService } from 'src/app/service/nutritional-goal.service';
+import { UserDataService } from 'src/app/service/user-data.service';
 
 @Component({
   selector: 'app-nutritional-goal-item-details',
@@ -12,8 +13,8 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
 
   id: number | undefined;
   nutritionalGoal: NutritionalGoal | undefined;
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private nutritionalGoalService: NutritionalGoalService){
+  user: any | undefined;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private nutritionalGoalService: NutritionalGoalService, private userDataService: UserDataService){
 
   }
 
@@ -30,6 +31,13 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
         );
       }
     )
+    this.userDataService.getUserProfileInfo().subscribe(
+      (data: any) => {
+        this.user = data;
+      }
+    );
+
+
   }
 
 

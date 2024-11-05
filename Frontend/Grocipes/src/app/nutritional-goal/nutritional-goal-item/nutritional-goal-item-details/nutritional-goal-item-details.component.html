@@ -1,16 +1,50 @@
 <div class="container">
-   
+    
+    <div class="row text-center">
+        <h1>
+            {{nutritionalGoal?.name}}
+        </h1>
+    </div>
+    <div class="row text-center text-muted">
+        <h4>
+            {{nutritionalGoal?.typeOfGoal}}
+        </h4>
+    </div>
+    <div class="row" *ngIf="nutritionalGoal?.active">
+        <div class="col">
+            {{nutritionalGoal?.goalStartDate}}
+        </div>
+        <div class="col text-end">
+            {{nutritionalGoal?.goalEndDate}}
+        </div>
+    </div>
+    <ngb-progressbar class="mb-3" type="primary" [value]="nutritionalGoal?.progress!" *ngIf="nutritionalGoal?.active"/>     
+
 <div class="row text-center">
-    <h1>
-        {{nutritionalGoal?.name}}
-    </h1>
+    <div class="col">
+        Current weight
+    </div>
+    <div class="col">
+        {{user?.weight}}
+    </div>
 </div>
-<div class="row text-center text-muted">
-    <h4>
-        {{nutritionalGoal?.typeOfGoal}}
-    </h4>
+<div class="row text-center">
+    <div class="col">
+        Current abdominal circumference
+    </div>
+    <div class="col">
+        {{user?.abdominal_circumference}}
+    </div>
 </div>
-<hr>
+<div class="row text-center">
+    <div class="col">
+        Current body fat level
+    </div>
+    <div class="col">
+        {{user?.body_fat_leve}}
+    </div>
+</div>
+<br>
 <div class="row text-center">
     <div class="col">
         Target weight
@@ -35,25 +69,6 @@
         {{nutritionalGoal?.targetBodyFatLevel}}
     </div>
 </div>
-<div class="row text-center">
-    <div class="col">
-        Estimated duration of the goal
-    </div>
-    <div class="col">
-        {{nutritionalGoal?.targetBodyFatLevel}}
-    </div>
-</div>
-
-
-<button type="button" class="btn btn-dark">
-    {{ nutritionalGoal?.active ? 'end goal' : 'start goal' }}
-</button>
-
-<div class="row">
-    {{nutritionalGoal?.goalStartDate}}
-    {{nutritionalGoal?.goalEndDate}}
-</div>
-<ngb-progressbar class="mb-3" type="primary" [value]="nutritionalGoal?.progress!" *ngIf="nutritionalGoal?.active"/>     
 
             
 

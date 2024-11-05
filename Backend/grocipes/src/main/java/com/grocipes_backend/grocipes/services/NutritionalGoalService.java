@@ -73,10 +73,15 @@ public class NutritionalGoalService {
         // Ustawianie stanu aktywności celów
         LocalDate today = LocalDate.now();
         for (NutritionalGoal goal : nutritionalGoals) {
+            BodyMeasurementsDTO bodyMeasurementsDTO = findBodyMeasurementsByNearestDate(userId, goal.getGoalStartDate());
             boolean isActive = (goal.getGoalStartDate() != null && goal.getGoalEndDate() != null) &&
                     (today.isEqual(goal.getGoalStartDate()) || today.isEqual(goal.getGoalEndDate()) ||
                             (today.isAfter(goal.getGoalStartDate()) && today.isBefore(goal.getGoalEndDate())));
+            int progress = calculateProgress(profileInfoDTO.getWeight(),bodyMeasurementsDTO.getWeight(),goal.getTargetWeight());
+
+            goal.setProgress(progress);
             goal.setActive(isActive);
+
          if(isActive)nutritionalGoalRepository.save(goal);
         }
 

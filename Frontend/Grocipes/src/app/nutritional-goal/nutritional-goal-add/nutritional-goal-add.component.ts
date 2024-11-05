@@ -121,13 +121,19 @@ export class NutritionalGoalAddComponent implements OnInit {
       };
       this.nutritionalGoalService.addNutritionalGoal(updatedValues).pipe(
         switchMap(() => this.nutritionalGoalService.getNutritionalGoals())
-      ).subscribe();
-      this.onCancel();
+      ).subscribe(
+        (updatedNutrtionalGoal: NutritionalGoal[])=>{
+          this.nutritionalGoalService.nutritionalGoalChanged.next(updatedNutrtionalGoal);
+          this.onCancel();
+        }
+      );
     } else {
       this.router.navigate(['nutritional-goal']);
     }
 
   }
+
+
 
   onCancel() {
     this.nutritionalGoalForm.reset();

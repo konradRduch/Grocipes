@@ -95,7 +95,7 @@
   
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
   <br>
-  <div class="row text-center">
+  <div class="row text-center" *ngIf="active === 1 && !isActive()">
     <div class="col">
       <button class="btn btn-light btn-outline-dark btn-lg" (click)="add()">
         <i class="fas fa-add"></i>
