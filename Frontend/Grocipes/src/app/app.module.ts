@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesComponent } from './recipes/recipes.component';
 import { GroceriesComponent } from './groceries/groceries.component';
@@ -39,16 +39,13 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
 import { BodyParametersHistoryComponent } from './profile/body-parameters-history/body-parameters-history.component';
 import { UpdateBodyParametersComponent } from './profile/update-body-parameters/update-body-parameters.component';
 import { BodyParametersChartComponent } from './profile/body-parameters-chart/body-parameters-chart.component';
-import { SchedulesComponent } from './schedules/schedules.component';
-import { NutritionComponent } from './schedules/nutrition/nutrition.component';
-import { ShoppingComponent } from './schedules/shopping/shopping.component';
 import { NutritionalGoalComponent } from './nutritional-goal/nutritional-goal.component';
-import { ShoppingDayDetailsComponent } from './schedules/shopping/shopping-day-details/shopping-day-details.component';
-import { NutritionDayDetailsComponent } from './schedules/nutrition/nutrition-day-details/nutrition-day-details.component';
 import { NutritionalGoalAddComponent } from './nutritional-goal/nutritional-goal-add/nutritional-goal-add.component';
 import { NutritionalGoalEditComponent } from './nutritional-goal/nutritional-goal-edit/nutritional-goal-edit.component';
 import { NutritionalGoalItemComponent } from './nutritional-goal/nutritional-goal-item/nutritional-goal-item.component';
 import { NutritionalGoalItemDetailsComponent } from './nutritional-goal/nutritional-goal-item/nutritional-goal-item-details/nutritional-goal-item-details.component';
+import { DatepickerConfigComponent } from './datepicker-config/datepicker-config.component';
+import { DayDetailsComponent } from './calendar-grid/day-details/day-details.component';
 
 
 @NgModule({
@@ -84,16 +81,13 @@ import { NutritionalGoalItemDetailsComponent } from './nutritional-goal/nutritio
     BodyParametersHistoryComponent,
     UpdateBodyParametersComponent,
     BodyParametersChartComponent,
-    SchedulesComponent,
-    NutritionComponent,
-    ShoppingComponent,
     NutritionalGoalComponent,
-    ShoppingDayDetailsComponent,
-    NutritionDayDetailsComponent,
     NutritionalGoalAddComponent,
     NutritionalGoalEditComponent,
     NutritionalGoalItemComponent,
     NutritionalGoalItemDetailsComponent,
+    DatepickerConfigComponent,
+    DayDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +96,7 @@ import { NutritionalGoalItemDetailsComponent } from './nutritional-goal/nutritio
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbDatepickerModule
   ],
   providers: [GroceriesService,RecipesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]

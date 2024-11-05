@@ -1,1 +1,46 @@
-<p>nutritional-goal-item works!</p>
+  <div class="container">
+   
+    <div class="card" >
+        <a [routerLink]="['nutritional-goal-item-details/',nutritionalGoal?.id]" style="text-decoration: none; color: black;">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{nutritionalGoal?.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted text-center">{{nutritionalGoal?.typeOfGoal}}</h6>
+          <!-- pasek progresu bedzie pokazywał procentowo ile zostało do osiągniecia danej wagi będzie brało aktualne parametry użytkownika-->
+          <ngb-progressbar class="mb-3" type="primary" [value]="nutritionalGoal?.progress!" *ngIf="nutritionalGoal?.active"/>
+          <!-- cel nie rozpoczety -->
+          <p *ngIf="nutritionalGoal">
+            <ng-container *ngIf="isUpcoming(nutritionalGoal.goalStartDate)">
+              Start at: {{ nutritionalGoal.goalStartDate }}
+            </ng-container>
+            <ng-container *ngIf="isActive(nutritionalGoal.goalStartDate, nutritionalGoal.goalEndDate)">
+              Started at: {{ nutritionalGoal.goalStartDate }}
+            </ng-container>
+            <ng-container *ngIf="isCompleted(nutritionalGoal.goalEndDate)">
+              Started at: {{ nutritionalGoal.goalStartDate }}
+            </ng-container>
+          </p>
+          
+          <p *ngIf="nutritionalGoal">
+            <ng-container *ngIf="isUpcoming(nutritionalGoal.goalStartDate)">
+              End at: {{ nutritionalGoal.goalEndDate }}
+            </ng-container>
+            <ng-container *ngIf="isActive(nutritionalGoal.goalStartDate, nutritionalGoal.goalEndDate)">
+              Ending at: {{ nutritionalGoal.goalEndDate }}
+            </ng-container>
+            <ng-container *ngIf="isCompleted(nutritionalGoal.goalEndDate)">
+              Ended at: {{ nutritionalGoal.goalEndDate }}
+            </ng-container>
+          </p>
+        </div>
+        </a>
+        <div class="card-footer text-center border-top ">
+            <!-- <button class="btn btn-light" style="margin-right: 5px;"  (click)="onEdit()" >
+                <i class="fas fa-edit"></i>
+            </button>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+            <button class="btn btn-danger" (click)="onDelete()" >X</button>
+        </div>
+      </div>
+
+  </div>
+   

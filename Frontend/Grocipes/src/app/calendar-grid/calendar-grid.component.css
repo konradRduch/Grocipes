@@ -1,0 +1,23 @@
+.highlight-today {
+    background-color: #007bff; /* niebieskie tło */
+    color: white; /* biały kolor numerka */
+    font-weight: bold;
+    border-radius: 50%; /* zaokrąglenie w kształt koła */
+    width: 1.5rem; /* mniejsza szerokość koła */
+    height: 1.5rem; /* mniejsza wysokość koła */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto; /* centrowanie w komórce */
+}
+
+@media (max-width: 768px) {
+    .highlight-today {
+        width: 1.3rem;
+        height: 1.3rem;
+        font-size: 0.8rem; /* zmniejszenie czcionki na mniejszych ekranach */
+        align-items: center;
+        justify-content: center;
+        margin: auto; /* centrowanie w komórce */
+    }
+}

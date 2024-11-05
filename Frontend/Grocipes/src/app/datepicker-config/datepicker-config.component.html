@@ -1,0 +1,33 @@
+<!-- <p>This datepicker input uses customized default values.</p>
+
+<form class="row row-cols-sm-auto">
+    <div class="col-12">
+        <div class="input-group">
+            <input
+                class="form-control my-callendar-disabled"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                [(ngModel)]="model"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                [markDisabled]="isDisabled"
+            />
+            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+        </div>
+    </div>
+</form> -->
+
+<div class="input-group">
+    <input
+      class="form-control my-callendar-disabled"
+      placeholder="yyyy-mm-dd"
+      [ngModel]="model"
+      ngbDatepicker
+      #d="ngbDatepicker"
+      [markDisabled]="isDisabled"
+      (ngModelChange)="onDateChange($event)"
+      [minDate]="{ year: minDate?.year || 0, month: minDate?.month || 0, day: minDate?.day || 0 }" 
+      required
+      />
+      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"></button>
+    </div>

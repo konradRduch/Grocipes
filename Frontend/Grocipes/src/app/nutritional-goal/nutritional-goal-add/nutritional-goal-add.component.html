@@ -1,1 +1,166 @@
-<p>nutritional-goal-add works!</p>
+<div class="container">
+    <form [formGroup]="nutritionalGoalForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input id="name" type="text" class="form-control" formControlName="name"
+                        placeholder="Enter goal name" />
+                    <div *ngIf="nutritionalGoalForm.get('name')?.invalid && nutritionalGoalForm.get('name')?.touched">
+                        <small class="text-danger">Name is required.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="typeOfGoal">Type of Goal:</label>
+                    <select id="typeOfGoal" class="form-control" formControlName="typeOfGoal">
+                        <option value="" disabled selected>Choose goal type</option>
+                        <option *ngFor="let goal of allGoals" [value]="goal">
+                            {{ getDisplayName(goal) }}
+                        </option>
+                    </select>
+                    <div
+                        *ngIf="nutritionalGoalForm.get('typeOfGoal')?.invalid && nutritionalGoalForm.get('typeOfGoal')?.touched">
+                        <small class="text-danger">Type of goal is required.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetWeight">Target Weight [kg]:</label>
+                    <input id="targetWeight" type="number" class="form-control" formControlName="targetWeight"
+                        placeholder="Enter target weight" min="0" (input)="onWeightChange($event)"
+                        (blur)="onWeightBlur()" />
+                </div>
+
+                <div class="form-group">
+                    <label for="targetAbdominalCircumference">Target Abdominal Circumference [cm]:</label>
+                    <input id="targetAbdominalCircumference" type="number" class="form-control"
+                        formControlName="targetAbdominalCircumference"
+                        placeholder="Enter target abdominal circumference" min="0" max="200"
+                        (input)="onAbdominalCircumferenceChange($event)" />
+                    <div
+                        *ngIf="nutritionalGoalForm.get('targetAbdominalCircumference')?.invalid && nutritionalGoalForm.get('targetAbdominalCircumference')?.touched">
+                        <small class="text-danger">Target abdominal circumference is required.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetBodyFatLevel">Target Body Fat Level [%]:</label>
+                    <input id="targetBodyFatLevel" type="number" class="form-control"
+                        formControlName="targetBodyFatLevel" placeholder="Enter target body fat level" min="0" max="100"
+                        (input)="onBodyFatLevelChange($event)" />
+                    <div
+                        *ngIf="nutritionalGoalForm.get('targetBodyFatLevel')?.invalid && nutritionalGoalForm.get('targetBodyFatLevel')?.touched">
+                        <small class="text-danger">Target body fat level is required.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row" *ngIf="nutritionalGoalForm.get('typeOfGoal')?.value !== 'Weight maintenance'">
+                    Estimated time to achieve nutritional goal: {{ getFormattedEstimatedTime() }} weeks
+                </div>
+
+                <!-- Data zakupów -->
+                <!-- <div class="form-group">
+                    <label for="goalStartDate">Start date:</label>
+                    <input id="goalStartDate" type="date" class="form-control" formControlName="goalStartDate"
+                         />
+                    <div
+                        *ngIf="nutritionalGoalForm.get('goalStartDate')?.invalid && nutritionalGoalForm.get('goalStartDate')?.touched">
+                        <small class="text-danger">Data jest wymagana.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goalEndDate">End date:</label>
+                    <input id="goalEndDate" type="date" class="form-control" formControlName="goalEndDate"
+                         />
+                    <div
+                        *ngIf="nutritionalGoalForm.get('goalEndDate')?.invalid && nutritionalGoalForm.get('goalEndDate')?.touched">
+                        <small class="text-danger">Data jest wymagana.</small>
+                    </div>
+                </div> -->
+
+                <!-- Data zakupów
+                <div class="form-group">
+                    <label for="goalStartDate">Start date:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="goalStartDate"
+                            ngbDatepicker #startDatePicker="ngbDatepicker" [minDate]="{year: 2010, month: 1, day: 1}"
+                            [maxDate]="{year: 2048, month: 12, day: 31}" required [readonly]="true" 
+                        />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="startDatePicker.toggle()"
+                            type="button"></button>
+                    </div>
+                    <div
+                        *ngIf="nutritionalGoalForm.get('goalStartDate')?.invalid && nutritionalGoalForm.get('goalStartDate')?.touched">
+                        <small class="text-danger">Start date is required.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="goalEndDate">End date:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="goalEndDate" ngbDatepicker
+                            #endDatePicker="ngbDatepicker" [minDate]="{year: 2010, month: 1, day: 1}"
+                            [maxDate]="{year: 2048, month: 12, day: 31}" required [readonly]="true"
+                        />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="endDatePicker.toggle()"
+                            type="button"></button>
+                    </div>
+                    <div
+                        *ngIf="nutritionalGoalForm.get('goalEndDate')?.invalid && nutritionalGoalForm.get('goalEndDate')?.touched">
+                        <small class="text-danger">End date is required.</small>
+                    </div>
+                </div> -->
+
+
+                <div class="form-group">
+                    <label for="goalStartDate">Start date:</label>
+                    <app-datepicker-config
+                        [date]="nutritionalGoalForm.get('goalStartDate')?.value"
+                        (dateChange)="nutritionalGoalForm.get('goalStartDate')?.setValue($event)"
+                        [blockedRanges]="blockedRanges"
+                        required
+                    ></app-datepicker-config>
+                    <div *ngIf="nutritionalGoalForm.get('goalStartDate')?.invalid && nutritionalGoalForm.get('goalStartDate')?.touched">
+                        <small class="text-danger">Start date is required.</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="goalEndDate">End date:</label>
+                    <app-datepicker-config
+                        [date]="nutritionalGoalForm.get('goalEndDate')?.value"
+                        (dateChange)="nutritionalGoalForm.get('goalEndDate')?.setValue($event)"
+                        [blockedRanges]="blockedRanges"
+                        required
+                    ></app-datepicker-config>
+                    <div *ngIf="nutritionalGoalForm.get('goalEndDate')?.invalid && nutritionalGoalForm.get('goalEndDate')?.touched">
+                        <small class="text-danger">End date is required.</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button class="btn btn-success" type="submit" [disabled]="!nutritionalGoalForm.valid">
+                    Save
+                </button>
+                <button class="btn btn-danger" type="button" (click)="onCancel()" style="margin-left: 5px;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- // W twoim komponencie HTML
+<ngb-datepicker 
+  [minDate]="{year: 2010, month: 1, day: 1}"
+  [maxDate]="{year: 2048, month: 12, day: 31}"
+  [markDisabled]="isDisabled">
+</ngb-datepicker> -->
+<!-- <app-datepicker-config [blockedRanges]="blockedRanges"></app-datepicker-config> -->
+

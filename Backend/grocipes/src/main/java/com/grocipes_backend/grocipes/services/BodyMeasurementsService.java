@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -46,10 +47,14 @@ public class BodyMeasurementsService {
         return bodyMeasurementsRepository.findUserBodyMeasurements(userId);
     }
 
-//@Transactional
-//    public Page<MyModel> findMyModelTop5() {
-//        return myModelRepository.findMyModelTop5(new PageRequest(0, 5));
-//    }
+
+    public BodyMeasurementsDTO findBodyMeasurementsByNearestDate(Integer userId, LocalDate startDate) {
+        return bodyMeasurementsRepository.findUserBodyMeasurements(userId).stream()
+                .filter(measurement -> !measurement.getMeasurement_date().isAfter(startDate.atStartOfDay())) // Tylko daty <= startDate
+                .max(Comparator.comparing(BodyMeasurementsDTO::getMeasurement_date))
+                .orElseThrow(() -> new IllegalArgumentException("Body measurements not found"));
+    }
+
     public ProfileInfoDTO getUserProfileInfo(Integer userId){
         return bodyMeasurementsRepository
                 .getUserProfileInfo(userId, PageRequest.of(0, 1))

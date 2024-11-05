@@ -18,24 +18,15 @@
         <div class="col text-center text-truncate" style="min-width: 1rem;">SUNDAY</div>
     </div>
 
-    <!-- <div *ngFor="let week of weeks; let weekIndex = index" class="row flex-grow-1 flex-nowrap">
-        <a href="">
-        <div *ngFor="let day of days; let dayIndex = index" class="col border d-flex justify-content-center" style="min-width: 1rem;">
-            <span *ngIf="weekIndex === 0 && dayIndex < firstDayOffset">{{ previousMonthDays[dayIndex] }}</span>
-            <span *ngIf="weekIndex === 0 && dayIndex >= firstDayOffset">{{ currentMonthDays[dayIndex - firstDayOffset] }}</span>
-            <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) < currentMonthDays.length">{{ currentMonthDays[weekIndex * days.length + dayIndex - firstDayOffset] }}</span>
-            <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) >= currentMonthDays.length">{{ nextMonthDays[(weekIndex * days.length + dayIndex - firstDayOffset) - currentMonthDays.length] }}</span>
-        </div>
-        </a>
-    </div> -->
-
     <div *ngFor="let week of weeks; let weekIndex = index" class="row flex-grow-1 flex-nowrap">
         <div *ngFor="let day of days; let dayIndex = index" class="col border d-flex justify-content-center" style="min-width: 1rem;">
             <a
-                [routerLink]="['/schedules', scheduleType, 'day-details', getDayDate(weekIndex, dayIndex)]" 
+            [routerLink]="['/calendar/day-details', getDayDate(weekIndex, dayIndex)]"
                 class="d-flex flex-column justify-content-center w-100 h-100" style="text-decoration: none; color: black;">
-                
-                <div class="day-number text-center"> <!-- Dodano klasę text-center -->
+                <div 
+                class="day-number text-center" 
+                [ngClass]="{'highlight-today': isToday(weekIndex, dayIndex)}"
+                > <!-- Dodano klasę text-center -->
                     <span *ngIf="weekIndex === 0 && dayIndex < firstDayOffset">{{ previousMonthDays[dayIndex] }}</span>
                     <span *ngIf="weekIndex === 0 && dayIndex >= firstDayOffset">{{ currentMonthDays[dayIndex - firstDayOffset] }}</span>
                     <span *ngIf="weekIndex > 0 && (weekIndex * days.length + dayIndex - firstDayOffset) < currentMonthDays.length">
@@ -45,15 +36,6 @@
                         {{ nextMonthDays[(weekIndex * days.length + dayIndex - firstDayOffset) - currentMonthDays.length] }}
                     </span>
                 </div>
-                
-                <div class="day-elements">
-                    <ul class="list-group d-none d-md-block">
-                        <li class="list-group-item list-group-item-success text-truncate">Breakfast</li>
-                        <li class="list-group-item list-group-item-success text-truncate">Lunch</li>
-                        <li class="list-group-item list-group-item-success text-truncate">Dinner</li>
-                    </ul>
-                </div>
-    
             </a>
         </div>
     </div>

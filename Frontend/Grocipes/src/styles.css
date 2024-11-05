@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* datepicker-config.component.css */
+.my-callendar-disabled {
+    color: black; /* Domyślny kolor tekstu */
+}
+
+.ngb-dp-day.disabled {
+    color: red; /* Kolor tekstu na czerwono dla zablokowanych dni */
+    background-color: #ee3b4a; /* Opcjonalnie, jasnoczerwone tło */
+}
+
+/* Dodatkowe style dla tła i ramki, jeśli potrzebne */
+.ngb-dp-day.disabled:hover {
+    background-color: #ee3b4a; /* Zmiana koloru tła podczas najechania */
+}

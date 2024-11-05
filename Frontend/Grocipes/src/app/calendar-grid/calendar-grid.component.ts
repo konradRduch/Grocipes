@@ -135,4 +135,18 @@ export class CalendarGridComponent {
     return `${year}-${formattedMonth}-${formattedDay}`;
   }
 
+
+  isToday(weekIndex: number, dayIndex: number): boolean {
+    const today = new Date();
+
+    const dayDateString = this.getDayDate(weekIndex, dayIndex); // Uzyskaj wynik jako string
+    const dayDate = new Date(dayDateString); // Konwertuj na Date
+    
+    return (
+      dayDate.getDate() === today.getDate() &&
+      dayDate.getMonth() === today.getMonth() &&
+      dayDate.getFullYear() === today.getFullYear()
+    );
+  }
+
 }

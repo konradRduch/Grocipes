@@ -1,2 +1,55 @@
-<p>nutritional-goal works!</p>
+<div class="container">
+    <br>
+    <div class="row text-center">
+        <h3>Upcoming Goals</h3>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4" *ngFor="let goal of getUpcomingGoals()">
+            <div class="card-deck">
+              <app-nutritional-goal-item
+                [nutritionalGoal]="goal"
+                (nutritionalGoalDeleted)="onNutritionalGoalDeleted(goal.id)"
+              ></app-nutritional-goal-item>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <h3>Active Goal</h3>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4" *ngFor="let goal of getActiveGoals()">
+            <div class="card-deck">
+              <app-nutritional-goal-item
+                [nutritionalGoal]="goal"
+                (nutritionalGoalDeleted)="onNutritionalGoalDeleted(goal.id)"
+              ></app-nutritional-goal-item>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <h3>Finished Goals</h3>
+        <hr>
+    </div>
+    <div class="row ">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4" *ngFor="let goal of getCompletedGoals()">
+            <div class="card-deck">
+              <app-nutritional-goal-item
+                [nutritionalGoal]="goal"
+                (nutritionalGoalDeleted)="onNutritionalGoalDeleted(goal.id)"
+              ></app-nutritional-goal-item>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col">
+            <button class="btn btn-light btn-outline-dark btn-lg" (click)="add()">
+                <i class="fas fa-add"></i>
+              </button>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+            </div>
+        </div>
+</div>
 

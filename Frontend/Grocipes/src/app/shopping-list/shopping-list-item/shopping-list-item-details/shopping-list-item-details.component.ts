@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingList } from 'src/app/model/shopping-list.model';
 import { ShoppingListService } from 'src/app/service/shopping-list.service';
@@ -16,7 +16,7 @@ enum Color {
   templateUrl: './shopping-list-item-details.component.html',
   styleUrls: ['./shopping-list-item-details.component.css']
 })
-export class ShoppingListItemDetailsComponent {
+export class ShoppingListItemDetailsComponent implements OnInit{
 
 
   shoppList: ShoppingList |undefined;

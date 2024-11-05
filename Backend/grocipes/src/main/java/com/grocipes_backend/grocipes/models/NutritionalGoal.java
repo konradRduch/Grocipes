@@ -2,6 +2,7 @@ package com.grocipes_backend.grocipes.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -11,10 +12,15 @@ public class NutritionalGoal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private boolean goal_completed;
-    private double weight;
-    private double abdominal_circumference;
-    private double body_fat_level;
+    private String typeOfGoal;
+    private double targetWeight;
+    private double targetAbdominalCircumference;
+    private double targetBodyFatLevel;
+    private LocalDate goalStartDate;
+    private LocalDate goalEndDate;
+    private int progress;
+    private boolean isActive;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -22,22 +28,35 @@ public class NutritionalGoal {
     private List<DailyDemand> dailyDemandList;
 
 
-    public NutritionalGoal(Integer id, String name, boolean goal_completed, double weight, double abdominal_circumference, double body_fat_level) {
+    public NutritionalGoal(Integer id, String name, double targetWeight, double targetAbdominalCircumference, double targetBodyFatLevel) {
         this.id = id;
         this.name = name;
-        this.goal_completed = goal_completed;
-        this.weight = weight;
-        this.abdominal_circumference = abdominal_circumference;
-        this.body_fat_level = body_fat_level;
+        this.targetWeight = targetWeight;
+        this.targetAbdominalCircumference = targetAbdominalCircumference;
+        this.targetBodyFatLevel = targetBodyFatLevel;
     }
 
-    public NutritionalGoal(Integer id, String name, boolean goal_completed, double weight, double abdominal_circumference, double body_fat_level, UserEntity userEntity, List<DailyDemand> dailyDemandList) {
+    public NutritionalGoal(Integer id, String name, double targetWeight, double targetAbdominalCircumference, double targetBodyFatLevel, UserEntity userEntity, List<DailyDemand> dailyDemandList) {
         this.id = id;
         this.name = name;
-        this.goal_completed = goal_completed;
-        this.weight = weight;
-        this.abdominal_circumference = abdominal_circumference;
-        this.body_fat_level = body_fat_level;
+        this.targetWeight = targetWeight;
+        this.targetAbdominalCircumference = targetAbdominalCircumference;
+        this.targetBodyFatLevel = targetBodyFatLevel;
+        this.userEntity = userEntity;
+        this.dailyDemandList = dailyDemandList;
+    }
+
+    public NutritionalGoal(Integer id, String name, String typeOfGoal, double targetWeight, double targetAbdominalCircumference, double targetBodyFatLevel, LocalDate goalStartDate, LocalDate goalEndDate, int progress, boolean isActive, UserEntity userEntity, List<DailyDemand> dailyDemandList) {
+        this.id = id;
+        this.name = name;
+        this.typeOfGoal = typeOfGoal;
+        this.targetWeight = targetWeight;
+        this.targetAbdominalCircumference = targetAbdominalCircumference;
+        this.targetBodyFatLevel = targetBodyFatLevel;
+        this.goalStartDate = goalStartDate;
+        this.goalEndDate = goalEndDate;
+        this.progress = progress;
+        this.isActive = isActive;
         this.userEntity = userEntity;
         this.dailyDemandList = dailyDemandList;
     }
@@ -61,36 +80,29 @@ public class NutritionalGoal {
         this.name = name;
     }
 
-    public boolean isGoal_completed() {
-        return goal_completed;
+
+    public double getTargetWeight() {
+        return targetWeight;
     }
 
-    public void setGoal_completed(boolean goal_completed) {
-        this.goal_completed = goal_completed;
+    public void setTargetWeight(double targetWeight) {
+        this.targetWeight = targetWeight;
     }
 
-    public double getWeight() {
-        return weight;
+    public double getTargetAbdominalCircumference() {
+        return targetAbdominalCircumference;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setTargetAbdominalCircumference(double targetAbdominalCircumference) {
+        this.targetAbdominalCircumference = targetAbdominalCircumference;
     }
 
-    public double getAbdominal_circumference() {
-        return abdominal_circumference;
+    public double getTargetBodyFatLevel() {
+        return targetBodyFatLevel;
     }
 
-    public void setAbdominal_circumference(double abdominal_circumference) {
-        this.abdominal_circumference = abdominal_circumference;
-    }
-
-    public double getBody_fat_level() {
-        return body_fat_level;
-    }
-
-    public void setBody_fat_level(double body_fat_level) {
-        this.body_fat_level = body_fat_level;
+    public void setTargetBodyFatLevel(double targetBodyFatLevel) {
+        this.targetBodyFatLevel = targetBodyFatLevel;
     }
 
     public UserEntity getUserEntity() {
@@ -107,5 +119,45 @@ public class NutritionalGoal {
 
     public void setDailyDemandList(List<DailyDemand> dailyDemandList) {
         this.dailyDemandList = dailyDemandList;
+    }
+
+    public String getTypeOfGoal() {
+        return typeOfGoal;
+    }
+
+    public void setTypeOfGoal(String typeOfGoal) {
+        this.typeOfGoal = typeOfGoal;
+    }
+
+    public LocalDate getGoalStartDate() {
+        return goalStartDate;
+    }
+
+    public void setGoalStartDate(LocalDate goalStartDate) {
+        this.goalStartDate = goalStartDate;
+    }
+
+    public LocalDate getGoalEndDate() {
+        return goalEndDate;
+    }
+
+    public void setGoalEndDate(LocalDate goalEndDate) {
+        this.goalEndDate = goalEndDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 }

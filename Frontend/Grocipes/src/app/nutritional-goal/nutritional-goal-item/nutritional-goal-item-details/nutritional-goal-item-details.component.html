@@ -1,1 +1,61 @@
-<p>nutritional-goal-item-details works!</p>
+<div class="container">
+   
+<div class="row text-center">
+    <h1>
+        {{nutritionalGoal?.name}}
+    </h1>
+</div>
+<div class="row text-center text-muted">
+    <h4>
+        {{nutritionalGoal?.typeOfGoal}}
+    </h4>
+</div>
+<hr>
+<div class="row text-center">
+    <div class="col">
+        Target weight
+    </div>
+    <div class="col">
+        {{nutritionalGoal?.targetWeight}}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Target abdominal circumference
+    </div>
+    <div class="col">
+        {{nutritionalGoal?.targetAbdominalCircumference}}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Target body fat level
+    </div>
+    <div class="col">
+        {{nutritionalGoal?.targetBodyFatLevel}}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Estimated duration of the goal
+    </div>
+    <div class="col">
+        {{nutritionalGoal?.targetBodyFatLevel}}
+    </div>
+</div>
+
+
+<button type="button" class="btn btn-dark">
+    {{ nutritionalGoal?.active ? 'end goal' : 'start goal' }}
+</button>
+
+<div class="row">
+    {{nutritionalGoal?.goalStartDate}}
+    {{nutritionalGoal?.goalEndDate}}
+</div>
+<ngb-progressbar class="mb-3" type="primary" [value]="nutritionalGoal?.progress!" *ngIf="nutritionalGoal?.active"/>     
+
+            
+
+
+</div>
