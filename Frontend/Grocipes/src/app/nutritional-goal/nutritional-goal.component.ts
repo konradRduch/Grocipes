@@ -9,7 +9,7 @@ import { NutritionalGoalService } from '../service/nutritional-goal.service';
   styleUrls: ['./nutritional-goal.component.css']
 })
 export class NutritionalGoalComponent implements OnInit, OnDestroy{
-
+  active = 1;
   id: number | undefined;
   nutritionalGoals: NutritionalGoal[]| undefined;
   nutritionalGoal: NutritionalGoal| undefined;
@@ -62,5 +62,21 @@ export class NutritionalGoalComponent implements OnInit, OnDestroy{
     const today = new Date();
     return this.nutritionalGoals?.filter(goal => new Date(goal.goalEndDate) < today) || [];
   }
+
+  refreshGoals() {
+    switch (this.active) {
+      case 1:
+        this.getActiveGoals();
+        break;
+      case 2:
+        this.getUpcomingGoals();
+        break;
+      case 3:
+        this.getCompletedGoals();
+        break;
+    }
+  }
+
+
 
 }

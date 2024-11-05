@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./nutrition-schedule.component.css']
 })
 export class NutritionScheduleComponent {
-
+  rating = 8;
 }

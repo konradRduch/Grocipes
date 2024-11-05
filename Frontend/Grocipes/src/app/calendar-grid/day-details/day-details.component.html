@@ -1,11 +1,50 @@
 
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <p>nutrtion</p>
         <app-nutrition-schedule></app-nutrition-schedule>
     </div>
     <div class="row">
         <p>shopping</p>
         <app-shopping-schedule></app-shopping-schedule>
-    </div>
+    </div> -->
+    <ul ngbNav #nav="ngbNav" 
+    [(activeId)]="active" 
+    class="nav nav-underline flex-column flex-sm-row justify-content-center" >
+      <li [ngbNavItem]="1" >
+        <button ngbNavLink>Nutrition</button>
+        <ng-template ngbNavContent>
+            <br>
+            <app-nutrition-schedule></app-nutrition-schedule>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <button ngbNavLink>Shopping</button>
+        <ng-template ngbNavContent>
+            <br>
+            <app-shopping-schedule></app-shopping-schedule>
+        </ng-template>
+      </li>
+    </ul>
+    
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    <br>
 </div>
+
+
+
+
+
+<div *ngIf="imageUrl; else loading">
+    <img [src]="imageUrl" alt="Image" style="max-width: 50%; height: auto;" />
+  </div>
+  <ng-template #loading>
+    <p>Ładowanie obrazu...</p>
+  </ng-template>
+
+
+  <div>
+    <h2>Dodaj obrazek</h2>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="upload()">Prześlij</button>
+  </div>

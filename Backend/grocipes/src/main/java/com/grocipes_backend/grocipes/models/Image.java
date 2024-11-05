@@ -1,6 +1,7 @@
 package com.grocipes_backend.grocipes.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Image {
@@ -16,7 +17,7 @@ public class Image {
     private String type;
 
     @Lob
-    @Column(name = "data", columnDefinition = "BLOB")
+    @Column(name = "data", columnDefinition = "MEDIUMBLOB")
     private byte[] data;
     @ManyToOne
     @JoinColumn(name="product_id")

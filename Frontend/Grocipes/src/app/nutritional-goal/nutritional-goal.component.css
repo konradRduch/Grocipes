@@ -1,0 +1,16 @@
+/* Kolor dla nieaktywnych zakładek */
+.nav-underline .nav-link {
+    color: gray; /* Ustaw kolor dla nieaktywnych zakładek */
+  }
+  
+  /* Kolor dla zakładek po najechaniu */
+  .nav-underline .nav-link:hover {
+    color: darkgray; /* Kolor dla zakładek po najechaniu myszą */
+  }
+  
+  /* Kolor dla aktywnej zakładki */
+  .nav-underline .nav-link.active {
+    color: black; /* Ustaw kolor dla aktywnej zakładki */
+    background-color: transparent; /* Usuń domyślne tło, jeśli jest */
+    border-bottom: 2px solid black; /* Opcjonalnie dodaj dolną obwódkę */
+  }
