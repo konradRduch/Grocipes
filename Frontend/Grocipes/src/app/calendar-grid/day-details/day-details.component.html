@@ -16,13 +16,31 @@
         <ng-template ngbNavContent>
             <br>
             <app-nutrition-schedule></app-nutrition-schedule>
+
+
+            
+<br>
+<hr>
+<div *ngIf="imageUrl; else loading">
+  <img [src]="imageUrl" alt="Image" style="max-width: 50%; height: auto;" />
+</div>
+<ng-template #loading>
+  <p>Ładowanie obrazu...</p>
+</ng-template>
+
+
+<div>
+  <h2>Dodaj obrazek</h2>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="upload()">Prześlij</button>
+</div>
         </ng-template>
       </li>
       <li [ngbNavItem]="2">
         <button ngbNavLink>Shopping</button>
         <ng-template ngbNavContent>
             <br>
-            <app-shopping-schedule></app-shopping-schedule>
+            <app-shopping-schedule [shoppingLists]="shoppingLists"></app-shopping-schedule>
         </ng-template>
       </li>
     </ul>
@@ -32,19 +50,3 @@
 </div>
 
 
-
-
-
-<div *ngIf="imageUrl; else loading">
-    <img [src]="imageUrl" alt="Image" style="max-width: 50%; height: auto;" />
-  </div>
-  <ng-template #loading>
-    <p>Ładowanie obrazu...</p>
-  </ng-template>
-
-
-  <div>
-    <h2>Dodaj obrazek</h2>
-    <input type="file" (change)="onFileSelected($event)" />
-    <button (click)="upload()">Prześlij</button>
-  </div>

@@ -1,1 +1,5 @@
-<p>What to buy</p>
+<div class="row" *ngFor="let s of shoppingLists">
+    <div class="col-4">
+        <app-shopping-list-item [shoppList]="s"></app-shopping-list-item>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ShoppingList } from '../model/shopping-list.model';
+import { ShoppingListItemComponent } from "../shopping-list/shopping-list-item/shopping-list-item.component";
 
 @Component({
   selector: 'app-shopping-schedule',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./shopping-schedule.component.css']
 })
 export class ShoppingScheduleComponent {
+  @Input() shoppingLists: ShoppingList[]|undefined
+
 
 }

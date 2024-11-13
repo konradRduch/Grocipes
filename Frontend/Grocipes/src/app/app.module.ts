@@ -87,7 +87,7 @@ import { DayDetailsComponent } from './calendar-grid/day-details/day-details.com
     NutritionalGoalItemComponent,
     NutritionalGoalItemDetailsComponent,
     DatepickerConfigComponent,
-    DayDetailsComponent,
+    DayDetailsComponent
   ],
   imports: [
     BrowserModule,

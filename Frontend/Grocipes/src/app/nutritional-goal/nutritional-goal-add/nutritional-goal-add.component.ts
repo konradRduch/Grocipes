@@ -81,6 +81,7 @@ export class NutritionalGoalAddComponent implements OnInit {
     this.nutritionalGoalForm.get('goalStartDate')?.valueChanges.subscribe((startDate: string) => {
       this.calculateEndDate();
     });
+   
 
     this.nutritionalGoalForm.get('typeOfGoal')?.valueChanges.subscribe((goalType: NutritionalGoalType) => {
       const targetWeightControl = this.nutritionalGoalForm.get('targetWeight');
@@ -234,6 +235,7 @@ export class NutritionalGoalAddComponent implements OnInit {
   onWeightBlur() {
     const targetWeight = this.nutritionalGoalForm.get('targetWeight')?.value; // Pobierz wartość z targetWeight
     const typeOfGoal = this.nutritionalGoalForm.get('typeOfGoal')?.value; // Pobierz wartość z typeOfGoal
+    
     this.nutritionalGoalService.getEstimatedTimeToAchieveGoal(this.currentWeight!, targetWeight, typeOfGoal).subscribe(
       (data: string) => {
         console.log(data);
@@ -244,20 +246,29 @@ export class NutritionalGoalAddComponent implements OnInit {
   }
   
   getFormattedEstimatedTime(): number {
-    const time = parseFloat(this.estimatedTime); // Konwersja stringa na liczbę
+    const time = parseFloat(this.estimatedTime) * 7; // Konwersja stringa na liczbę
     return Math.floor(time); // Zaokrąglenie w dół
   }
 
-  private calculateEndDate() {
-    const startDate = this.nutritionalGoalForm.get('goalStartDate')?.value;
-    const time = parseFloat(this.estimatedTime);
-    if (startDate && time) {
-      const start = new Date(startDate);
-      console.log(start)
-      start.setDate(start.getDate() + time * 7); // Dodanie `estimatedTime` w tygodniach
-      this.nutritionalGoalForm.get('goalEndDate')?.setValue(this.formatDate(start));
+  public calculateEndDate() {
+    const dateFromInput= this.nutritionalGoalForm.get('goalStartDate')?.value;
+    console.log(dateFromInput)
+    if(dateFromInput){
+      const startDate = this.formatJsonToLocalDate(dateFromInput);
+      console.log(startDate);
+      console.log(this.estimatedTime)
+      const time = parseFloat(this.estimatedTime);
+      if (startDate && time) {
+        const start = new Date(startDate);
+        start.setDate(start.getDate() + time * 7); // Dodanie `estimatedTime` w tygodniach
+        this.nutritionalGoalForm.get('goalEndDate')?.setValue(this.formatDate2(start));
+      }
     }
   }
+
+
+
+
 
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -265,9 +276,22 @@ export class NutritionalGoalAddComponent implements OnInit {
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+  private formatDate2(date: Date): { year: number; month: number; day: number } {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return { year: year, month: +month, day: +day };
+  }
 
   private formatJsonToLocalDate(date: any) {
+    console.log(date)
     return `${date.year}-${date.month.toString().padStart(2, '0')}-${date.day.toString().padStart(2, '0')}`;
   }
+
+  convertToNgbDate(dateString: string): NgbDate {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new NgbDate(year, month, day);
+  }
+
 
 }

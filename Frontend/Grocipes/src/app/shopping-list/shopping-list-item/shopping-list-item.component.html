@@ -7,7 +7,7 @@
     'bg-info': enum.TURQUOISE===cardColor?true :false, 
     'bg-dark': enum.BLACK===cardColor?true :false,
     }">
-        <a [routerLink]="['shopping-list-item-details/',shoppList?.id]" style=" text-decoration: none;color: white;">
+        <a [routerLink]="['/shopping-list/shopping-list-item-details/',shoppList?.id]" style=" text-decoration: none;color: white;">
             <div class="card-body">
                 <h5 class="card-title text-center">{{shoppList?.name}}</h5>
                 {{shoppList?.shopping_date | date:"hh:mm MMM dd, yyyy"}}
