@@ -72,14 +72,6 @@ export class ShoppingListService {
         return this.http.patch(`http://localhost:8080/shoppingList/edit/${shoppingListId}`,editShoppingListDTO);
     }
 
-    addProductToShoppingList(){
-
-    }
-    
-    deleteProductFromShoppingList(){
-        
-    }
-
     toggleProduct(shoppingListId: number, productshoppinglistId: number){
         const emptyBody ={}
       return this.http.patch(`http://localhost:8080/shoppingList/toggle/${shoppingListId}/${productshoppinglistId}`, emptyBody);  

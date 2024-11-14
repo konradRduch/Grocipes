@@ -9,6 +9,14 @@
             </div>
           </div>
           <div class="mb-3">
+            <label for="typeOfMeal">Type of Meal</label>
+            <div class="input-group">
+              <select id="typeOfMeal" formControlName="typeOfMeal" class="form-select">
+                <option *ngFor="let type of recipeTypes" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="image_url">Image URL</label>
             <div class="input-group">
               <input id="image_url" formControlName="image_url" type="url" class="form-control" placeholder="image url" />

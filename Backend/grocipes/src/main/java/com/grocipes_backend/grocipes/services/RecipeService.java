@@ -33,7 +33,7 @@ public class RecipeService {
             return Optional.empty();
         }
 
-        Recipe recipe = new Recipe(dto.getTitle(),dto.getDescription(),dto.getPreparation_method(),dto.getImage_url());
+        Recipe recipe = new Recipe(dto.getTitle(),dto.getDescription(),dto.getPreparation_method(),dto.getImage_url(), dto.getTypeOfMeal());
         return Optional.of(recipeRepository.save(recipe));
     }
 
@@ -60,20 +60,21 @@ public class RecipeService {
                             (String) o[2],
                             (String) o[3],
                             (String) o[4],
+                            (String) o[5],
                             new ArrayList<>()
                     )
             );
 
             ProductWithUnitDTO productWithUnitDTO = new ProductWithUnitDTO(
-                    (Integer) o[5],
-                    (String) o[6],
-                    (double) o[7],
-                    (double) o[8],
-                    (String) o[9],
-                    (Integer) o[10],
-                    (Integer) o[12],
-                    (String)o[13],
-                    (double)o[11]
+                    (Integer) o[6],//6
+                    (String) o[7],//7
+                    (double) o[8],//8
+                    (double) o[9],//9
+                    (String) o[10],//10
+                    (Integer) o[11],//11
+                    (Integer) o[13],//13
+                    (String)o[14],//14
+                    (double)o[12]//12
             );
 
             // Dodajemy nutrientDTO do listy w GetProductsDTO

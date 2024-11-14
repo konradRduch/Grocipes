@@ -19,5 +19,9 @@ export class ImageService {
         return this.http.post(`http://localhost:8080/images`, formData); // Wysyłanie obrazu do backendu
     }
 
+    getImageById(id: number){
+        return this.http.get(`http://localhost:8080/images/downloadImage/${id}`, { responseType: 'blob' });
+    }
+
 
 }

@@ -1,5 +1,10 @@
-<div class="row" *ngFor="let s of shoppingLists">
-    <div class="col-4">
-        <app-shopping-list-item [shoppList]="s"></app-shopping-list-item>
+<div *ngIf="shoppingLists?.length === 0">
+    Today you have no shopping lists to make.
+</div>
+<div *ngIf="shoppingLists!.length > 0">
+    <div class="row" *ngFor="let s of shoppingLists">
+        <div class="col-4">
+            <app-shopping-list-item [shoppList]="s"></app-shopping-list-item>
+        </div>
     </div>
 </div>

@@ -3,12 +3,14 @@ package com.grocipes_backend.grocipes.models.DTO;
 public class RecipeDTO {
 
     private String title;
+    private String typeOfMeal;
     private String description;
     private String preparation_method;
     private String image_url;
 
-    public RecipeDTO(String title, String description, String preparation_method, String image_url) {
+    public RecipeDTO(String title, String typeOfMeal, String description, String preparation_method, String image_url) {
         this.title = title;
+        this.typeOfMeal = typeOfMeal;
         this.description = description;
         this.preparation_method = preparation_method;
         this.image_url = image_url;
@@ -44,5 +46,13 @@ public class RecipeDTO {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public String getTypeOfMeal() {
+        return typeOfMeal;
+    }
+
+    public void setTypeOfMeal(String typeOfMeal) {
+        this.typeOfMeal = typeOfMeal;
     }
 }

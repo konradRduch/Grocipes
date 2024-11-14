@@ -23,14 +23,37 @@
                 <p>{{recipe?.preparation_method}}</p>
             </div>
 
-            <div class="row align-self-end" style="margin-top: 25px;margin-bottom: 25px;margin-left: 15px;"> 
+            <!-- <div class="row align-self-end" style="margin-top: 25px;margin-bottom: 25px;margin-left: 15px;"> 
+                <div class="col-auto">
+                    <input type="date">
+                </div>
                 <div class="col-auto">
                     <button type="button" class="btn btn-primary" (click)="addToCalendar()">Add to calendar</button>
+                </div>
+            </div> -->
+            <!-- <div class="col-auto">
+                <button type="button" class="btn btn-primary">Add to nutrition schedule</button>
+            </div> -->
+
+
+            <div class="row align-self-end" style="margin-top: 25px; margin-bottom: 25px; margin-left: 15px;">
+                <div class="col-auto">
+                    <input type="date" [(ngModel)]="selectedDate">
+                </div>
+                <div class="col-auto">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="addToCalendar()"
+                        [disabled]="!selectedDate">
+                        Add to calendar
+                    </button>
                 </div>
                 <!-- <div class="col-auto">
                     <button type="button" class="btn btn-primary">Add to nutrition schedule</button>
                 </div> -->
             </div>
+
         </div>
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6  d-flex align-items-stretch" style="padding-right: 0px; padding-left: 0px;">

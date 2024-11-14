@@ -85,12 +85,11 @@ public class ShoppingListController {
         }
     }
 
-    @PostMapping("/addProductToShoppingList")
-    public ResponseEntity<Void> addProductToShoppingList(){
-
-
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping("/createRecipeProductsShoppingList")
+//    public ResponseEntity<Void> createRecipeProductsShoppingList(@RequestBody ShoppingListDTO shoppingListDTO){
+//
+//        return ResponseEntity.ok().build();
+//    }
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteShoppingList(@PathVariable Integer id) {
         // Usuwanie wszystkich powiązanych rekordów z ProductShoppingList na podstawie shoppingListId

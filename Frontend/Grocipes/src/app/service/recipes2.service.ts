@@ -33,6 +33,7 @@ export class Recipe2Service {
     const payload = {
       recipe: {
         title: recipe.title,
+        typeOfMeal: recipe.typeOfMeal,
         description: recipe.description,
         preparation_method: recipe.preparation_method,
         image_url: recipe.image_url
@@ -55,6 +56,7 @@ export class Recipe2Service {
     const updatedProduct = {
       recipe: {
         title: recipe.title,
+        typeOfMeal: recipe.typeOfMeal,
         description: recipe.description,
         preparation_method: recipe.preparation_method,
         image_url: recipe.image_url

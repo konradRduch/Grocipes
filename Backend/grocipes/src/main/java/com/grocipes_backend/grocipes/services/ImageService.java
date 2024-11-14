@@ -41,4 +41,16 @@ public class ImageService {
         }).orElse(null);
     }
 
+    public byte [] getImageByEatDeadlineId(Integer id){
+        Optional<Image> dbImage = imageRepository.findImageByEatDeadlineId(id);
+        return dbImage.map(image -> {
+            try {
+                return ImageUtils.decompressImage(image.getData());
+            } catch (DataFormatException | IOException exception) {
+                throw new ContextedRuntimeException("Error downloading an image", exception)
+                        .addContextValue("Image ID",  image.getId());
+            }
+        }).orElse(null);
+    }
+
 }

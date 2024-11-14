@@ -2,33 +2,28 @@ package com.grocipes_backend.grocipes.models.DTO;
 
 import java.time.LocalDateTime;
 
-public class EatDeadlineDTO {
-    private Integer id;
+public class CreateEatDeadlineDTO {
+    private Integer userId;
     private Integer recipeId;
-    private String title;
-    private String typeOfMeal;
     private LocalDateTime eatingDate;
     private boolean done;
     private int rate;
     private String comment;
 
-    public EatDeadlineDTO(Integer id, Integer recipeId, String title, String typeOfMeal, LocalDateTime eatingDate, boolean done, int rate, String comment) {
-        this.id = id;
+    public CreateEatDeadlineDTO(Integer recipeId, LocalDateTime eatingDate, boolean done, int rate, String comment) {
         this.recipeId = recipeId;
-        this.title = title;
-        this.typeOfMeal = typeOfMeal;
         this.eatingDate = eatingDate;
         this.done = done;
         this.rate = rate;
         this.comment = comment;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getRecipeId() {
@@ -37,14 +32,6 @@ public class EatDeadlineDTO {
 
     public void setRecipeId(Integer recipeId) {
         this.recipeId = recipeId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public LocalDateTime getEatingDate() {
@@ -79,11 +66,4 @@ public class EatDeadlineDTO {
         this.comment = comment;
     }
 
-    public String getTypeOfMeal() {
-        return typeOfMeal;
-    }
-
-    public void setTypeOfMeal(String typeOfMeal) {
-        this.typeOfMeal = typeOfMeal;
-    }
 }

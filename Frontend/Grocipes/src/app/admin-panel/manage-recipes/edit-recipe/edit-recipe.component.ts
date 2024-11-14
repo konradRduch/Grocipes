@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { RecipeTypeOfMeal } from 'src/app/enums/recipe-type-of-meal.enum';
 import { Product } from 'src/app/model/product.model';
 import { Recipe } from 'src/app/model/recepie.model';
 import { Groceries2Service } from 'src/app/service/groceries2.service';
@@ -16,6 +17,8 @@ export class EditRecipeComponent implements OnInit {
   recipeForm: FormGroup = new FormGroup({});
   availableProducts: Product[] = []; // Przy
   availableUnit: {id: number, name: string }[] = [];
+
+  recipeTypes = RecipeTypeOfMeal.getAllTypeOfMeal();
 
   id: number = 0;
 
@@ -48,6 +51,7 @@ export class EditRecipeComponent implements OnInit {
   private initForm(recipe?: Recipe) {
     this.recipeForm = new FormGroup({
       title: new FormControl(recipe?.title, Validators.required),
+      typeOfMeal: new FormControl(recipe?.typeOfMeal, Validators.required),
       description: new FormControl(recipe?.description, Validators.required),
       preparation_method: new FormControl(recipe?.preparation_method, Validators.required),
       image_url: new FormControl(recipe?.image_url, Validators.required),

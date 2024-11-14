@@ -15,25 +15,30 @@
         <button ngbNavLink>Nutrition</button>
         <ng-template ngbNavContent>
             <br>
-            <app-nutrition-schedule></app-nutrition-schedule>
+            <app-nutrition-schedule 
+            [imageUrl]="imageUrl"
+            [breakfast]="breakfast"
+            [lunch]="lunch"
+            [dinner]="dinner"
+            ></app-nutrition-schedule>
 
 
             
-<br>
+<!-- <br>
 <hr>
 <div *ngIf="imageUrl; else loading">
   <img [src]="imageUrl" alt="Image" style="max-width: 50%; height: auto;" />
 </div>
 <ng-template #loading>
   <p>Ładowanie obrazu...</p>
-</ng-template>
+</ng-template> -->
 
 
-<div>
+<!-- <div>
   <h2>Dodaj obrazek</h2>
   <input type="file" (change)="onFileSelected($event)" />
   <button (click)="upload()">Prześlij</button>
-</div>
+</div> -->
         </ng-template>
       </li>
       <li [ngbNavItem]="2">

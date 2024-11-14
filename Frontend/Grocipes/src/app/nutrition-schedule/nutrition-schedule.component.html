@@ -1,88 +1,151 @@
 <div class="container">
-    <div class="row text-center">
-        <div class="col">
+
+
+    <!-- <div>
+  <h2>Dodaj obrazek</h2>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="upload()">Prześlij</button>
+</div> -->
+
+    <div class="row text-center" >
+        <div class="col" *ngIf="breakfast===undefined">
+            <p>
+                you don't have breakfast planned
+            </p>
+        </div>
+        <div class="col" *ngIf="breakfast!==undefined">
             <hr>
             <h4>Breakfast</h4>
-            <p>Cheese toast</p>
+            <p>{{breakfast.title}}</p>
             <div class="row">
                 <div class="col">
-                    <img src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-05-Cheese-on-Toast%2FIMG_6699"
-                        alt="" style="min-height: 400px; max-height: 400px;min-width: 400px;max-width: 400px;">
+                    <div class="row border border-dark rounded" style="width: 400px; height: 400px;">
+                        <img *ngIf="breakfastImageUrl!==null" [src]="breakfastImageUrl" alt="add photo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="row" *ngIf="breakfastImageUrl!==null">
+                        <div class="col-1 text-center">
+                            <button class="btn btn-danger" (click)="exit()">
+                                <i class="fas fa">X</i>
+                            </button>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="breakfastImageUrl===null">
+                        <div class="col">
+                            <input type="file" (change)="onFileSelected($event)"  />
+                        </div>
+                        <div class="col">
+                            <button (click)="upload()">Prześlij</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     <div class="row">
                         <div class="col">Rate:</div>
-                        <div class="col"><ngb-rating [(rate)]="rating" /></div>
+                        <div class="col"><ngb-rating [(rate)]="breakfast.rate" /></div>
                     </div>
                     <div class="row">
                         <div class="col">Comment:</div>
                         <div class="col"><input type="text"></div>
                     </div>
-                    <div>
-                        <h2>Dodaj obrazek</h2>
-                        <input type="file"   />
-                        <button  >Prześlij</button>
-                      </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row text-center">
-        <div class="col">
+        <div class="col" *ngIf="lunch===undefined">
+            <p>
+                you don't have lunch planned
+            </p>
+        </div>
+        <div class="col" *ngIf="lunch!==undefined">
             <hr>
             <h4>Lunch</h4>
-            <p>Spagetti</p>
+            <p>{{lunch.title}}</p>
             <div class="row">
+               
                 <div class="col">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUpAU1Hy39k5ff-GtMRElvSedpe6tS2St-ig&s"
-                        alt="" style="min-height: 400px; max-height: 400px;min-width: 400px;max-width: 400px;">
+                    <div class="row border border-dark rounded" style="width: 400px; height: 400px;">
+                        <img *ngIf="lunchImageUrl!==null" [src]="lunchImageUrl" alt="add photo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="row" *ngIf="lunchImageUrl!==null">
+                        <div class="col-1 text-center">
+                            <button class="btn btn-danger" (click)="exit()">
+                                <i class="fas fa">X</i>
+                            </button>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="lunchImageUrl===null">
+                        <div class="col">
+                            <input type="file"   />
+                        </div>
+                        <div class="col">
+                            <button  >Prześlij</button>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col">
                     <div class="row">
                         <div class="col">Rate:</div>
-                        <div class="col"><ngb-rating [(rate)]="rating" /></div>
+                        <div class="col"><ngb-rating [(rate)]="lunch.rate" /></div>
                     </div>
                     <div class="row">
                         <div class="col">Comment:</div>
                         <div class="col"><input type="text"></div>
                     </div>
-                    <div>
-                        <h2>Dodaj obrazek</h2>
-                        <input type="file"   />
-                        <button  >Prześlij</button>
-                      </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row text-center">
-        <div class="col">
+        <div class="col" *ngIf="dinner===undefined">
+            <hr>
+            <p>
+                you don't have dinner planned
+            </p>
+        </div>
+        <div class="col" *ngIf="dinner!==undefined">
             <hr>
             <h4>Dinner</h4>
             <p>Friut salad</p>
             <div class="row">
                 <div class="col">
-                    <img src="data:image/jpeg;base64,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"
-                        alt="" style="min-height: 400px; max-height: 400px;min-width: 400px;max-width: 400px;">
+                    <div class="row border border-dark rounded" style="width: 400px; height: 400px;">
+                        <img *ngIf="dinnerImageUrl!==null" [src]="dinnerImageUrl" alt="add photo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="row" *ngIf="dinnerImageUrl!==null" >
+                        <div class="col-1 text-center">
+                            <button class="btn btn-danger" (click)="exit()">
+                                <i class="fas fa">X</i>
+                            </button>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dinnerImageUrl===null">
+                        <div class="col">
+                            <input type="file"   />
+                        </div>
+                        <div class="col">
+                            <button  >Prześlij</button>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="col">
                     <div class="row">
                         <div class="col">Rate:</div>
-                        <div class="col"><ngb-rating [(rate)]="rating" /></div>
+                        <div class="col"><ngb-rating [(rate)]="dinner.rate" /></div>
                     </div>
                     <div class="row">
                         <div class="col">Comment:</div>
                         <div class="col"><input type="text"></div>
                     </div>
-
-                    <div>
-                        <h2>Dodaj obrazek</h2>
-                        <input type="file"   />
-                        <button  >Prześlij</button>
-                      </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+
 </div>

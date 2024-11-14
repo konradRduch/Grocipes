@@ -17,7 +17,7 @@ public class Recipe {
     @Column(columnDefinition="varchar(1000)")
     private String preparation_method;
     private String image_url;
-
+    private String typeOfMeal;
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<RecipeProduct> recipeProducts = new ArrayList<>();
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
@@ -31,19 +31,21 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String title, String description, String preparation_method, String image_url) {
+    public Recipe(String title, String description, String preparation_method, String image_url, String typeOfMeal) {
         this.title = title;
         this.description = description;
         this.preparation_method = preparation_method;
         this.image_url = image_url;
+        this.typeOfMeal = typeOfMeal;
     }
 
-    public Recipe(Integer id, String title, String description, String preparation_method, String image_url, List<RecipeProduct> recipeProducts, List<EatDeadline> eatDeadlines, List<UserEntity> users, List<Image> images) {
+    public Recipe(Integer id, String title, String description, String preparation_method, String image_url, String typeOfMeal, List<RecipeProduct> recipeProducts, List<EatDeadline> eatDeadlines, List<UserEntity> users, List<Image> images) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.preparation_method = preparation_method;
         this.image_url = image_url;
+        this.typeOfMeal = typeOfMeal;
         this.recipeProducts = recipeProducts;
         this.eatDeadlines = eatDeadlines;
         this.users = users;
@@ -120,5 +122,13 @@ public class Recipe {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public String getTypeOfMeal() {
+        return typeOfMeal;
+    }
+
+    public void setTypeOfMeal(String typeOfMeal) {
+        this.typeOfMeal = typeOfMeal;
     }
 }

@@ -42,4 +42,12 @@ public class ImageController {
                 .body(imageData);
     }
 
+    @GetMapping("/downloadImage/{id}")
+    public ResponseEntity<?> downloadImageByEatDeadlineId(@PathVariable Integer id) {
+        byte[] imageData = imageService.getImageByEatDeadlineId(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf(IMAGE_PNG_VALUE))
+                .body(imageData);
+    }
+
 }

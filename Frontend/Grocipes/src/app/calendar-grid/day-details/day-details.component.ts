@@ -1,8 +1,11 @@
 import { formatDate } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { RecipeTypeOfMeal } from 'src/app/enums/recipe-type-of-meal.enum';
+import { EatDeadline } from 'src/app/model/eat-deadline.model';
 import { ShoppingList } from 'src/app/model/shopping-list.model';
 import { ShoppingSchedule } from 'src/app/model/shoppingSchedule.model';
+import { EatDeadlineService } from 'src/app/service/eat-deadline.service';
 import { ImageService } from 'src/app/service/image.service';
 import { ShoppingListService } from 'src/app/service/shopping-list.service';
 
@@ -18,15 +21,26 @@ export class DayDetailsComponent implements OnInit{
   selectedFile: File | null = null;
   date: string | undefined;
   shoppingLists: ShoppingList[] = [];
+
+  eatDeadlines: EatDeadline[] =[];
+  breakfast: EatDeadline| undefined;
+  lunch: EatDeadline| undefined;
+  dinner: EatDeadline| undefined;
+
+  breakfastImageUrl: string | null = null;
+  lunchImageUrl: string | null = null;
+  dinnerImageUrl: string | null = null;
+
   
   constructor(
     private imageService: ImageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private shoppingListService: ShoppingListService,
+    private eatDeadlineService: EatDeadlineService,
     @Inject(LOCALE_ID) private locale: string // Inject dynamic locale
   ) {}
-
+  
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: Params)=>{
@@ -48,13 +62,33 @@ export class DayDetailsComponent implements OnInit{
         }
       }
     );
+
+    this.eatDeadlineService.getAllEatDeadline().subscribe(
+      (data: EatDeadline[]) =>{
+        if(this.date){
+          const filteredList = data.filter((item) => {
+            const itemDate = formatDate(item.eatingDate, 'yyyy-MM-dd', this.locale); // Dynamic locale
+            return itemDate === this.date;
+          });
+          this.eatDeadlines = filteredList;
+          console.log(this.eatDeadlines)
+
+          this.breakfast = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.BREAKFAST);
+          this.lunch = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.LUNCH);
+          this.dinner = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.DINNER);
+          console.log('daads')
+          console.log(this.lunch)
+        }
+      }
+    );
+
     this.loadImage('cheese.jpg');
   }
 
   loadImage(name: string) {
     this.imageService.getImage(name).subscribe(blob => {
       const url = URL.createObjectURL(blob);
-      this.imageUrl = url;
+      this.imageUrl =null;
     });
   }
 

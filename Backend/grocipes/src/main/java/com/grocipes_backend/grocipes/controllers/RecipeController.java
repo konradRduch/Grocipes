@@ -73,6 +73,7 @@ public class RecipeController {
         recipe.setDescription(recipeDTO.getDescription());
         recipe.setPreparation_method(recipeDTO.getPreparation_method());
         recipe.setImage_url(recipeDTO.getImage_url());
+        recipe.setTypeOfMeal(recipe.getTypeOfMeal());
         recipeService.save(recipe);
 
         // Usuwanie produktów

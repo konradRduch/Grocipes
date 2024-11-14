@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from 'src/app/service/recepies.service';
 import { Recipe } from '../../../model/recepie.model';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/service/data-storage.service';
 import { ShoppingListService } from 'src/app/service/shopping-list.service';
 import { NutritionalGoalService } from 'src/app/service/nutritional-goal.service';
+import { EatDeadlineService } from 'src/app/service/eat-deadline.service';
 
 @Component({
   selector: 'app-recipes-item-details',
@@ -13,6 +14,8 @@ import { NutritionalGoalService } from 'src/app/service/nutritional-goal.service
   styleUrls: ['./recipes-item-details.component.css']
 })
 export class RecipesItemDetailsComponent implements OnInit {
+  selectedDate: string | null = null; 
+
   recipe: Recipe | undefined;
   title: string | undefined;
 
@@ -20,11 +23,13 @@ export class RecipesItemDetailsComponent implements OnInit {
   subscription: Subscription = new Subscription;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute, 
     private recipesService: RecipesService, 
     private dataStorageService: DataStorageService,
     private shoppingListService: ShoppingListService,
-    private nutrtionalGoalService: NutritionalGoalService
+    private nutrtionalGoalService: NutritionalGoalService,
+    private eatDeadlineService: EatDeadlineService
   ) {
   }
   ngOnInit(): void {
@@ -53,13 +58,35 @@ export class RecipesItemDetailsComponent implements OnInit {
       );
   }
 
-
-
-
   addToCalendar(){
-    //adding to nutritional schedule
+    console.log(this.recipe)
+    const recipeProductsShoppingList = {
+      name: this.recipe?.title,
+      shoppingDate:`${this.selectedDate}T10:00`,
+      colorCard: 1,
+      likedList: false,
+      products: this.recipe?.products.map((data: any) => ({
+        id: data.id,
+        unitValue: data.unitValue,
+        unit_id: 1,//data.unit_id,
+        done: false
+      }))
+    }
+    console.log(recipeProductsShoppingList)
+    this.shoppingListService.addShoppingList(recipeProductsShoppingList).subscribe();
 
-    //adding to shopping schedule 
+
+    const addToEatDeadline = {
+        recipeId: this.recipe?.id,
+        eatingDate: `${this.selectedDate}T10:00`,
+        done: false,
+        rate: 0,
+        comment: ""
+    }
+
+    this.eatDeadlineService.addEatDeadline(addToEatDeadline).subscribe();
+
+    this.router.navigate(['/recipes']);
   }
 
 }
