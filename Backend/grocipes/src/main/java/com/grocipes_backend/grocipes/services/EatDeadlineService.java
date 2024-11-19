@@ -11,6 +11,7 @@ import com.grocipes_backend.grocipes.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class EatDeadlineService {
@@ -50,5 +51,20 @@ public class EatDeadlineService {
                 .filter(eatDeadlineDTO -> eatDeadlineDTO.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void commentMeal(Integer id, CreateEatDeadlineDTO createEatDeadlineDTO) {
+       EatDeadline eatDeadline =  eatDeadlineRepository.findById(id)
+               .orElseThrow(() -> new NoSuchElementException("No EatDeadline found with ID: " + id));
+       eatDeadline.setComment(createEatDeadlineDTO.getComment());
+       eatDeadlineRepository.save(eatDeadline);
+
+    }
+
+    public void rateMeal(Integer id, CreateEatDeadlineDTO createEatDeadlineDTO) {
+        EatDeadline eatDeadline =  eatDeadlineRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("No EatDeadline found with ID: " + id));
+        eatDeadline.setRate(createEatDeadlineDTO.getRate());
+        eatDeadlineRepository.save(eatDeadline);
     }
 }

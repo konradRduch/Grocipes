@@ -36,6 +36,23 @@ export class EatDeadlineService {
         return this.http.post('http://localhost:8080/eatDeadline/add',addDto)
     }
 
+    deleteEatDeadline(id:number){
+      return this.http.delete(`http://localhost:8080/eatDeadline/delete/${id}`)
+    }
+
+    commentMeal(id: number, comment: string){
+      const newComment = {
+        comment: comment
+      }
+      return this.http.put(`http://localhost:8080/eatDeadline/comment/${id}`, newComment);
+    }
+    rateMeal(id: number, rate: number){
+      const newRate = {
+        rate: rate
+      }
+      return this.http.put(`http://localhost:8080/eatDeadline/rate/${id}`, newRate);
+    }
+
     /*
      fetchGroceries(): Observable<Product[]> {
     return this.http.get<Product[]>('http://localhost:8080/products').pipe(

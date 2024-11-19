@@ -45,9 +45,27 @@ public class ImageController {
     @GetMapping("/downloadImage/{id}")
     public ResponseEntity<?> downloadImageByEatDeadlineId(@PathVariable Integer id) {
         byte[] imageData = imageService.getImageByEatDeadlineId(id);
+
+        if (imageData == null || imageData.length == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No image data found for EatDeadline ID: " + id);
+        }
+
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf(IMAGE_PNG_VALUE))
                 .body(imageData);
+    }
+    @PostMapping("/upload/{id}")
+    public ResponseEntity<?>uploadImageById(@PathVariable Integer id, @RequestParam("image") MultipartFile file)throws IOException{
+        String uploadImage = imageService.uploadImageById(id,file); // Logika przesyłania
+        // Zwracaj odpowiedź w formacie JSON
+        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("message", uploadImage));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteImageById(@PathVariable Integer id){
+        imageService.deleteImageById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

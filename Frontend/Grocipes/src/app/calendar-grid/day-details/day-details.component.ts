@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, LOCALE_ID, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeTypeOfMeal } from 'src/app/enums/recipe-type-of-meal.enum';
 import { EatDeadline } from 'src/app/model/eat-deadline.model';
@@ -27,20 +27,47 @@ export class DayDetailsComponent implements OnInit{
   lunch: EatDeadline| undefined;
   dinner: EatDeadline| undefined;
 
-  breakfastImageUrl: string | null = null;
-  lunchImageUrl: string | null = null;
-  dinnerImageUrl: string | null = null;
-
+  currentMealId: number | undefined;
+  currentRate: number | undefined;
+  currentComment: string | undefined;
   
   constructor(
-    private imageService: ImageService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private shoppingListService: ShoppingListService,
     private eatDeadlineService: EatDeadlineService,
     @Inject(LOCALE_ID) private locale: string // Inject dynamic locale
   ) {}
   
+
+
+   // Metoda do obsługi zmiany oceny
+   handleRateChange(event: {id: number, rate: number}): void {
+    if (event.id === this.breakfast?.id) {
+      this.breakfast.rate = event.rate;
+    } else if (event.id === this.lunch?.id) {
+      this.lunch.rate = event.rate;
+    } else if (event.id === this.dinner?.id) {
+      this.dinner.rate = event.rate;
+    }
+
+    this.eatDeadlineService.rateMeal(event.id,event.rate).subscribe();
+    console.log('Updated rate for item', event);
+  }
+
+  // Metoda do obsługi zmiany komentarza
+  handleCommentChange(event: {id: number, comment: string}): void {
+    if (event.id === this.breakfast?.id) {
+      this.breakfast.comment = event.comment;
+    } else if (event.id === this.lunch?.id) {
+      this.lunch.comment = event.comment;
+    } else if (event.id === this.dinner?.id) {
+      this.dinner.comment = event.comment;
+    }
+    this.eatDeadlineService.commentMeal(event.id,event.comment).subscribe();
+    console.log('Updated comment for item', event);
+  }
+
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: Params)=>{
@@ -58,7 +85,6 @@ export class DayDetailsComponent implements OnInit{
           });
           console.log(filteredList);
           this.shoppingLists = filteredList;
-          
         }
       }
     );
@@ -76,42 +102,10 @@ export class DayDetailsComponent implements OnInit{
           this.breakfast = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.BREAKFAST);
           this.lunch = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.LUNCH);
           this.dinner = this.eatDeadlines.find(item => item.typeOfMeal === RecipeTypeOfMeal.DINNER);
-          console.log('daads')
-          console.log(this.lunch)
         }
       }
     );
-
-    this.loadImage('cheese.jpg');
   }
-
-  loadImage(name: string) {
-    this.imageService.getImage(name).subscribe(blob => {
-      const url = URL.createObjectURL(blob);
-      this.imageUrl =null;
-    });
-  }
-
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0]; // Przechwytywanie wybranego pliku
-  }
-
-  upload() {
-    if (this.selectedFile) {
-        this.imageService.uploadImage(this.selectedFile).subscribe(
-            response => {
-                console.log('Obraz został dodany:', response.message); // Oczekuj obiektu z kluczem "message"
-                // Możesz dodać dodatkową logikę, np. resetować formularz
-            },
-            error => {
-                console.error('Wystąpił błąd podczas dodawania obrazu:', error);
-            }
-        );
-    } else {
-        console.error('Proszę wybrać plik do przesłania.');
-    }
-}
 
 
 

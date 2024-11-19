@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EatDeadlineRepository extends JpaRepository<EatDeadline,Integer> {
 
@@ -18,9 +19,6 @@ public interface EatDeadlineRepository extends JpaRepository<EatDeadline,Integer
             "WHERE ns.userEntity.id = :userId"
     )
     List<EatDeadlineDTO> findAllEatDeadline(@Param("userId") Integer userId);
-
-
-
 
 
 }

@@ -10,11 +10,22 @@ public class CreateEatDeadlineDTO {
     private int rate;
     private String comment;
 
+    public CreateEatDeadlineDTO() {
+    }
+
     public CreateEatDeadlineDTO(Integer recipeId, LocalDateTime eatingDate, boolean done, int rate, String comment) {
         this.recipeId = recipeId;
         this.eatingDate = eatingDate;
         this.done = done;
         this.rate = rate;
+        this.comment = comment;
+    }
+
+    public CreateEatDeadlineDTO(int rate) {
+        this.rate = rate;
+    }
+
+    public CreateEatDeadlineDTO(String comment) {
         this.comment = comment;
     }
 
