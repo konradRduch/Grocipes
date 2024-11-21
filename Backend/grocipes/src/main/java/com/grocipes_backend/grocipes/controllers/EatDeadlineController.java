@@ -93,6 +93,18 @@ public class EatDeadlineController {
             throw new RuntimeException("Token not found or invalid");
         }
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteEatDeadline(@PathVariable Integer id, HttpServletRequest request){
+        String token = request.getHeader("Authorization"); // Odczytaj token z nagłówka
 
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            Integer userId = jwtGenerator.getUserIdFromJWT(token);
+            eatDeadlineService.deleteEatDeadline(id);
+            return ResponseEntity.ok().build();
+        } else {
+            throw new RuntimeException("Token not found or invalid");
+        }
+    }
 
 }

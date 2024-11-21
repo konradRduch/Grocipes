@@ -76,7 +76,7 @@
             <br>
             <div class="row text-center">
                 <div class="col">
-                    <button class="btn btn-danger" (click)="deleteMeal()">
+                    <button class="btn btn-danger" (click)="deleteMeal(breakfast.id)">
                         Remove meal
                     </button>
                     <link rel="stylesheet"
@@ -162,7 +162,7 @@
             <br>
             <div class="row text-center">
                 <div class="col">
-                    <button class="btn btn-danger" (click)="deleteMeal()">
+                    <button class="btn btn-danger" (click)="deleteMeal(lunch.id)">
                         Remove meal
                     </button>
                     <link rel="stylesheet"
@@ -236,7 +236,7 @@
                             [(ngModel)]="newComment"
                             ></textarea>
                         </div>
-                    </div>
+                    </div> 
                     <div class="row" *ngIf="dinner.comment.length ===0">
                         <div class="col text-end">
                             <button class="btn btn-primary" (click)="submitComment(dinner.id)">Submit</button>
@@ -247,7 +247,7 @@
             <br>
             <div class="row text-center">
                 <div class="col">
-                    <button class="btn btn-danger" (click)="deleteMeal()">
+                    <button class="btn btn-danger" (click)="deleteMeal(dinner.id)">
                         Remove meal
                     </button>
                     <link rel="stylesheet"

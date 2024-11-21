@@ -38,36 +38,6 @@ export class DayDetailsComponent implements OnInit{
     @Inject(LOCALE_ID) private locale: string // Inject dynamic locale
   ) {}
   
-
-
-   // Metoda do obsługi zmiany oceny
-   handleRateChange(event: {id: number, rate: number}): void {
-    if (event.id === this.breakfast?.id) {
-      this.breakfast.rate = event.rate;
-    } else if (event.id === this.lunch?.id) {
-      this.lunch.rate = event.rate;
-    } else if (event.id === this.dinner?.id) {
-      this.dinner.rate = event.rate;
-    }
-
-    this.eatDeadlineService.rateMeal(event.id,event.rate).subscribe();
-    console.log('Updated rate for item', event);
-  }
-
-  // Metoda do obsługi zmiany komentarza
-  handleCommentChange(event: {id: number, comment: string}): void {
-    if (event.id === this.breakfast?.id) {
-      this.breakfast.comment = event.comment;
-    } else if (event.id === this.lunch?.id) {
-      this.lunch.comment = event.comment;
-    } else if (event.id === this.dinner?.id) {
-      this.dinner.comment = event.comment;
-    }
-    this.eatDeadlineService.commentMeal(event.id,event.comment).subscribe();
-    console.log('Updated comment for item', event);
-  }
-
-
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: Params)=>{
@@ -106,6 +76,54 @@ export class DayDetailsComponent implements OnInit{
       }
     );
   }
+
+ 
+   // Metoda do obsługi zmiany oceny
+   handleRateChange(event: {id: number, rate: number}): void {
+    if (event.id === this.breakfast?.id) {
+      this.breakfast.rate = event.rate;
+    } else if (event.id === this.lunch?.id) {
+      this.lunch.rate = event.rate;
+    } else if (event.id === this.dinner?.id) {
+      this.dinner.rate = event.rate;
+    }
+
+    this.eatDeadlineService.rateMeal(event.id,event.rate).subscribe();
+    console.log('Updated rate for item', event);
+  }
+
+  // Metoda do obsługi zmiany komentarza
+  handleCommentChange(event: {id: number, comment: string}): void {
+    if (event.id === this.breakfast?.id) {
+      this.breakfast.comment = event.comment;
+    } else if (event.id === this.lunch?.id) {
+      this.lunch.comment = event.comment;
+    } else if (event.id === this.dinner?.id) {
+      this.dinner.comment = event.comment;
+    }
+    this.eatDeadlineService.commentMeal(event.id,event.comment).subscribe();
+    console.log('Updated comment for item', event);
+  }
+
+
+  handleEatDeadlineDelete(id: number): void {
+    this.eatDeadlineService.deleteEatDeadline(id).subscribe(() => {
+      // Usuń z lokalnej listy eatDeadlines
+      this.eatDeadlines = this.eatDeadlines.filter(item => item.id !== id);
+  
+      // Zaktualizuj widok posiłków
+      if (this.breakfast?.id === id) {
+        this.breakfast = undefined;
+      } else if (this.lunch?.id === id) {
+        this.lunch = undefined;
+      } else if (this.dinner?.id === id) {
+        this.dinner = undefined;
+      }
+  
+      console.log(`Deleted eat deadline with id: ${id}`);
+    });
+  }
+
 
 
 

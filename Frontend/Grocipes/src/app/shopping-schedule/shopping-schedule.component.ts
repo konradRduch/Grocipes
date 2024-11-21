@@ -11,4 +11,8 @@ export class ShoppingScheduleComponent {
   @Input() shoppingLists: ShoppingList[]|undefined
 
 
+
+  onShoppingListDeleted(id: number) {
+    this.shoppingLists = this.shoppingLists?.filter(list => list.id !== id);
+  }
 }

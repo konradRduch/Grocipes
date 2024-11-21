@@ -5,9 +5,8 @@ import com.grocipes_backend.grocipes.models.DTO.EatDeadlineDTO;
 import com.grocipes_backend.grocipes.models.EatDeadline;
 import com.grocipes_backend.grocipes.models.NutritionSchedule;
 import com.grocipes_backend.grocipes.models.Recipe;
-import com.grocipes_backend.grocipes.repositories.EatDeadlineRepository;
-import com.grocipes_backend.grocipes.repositories.NutritionScheduleRepository;
-import com.grocipes_backend.grocipes.repositories.RecipeRepository;
+import com.grocipes_backend.grocipes.repositories.*;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +18,17 @@ public class EatDeadlineService {
     private final EatDeadlineRepository eatDeadlineRepository;
     private final RecipeRepository recipeRepository;
     private final NutritionScheduleRepository nutritionScheduleRepository;
+    private final ImageRepository imageRepository;
+    private final ShoppingListRepository shoppingListRepository;
 
-    public EatDeadlineService(EatDeadlineRepository eatDeadlineRepository, RecipeRepository recipeRepository, NutritionScheduleRepository nutritionScheduleRepository) {
+    public EatDeadlineService(EatDeadlineRepository eatDeadlineRepository, RecipeRepository recipeRepository, NutritionScheduleRepository nutritionScheduleRepository,
+                              ImageRepository imageRepository,
+                              ShoppingListRepository shoppingListRepository) {
         this.eatDeadlineRepository = eatDeadlineRepository;
         this.recipeRepository = recipeRepository;
         this.nutritionScheduleRepository = nutritionScheduleRepository;
+        this.imageRepository = imageRepository;
+        this.shoppingListRepository = shoppingListRepository;
     }
 
     public void addEatDeadline(CreateEatDeadlineDTO createEatDeadlineDTO) {
@@ -66,5 +71,11 @@ public class EatDeadlineService {
                 .orElseThrow(() -> new NoSuchElementException("No EatDeadline found with ID: " + id));
         eatDeadline.setRate(createEatDeadlineDTO.getRate());
         eatDeadlineRepository.save(eatDeadline);
+    }
+
+    @Transactional
+    public void deleteEatDeadline(Integer id) {
+        imageRepository.deleteImageByEatDeadlineId(id);
+        eatDeadlineRepository.deleteById(id);
     }
 }

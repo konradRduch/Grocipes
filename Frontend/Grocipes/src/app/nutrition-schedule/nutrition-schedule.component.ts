@@ -23,7 +23,7 @@ export class NutritionScheduleComponent implements  OnChanges {
 
   @Output() rateChange = new EventEmitter<{id: number, rate: number}>();
   @Output() commentChange = new EventEmitter<{id: number, comment: string}>();
-
+  @Output() eatDeadlineDelete = new EventEmitter<number>();
   
   
   constructor(private imageService: ImageService) { }
@@ -127,9 +127,10 @@ export class NutritionScheduleComponent implements  OnChanges {
   
 
 
-  deleteMeal(){
-
+  deleteMeal(id: number){
+    this.eatDeadlineDelete.emit(id);
   }
+
   removeOpinion(id: number): void {
     const obj = {
       id: id,
@@ -154,6 +155,6 @@ export class NutritionScheduleComponent implements  OnChanges {
     this.newComment = '';
   }
 
-  rateMeal(){}
+ 
 
 }
