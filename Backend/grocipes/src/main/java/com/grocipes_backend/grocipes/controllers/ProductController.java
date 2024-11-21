@@ -86,7 +86,7 @@ public class ProductController {
         product.setPrice(productDTO.getPrice());
         product.setImage_url(productDTO.getImage_url());
         product.setCalories(productDTO.getCalories());
-        productService.save(product);
+        productService.save(product, productDTO.getUnitId());
 
         // Usuwanie istniejących wartości odżywczych dla danego produktu
         nutritionFactNutrientService.deleteNutritionFactsByProductId(id);

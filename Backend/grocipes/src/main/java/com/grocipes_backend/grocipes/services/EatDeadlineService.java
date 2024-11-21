@@ -20,15 +20,18 @@ public class EatDeadlineService {
     private final NutritionScheduleRepository nutritionScheduleRepository;
     private final ImageRepository imageRepository;
     private final ShoppingListRepository shoppingListRepository;
+    private final RecipeProductRepository recipeProductRepository;
 
     public EatDeadlineService(EatDeadlineRepository eatDeadlineRepository, RecipeRepository recipeRepository, NutritionScheduleRepository nutritionScheduleRepository,
                               ImageRepository imageRepository,
-                              ShoppingListRepository shoppingListRepository) {
+                              ShoppingListRepository shoppingListRepository,
+                              RecipeProductRepository recipeProductRepository) {
         this.eatDeadlineRepository = eatDeadlineRepository;
         this.recipeRepository = recipeRepository;
         this.nutritionScheduleRepository = nutritionScheduleRepository;
         this.imageRepository = imageRepository;
         this.shoppingListRepository = shoppingListRepository;
+        this.recipeProductRepository = recipeProductRepository;
     }
 
     public void addEatDeadline(CreateEatDeadlineDTO createEatDeadlineDTO) {
@@ -37,6 +40,7 @@ public class EatDeadlineService {
         //findNutritionSchedule
         List<NutritionSchedule> nutritionSchedule = nutritionScheduleRepository.findByUserId(createEatDeadlineDTO.getUserId());
 
+        double totalPrice = recipeProductRepository.findRecipeProductsByRecipeIdAndAggregate(recipe.getId());
         EatDeadline eatDeadline = new EatDeadline();
         eatDeadline.setRecipe(recipe);
         eatDeadline.setNutritionSchedule(nutritionSchedule.get(0));
@@ -44,6 +48,7 @@ public class EatDeadlineService {
         eatDeadline.setDone(createEatDeadlineDTO.isDone());
         eatDeadline.setRate(createEatDeadlineDTO.getRate());
         eatDeadline.setComment(createEatDeadlineDTO.getComment());
+        eatDeadline.setTotalPrice(totalPrice);
         eatDeadlineRepository.save(eatDeadline);
     }
 

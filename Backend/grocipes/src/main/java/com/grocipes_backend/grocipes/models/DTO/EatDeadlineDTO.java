@@ -11,8 +11,9 @@ public class EatDeadlineDTO {
     private boolean done;
     private int rate;
     private String comment;
+    private double totalPrice;
 
-    public EatDeadlineDTO(Integer id, Integer recipeId, String title, String typeOfMeal, LocalDateTime eatingDate, boolean done, int rate, String comment) {
+    public EatDeadlineDTO(Integer id, Integer recipeId, String title, String typeOfMeal, LocalDateTime eatingDate, boolean done, int rate, String comment,double totalPrice) {
         this.id = id;
         this.recipeId = recipeId;
         this.title = title;
@@ -21,6 +22,7 @@ public class EatDeadlineDTO {
         this.done = done;
         this.rate = rate;
         this.comment = comment;
+        this.totalPrice = totalPrice;
     }
 
     public Integer getId() {
@@ -85,5 +87,13 @@ public class EatDeadlineDTO {
 
     public void setTypeOfMeal(String typeOfMeal) {
         this.typeOfMeal = typeOfMeal;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

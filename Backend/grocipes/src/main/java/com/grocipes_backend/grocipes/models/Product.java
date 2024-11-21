@@ -30,6 +30,10 @@ public class Product {
     private List<ProductShoppingList> productShoppingLists;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Image>images;
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    private UnitRecipeProduct unit;
+
     public Product() {
     }
 
@@ -42,12 +46,13 @@ public class Product {
         this.calories = calories;
     }
 
-    public Product(String name, double weight, double price, String image_url, Integer calories) {
+    public Product(String name, double weight, double price, String image_url, Integer calories,UnitRecipeProduct unit) {
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.image_url = image_url;
         this.calories = calories;
+        this.unit = unit;
     }
 
     public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts, List<ProductShoppingList> productShoppingLists) {
@@ -73,6 +78,20 @@ public class Product {
         this.recipeProducts = recipeProducts;
         this.productShoppingLists = productShoppingLists;
         this.images = images;
+    }
+
+    public Product(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutritionFactNutrient> nutritionFacts, List<RecipeProduct> recipeProducts, List<ProductShoppingList> productShoppingLists, List<Image> images, UnitRecipeProduct unit) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.price = price;
+        this.image_url = image_url;
+        this.calories = calories;
+        this.nutritionFacts = nutritionFacts;
+        this.recipeProducts = recipeProducts;
+        this.productShoppingLists = productShoppingLists;
+        this.images = images;
+        this.unit = unit;
     }
 
     public List<ProductShoppingList> getProductShoppingLists() {
@@ -153,5 +172,14 @@ public class Product {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+
+    public UnitRecipeProduct getUnit() {
+        return unit;
+    }
+
+    public void setUnit(UnitRecipeProduct unit) {
+        this.unit = unit;
     }
 }

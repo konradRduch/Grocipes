@@ -7,8 +7,9 @@ export class EatDeadline{
     public  done: boolean;
     public  rate: number;
     public  comment:string;
+    public  totalPrice: number;
 
-    constructor(id: number, recipeId:number, title: string,typeOfMeal:string ,eatingDate: string, done: boolean, rate: number, comment: string){
+    constructor(id: number, recipeId:number, title: string,typeOfMeal:string ,eatingDate: string, done: boolean, rate: number, comment: string, totalPrice: number){
         this.id = id;
         this.recipeId = recipeId;
         this.title = title;
@@ -17,6 +18,7 @@ export class EatDeadline{
         this.done = done;
         this.rate = rate;
         this.comment = comment;
+        this.totalPrice = totalPrice;
     }
 
 }

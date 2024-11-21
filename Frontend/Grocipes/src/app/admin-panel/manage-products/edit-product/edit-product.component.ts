@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { ProductUnit } from 'src/app/enums/product-unit.enum';
 import { NutritionFacts } from 'src/app/model/nutrition-facts.model';
 import { Product } from 'src/app/model/product.model';
 import { GroceriesService } from 'src/app/service/groceries.service';
@@ -15,7 +16,7 @@ import { Groceries2Service } from 'src/app/service/groceries2.service';
 export class EditProductComponent implements OnInit {
   productForm: FormGroup = new FormGroup({});
   id: number = 0;
-
+  productUnit: { value: ProductUnit; label: string; }[] | undefined;
   constructor(
     private groceries2Service: Groceries2Service,
     private router: Router,
@@ -25,6 +26,7 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productUnit = ProductUnit.getSelectOptions();
     this.initForm();
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -60,6 +62,7 @@ export class EditProductComponent implements OnInit {
     this.productForm = new FormGroup({
       name: new FormControl(product?.name, [Validators.required, Validators.min(0)]),
       weight: new FormControl(product?.weight, [Validators.required, Validators.min(0)]),
+      unit_id: new FormControl(product?.unitId, Validators.required),
       price: new FormControl(product?.price, [Validators.required, Validators.min(0)]),
       image_url: new FormControl(product?.image_url, Validators.required),
       calories: new FormControl(product?.calories, [Validators.required, Validators.min(0)]),

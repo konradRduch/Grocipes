@@ -15,6 +15,14 @@
           </div>
         </div>
         <div class="mb-3">
+          <label for="unit_id">Unit</label>
+          <div class="input-group">
+            <select id="unit_id" formControlName="unit_id" class="form-select">
+              <option *ngFor="let type of productUnit" [value]="type.value">{{ type.label }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
           <label for="price">Price</label>
           <div class="input-group">
             <input id="price" formControlName="price" class="form-control" placeholder="price" type="number" step="0.1" min="0" />

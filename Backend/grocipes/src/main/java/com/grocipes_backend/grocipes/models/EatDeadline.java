@@ -15,6 +15,7 @@ public class EatDeadline {
     private boolean done;
     private int rate;
     private String comment;
+    private double totalPrice;
     @ManyToOne
     @JoinColumn(name="nutrition_schedule_id")
     private NutritionSchedule nutritionSchedule;
@@ -26,12 +27,13 @@ public class EatDeadline {
     public EatDeadline() {
     }
 
-    public EatDeadline(Integer id, LocalDateTime eating_date, boolean done, int rate, String comment, NutritionSchedule nutritionSchedule, Recipe recipe, List<Image> image) {
+    public EatDeadline(Integer id, LocalDateTime eating_date, boolean done, int rate, String comment, double totalPrice, NutritionSchedule nutritionSchedule, Recipe recipe, List<Image> image) {
         this.id = id;
         this.eating_date = eating_date;
         this.done = done;
         this.rate = rate;
         this.comment = comment;
+        this.totalPrice = totalPrice;
         this.nutritionSchedule = nutritionSchedule;
         this.recipe = recipe;
         this.image = image;
@@ -99,5 +101,13 @@ public class EatDeadline {
 
     public void setImage(List<Image> image) {
         this.image = image;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

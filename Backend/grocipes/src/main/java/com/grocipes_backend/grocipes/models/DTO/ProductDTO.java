@@ -6,13 +6,23 @@ public class ProductDTO {
     private double price;
     private String image_url;
     private Integer calories;
+    private Integer unitId;
 
-    public ProductDTO(String name, double weight, double price, String image_url, Integer calories) {
+    public ProductDTO(String name, double weight, double price, String image_url, Integer calories, Integer unitId) {
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.image_url = image_url;
         this.calories = calories;
+        this.unitId = unitId;
+    }
+
+    public Integer getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(Integer unitId) {
+        this.unitId = unitId;
     }
 
     public String getName() {

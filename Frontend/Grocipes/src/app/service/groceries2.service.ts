@@ -39,7 +39,8 @@ export class Groceries2Service {
         weight: product.weight,
         price: product.price,
         image_url: product.image_url,
-        calories: product.calories
+        calories: product.calories,
+        unitId: product.unit_id
       },
       nutritionFactNutrientDTO: product.nutrient.map(nutrient => ({
         nutrientId: nutrient.id,
@@ -62,7 +63,8 @@ export class Groceries2Service {
         weight: product.weight,
         price: product.price,
         image_url: product.image_url,
-        calories: product.calories
+        calories: product.calories,
+        unitId: product.unit_id
       },
       nutritionFactNutrientDTO: product.nutrient.map(nutrient => ({
         nutrientId: nutrient.id,

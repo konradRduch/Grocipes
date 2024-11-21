@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { ProductUnit } from 'src/app/enums/product-unit.enum';
 import { DataStorageService } from 'src/app/service/data-storage.service';
 import { Groceries2Service } from 'src/app/service/groceries2.service';
 
@@ -12,15 +13,15 @@ import { Groceries2Service } from 'src/app/service/groceries2.service';
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup = new FormGroup({});
-
-
+  productUnit: { value: ProductUnit; label: string; }[] | undefined;
+  
   constructor(
     private groceries2Service: Groceries2Service,
     private router: Router,
   ) { }
 
   ngOnInit() {
-
+    this.productUnit = ProductUnit.getSelectOptions();
     this.initForm();
   }
 
@@ -48,6 +49,7 @@ export class AddProductComponent implements OnInit {
     this.productForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       weight: new FormControl(null, [Validators.required, Validators.min(1)]),
+      unit_id: new FormControl(null, Validators.required),
       price: new FormControl(null, [Validators.required, Validators.min(0)]),
       image_url: new FormControl(null, Validators.required),
       calories: new FormControl(null, [Validators.required, Validators.min(0)]),

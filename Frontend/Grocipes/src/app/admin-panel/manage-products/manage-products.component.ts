@@ -22,6 +22,7 @@ export class ManageProductsComponent implements OnInit {
     calories: 0,
     price: 0,
     image_url: '',
+    unitId:1,
     unit_id: 1,
     unitName: 'g',
     unitValue: 0,

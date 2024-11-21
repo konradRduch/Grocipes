@@ -9,9 +9,10 @@ public class GetProductsDTO {
     private double price;
     private String image_url;
     private Integer calories;
+    private Integer unitId;
     private List<NutrientDTO> nutrient;
 
-    public GetProductsDTO(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutrientDTO> nutrient) {
+    public GetProductsDTO(Integer id, String name, double weight, double price, String image_url, Integer calories, List<NutrientDTO> nutrient,Integer unitId) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -19,6 +20,7 @@ public class GetProductsDTO {
         this.image_url = image_url;
         this.calories = calories;
         this.nutrient = nutrient;
+        this.unitId = unitId;
     }
 
     public GetProductsDTO(Integer id, String name, double weight, double price, String image_url, Integer calories) {
@@ -84,5 +86,13 @@ public class GetProductsDTO {
 
     public void setNutrient(List<NutrientDTO> nutrient) {
         this.nutrient = nutrient;
+    }
+
+    public Integer getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(Integer unitId) {
+        this.unitId = unitId;
     }
 }

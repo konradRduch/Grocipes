@@ -16,6 +16,9 @@ public class UnitRecipeProduct {
     @OneToMany(mappedBy = "unit")
     private List<RecipeProduct> recipeProducts;
 
+    @OneToMany(mappedBy = "unit")
+    private List<Product> products;
+
     public UnitRecipeProduct() {
     }
 
@@ -23,6 +26,13 @@ public class UnitRecipeProduct {
         this.id = id;
         this.name = name;
         this.recipeProducts = recipeProducts;
+    }
+
+    public UnitRecipeProduct(Integer id, String name, List<RecipeProduct> recipeProducts, List<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.recipeProducts = recipeProducts;
+        this.products = products;
     }
 
     public UnitRecipeProduct(String name) {
@@ -51,5 +61,13 @@ public class UnitRecipeProduct {
 
     public void setRecipeProducts(List<RecipeProduct> recipeProducts) {
         this.recipeProducts = recipeProducts;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

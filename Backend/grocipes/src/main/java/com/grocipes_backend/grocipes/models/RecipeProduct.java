@@ -9,6 +9,7 @@ public class RecipeProduct {
     private Integer id;
 
     private double quantity;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
@@ -28,6 +29,15 @@ public class RecipeProduct {
 
     public RecipeProduct(double quantity, Recipe recipe, Product product, UnitRecipeProduct unit) {
         this.quantity = quantity;
+        this.recipe = recipe;
+        this.product = product;
+        this.unit = unit;
+    }
+
+    public RecipeProduct(Integer id, double quantity, double price, Recipe recipe, Product product, UnitRecipeProduct unit) {
+        this.id = id;
+        this.quantity = quantity;
+        this.price = price;
         this.recipe = recipe;
         this.product = product;
         this.unit = unit;
@@ -75,5 +85,13 @@ public class RecipeProduct {
 
     public void setUnit(UnitRecipeProduct unit) {
         this.unit = unit;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

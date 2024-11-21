@@ -102,10 +102,13 @@ export class RecipesItemDetailsComponent implements OnInit  {
 
   private calculateProductsCost(): void {
     if (this.recipe?.products) {
-      this.productsCost = this.recipe.products.reduce(
+      const totalCost = this.recipe.products.reduce(
         (total: number, product: Product) => total + product.price,
         0
       );
+  
+      // Zaokrąglamy wynik do dwóch miejsc po przecinku
+      this.productsCost = parseFloat(totalCost.toFixed(2));
     }
   }
 

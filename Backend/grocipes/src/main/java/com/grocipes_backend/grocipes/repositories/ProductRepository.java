@@ -10,7 +10,7 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product>findByName(String name);
     Product findProductById(Integer id);
 
-    @Query("SELECT (p.id,p.name,p.weight, p.price,p.image_url,p.calories,nfn.amount, nfn.dailyValue,n.name) " +
+    @Query("SELECT (p.id,p.name,p.weight, p.price,p.image_url,p.calories,p.unit.id,nfn.amount, nfn.dailyValue,n.name) " +
             "FROM NutritionFactNutrient nfn " +
             "JOIN Product p ON p.id = nfn.id.productId " +
             "JOIN Nutrient n ON n.id = nfn.id.nutrientId "

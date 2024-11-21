@@ -9,6 +9,7 @@ public class CreateEatDeadlineDTO {
     private boolean done;
     private int rate;
     private String comment;
+    private double totalPrice;
 
     public CreateEatDeadlineDTO() {
     }
@@ -19,6 +20,15 @@ public class CreateEatDeadlineDTO {
         this.done = done;
         this.rate = rate;
         this.comment = comment;
+    }
+
+    public CreateEatDeadlineDTO(Integer recipeId, LocalDateTime eatingDate, boolean done, int rate, String comment, double totalPrice) {
+        this.recipeId = recipeId;
+        this.eatingDate = eatingDate;
+        this.done = done;
+        this.rate = rate;
+        this.comment = comment;
+        this.totalPrice = totalPrice;
     }
 
     public CreateEatDeadlineDTO(int rate) {

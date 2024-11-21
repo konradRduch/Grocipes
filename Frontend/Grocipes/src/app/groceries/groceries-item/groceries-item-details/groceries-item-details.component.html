@@ -26,10 +26,14 @@
                     <p>Weight</p>
                 </div>
                 <div class="col-6">
-                   <p>{{product?.weight}} g</p> 
+                   <p>{{product?.weight}} {{ getUnitLabel(product?.unitId!) }}</p> 
                 </div>
             </div>
             <br>
+            <div class="row text-center">
+                <div class="col">Nutritional values ​​per 100g</div>
+            </div>
+            <hr>
             <div class="row">
                 <div class="col-6">
                     <p>Calories</p>
@@ -51,6 +55,7 @@
                     <p>{{ n.dailyValue }} %</p>
                 </div>
             </div>
+            <hr>
         
             <!-- <div class="row text-center">
                 <div class="col">

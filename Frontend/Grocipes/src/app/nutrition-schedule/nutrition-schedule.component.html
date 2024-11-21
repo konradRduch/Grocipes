@@ -11,6 +11,11 @@
             <br>
             <div class="row">
                 <div class="col">
+                    {{breakfast.totalPrice | number: '1.2-2'}} PLN
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <h5 *ngIf="breakfastImageUrl===null">Add a photo of the prepared meal</h5>
                     <img *ngIf="breakfastImageUrl!==null" [src]="breakfastImageUrl" alt="add photo"
                     style="height:400px; width: 400px;" class=" border border-secondary rounded img-fluid">
@@ -95,6 +100,11 @@
             <hr>
             <h4>Lunch</h4>
             <br>
+            <div class="row">
+                <div class="col">
+                    {{lunch.totalPrice | number: '1.2-2'}} PLN
+                </div>
+            </div>
             <div class="row">
 
                 <div class="col">
@@ -181,6 +191,11 @@
             <hr>
             <h4>Dinner</h4>
             <br>
+            <div class="row">
+                <div class="col">
+                    {{dinner.totalPrice | number: '1.2-2'}} PLN
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <h5 *ngIf="dinnerImageUrl===null">Add a photo of the prepared meal</h5>
