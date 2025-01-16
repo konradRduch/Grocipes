@@ -69,6 +69,44 @@
         {{nutritionalGoal?.targetBodyFatLevel}}
     </div>
 </div>
+<hr>
+
+
+<div class="row text-center">
+    <h4>Daily demand</h4>
+</div>
+<div class="row text-center">
+    <div class="col">
+        TDEE
+    </div>
+    <div class="col">
+        {{goalDailyDemand?.calories | number: '1.2-2' }}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Protein
+    </div>
+    <div class="col">
+        {{goalDailyDemand?.protein | number: '1.2-2' }}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Carbs
+    </div>
+    <div class="col">
+        {{goalDailyDemand?.carbs | number: '1.2-2' }}
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col">
+        Fat
+    </div>
+    <div class="col">
+        {{goalDailyDemand?.fats | number: '1.2-2' }}
+    </div>
+</div>
 
             
 

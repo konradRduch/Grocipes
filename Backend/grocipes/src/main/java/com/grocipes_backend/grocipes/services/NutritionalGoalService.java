@@ -1,21 +1,18 @@
 package com.grocipes_backend.grocipes.services;
 
-import com.grocipes_backend.grocipes.models.DTO.BodyMeasurementsDTO;
-import com.grocipes_backend.grocipes.models.DTO.NutritionalGoalDTO;
-import com.grocipes_backend.grocipes.models.DTO.ProfileInfoDTO;
-import com.grocipes_backend.grocipes.models.DTO.ProgressDTO;
-import com.grocipes_backend.grocipes.models.NutritionalGoal;
-import com.grocipes_backend.grocipes.models.UserEntity;
-import com.grocipes_backend.grocipes.repositories.BodyMeasurementsRepository;
-import com.grocipes_backend.grocipes.repositories.NutritionalGoalRepository;
-import com.grocipes_backend.grocipes.repositories.UserEntityRepository;
+import com.grocipes_backend.grocipes.models.*;
+import com.grocipes_backend.grocipes.models.DTO.*;
+import com.grocipes_backend.grocipes.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
@@ -26,26 +23,69 @@ public class NutritionalGoalService {
     private final NutritionalGoalRepository nutritionalGoalRepository;
     private final UserEntityRepository userEntityRepository;
     private final BodyMeasurementsRepository bodyMeasurementsRepository;
+    private final DailyDemandRepository dailyDemandRepository;
+    private final UnitDailyDemandRepository unitDailyDemandRepository;
+    private final NutritionFactNutrientRepository nutritionFactNutrientRepository;
 
 
-    public NutritionalGoalService(NutritionalGoalRepository nutritionalGoalRepository, UserEntityRepository userEntityRepository, BodyMeasurementsRepository bodyMeasurementsRepository) {
+    public NutritionalGoalService(NutritionalGoalRepository nutritionalGoalRepository, UserEntityRepository userEntityRepository, BodyMeasurementsRepository bodyMeasurementsRepository,
+                                  DailyDemandRepository dailyDemandRepository,
+                                  UnitDailyDemandRepository unitDailyDemandRepository,
+                                  NutritionFactNutrientRepository nutritionFactNutrientRepository) {
         this.nutritionalGoalRepository = nutritionalGoalRepository;
         this.userEntityRepository = userEntityRepository;
         this.bodyMeasurementsRepository = bodyMeasurementsRepository;
+        this.dailyDemandRepository = dailyDemandRepository;
+        this.unitDailyDemandRepository = unitDailyDemandRepository;
+        this.nutritionFactNutrientRepository = nutritionFactNutrientRepository;
     }
 
-    public void cos(ProfileInfoDTO profileInfoDTO){
+    public DailyDemandDTO getGoalDailyDemand(Integer userId,ProfileInfoDTO profileInfoDTO){
+        List<NutritionalGoal>nutritionalGoals = nutritionalGoalRepository.findNutritionalGoalsByUserEntityId(userId);
+
+        NutritionalGoal activeGoal = nutritionalGoals.stream()
+                .filter(NutritionalGoal::isActive) // Sprawdź, czy cel jest aktywny
+                .findFirst() // Pobierz pierwszy (i jedyny) aktywny cel
+                .orElseThrow(() -> new IllegalStateException("Brak aktywnego celu dla użytkownika o ID: " + userId));
+
+        Integer nutritionalGoalId = activeGoal.getId();
+
+        List<DailyDemand> dailyDemands = dailyDemandRepository.findDailyDemandByNutritionalGoalId(nutritionalGoalId);
+
+        double proteinAmount = 0.0;//nutrientID 5
+        double carbsAmount = 0.0;//nutrientID 4
+        double fatsAmount = 0.0;//nutrientID 1
+
+        for (DailyDemand demand : dailyDemands) {
+            if (demand.getNutrient().getId().getNutrientId().equals(5)) {
+                proteinAmount = demand.getQuantity();
+            } else if (demand.getNutrient().getId().getNutrientId().equals(4)) {
+                carbsAmount = demand.getQuantity();
+            } else if (demand.getNutrient().getId().getNutrientId().equals(1)) {
+                fatsAmount = demand.getQuantity();
+            }
+        }
         LocalDate birthDate = profileInfoDTO.getBirthday();
         LocalDate currentDate = LocalDate.now();
         int age = (int) ChronoUnit.YEARS.between(birthDate, currentDate);
         double BMR = calculateBMR(profileInfoDTO.getGender(), profileInfoDTO.getWeight(),profileInfoDTO.getHeight(),age);
-        double TDEE = calculateAverageTDEE(BMR, "High active");
+        double TDEE = calculateAverageTDEE(BMR, profileInfoDTO.getPhysical_activity());
 
-        calculateDailyNutrientBreakdown(TDEE, "weight gain");
-
+        return new DailyDemandDTO(proteinAmount,carbsAmount,fatsAmount,TDEE);
     }
 
-    public void addNutritionalGoal(Integer userId, NutritionalGoalDTO nutritionalGoalDTO){
+    public void dailyDemand(ProfileInfoDTO profileInfoDTO, Integer nutritionalGoalId){
+        LocalDate birthDate = profileInfoDTO.getBirthday();
+        LocalDate currentDate = LocalDate.now();
+        int age = (int) ChronoUnit.YEARS.between(birthDate, currentDate);
+        double BMR = calculateBMR(profileInfoDTO.getGender(), profileInfoDTO.getWeight(),profileInfoDTO.getHeight(),age);
+        double TDEE = calculateAverageTDEE(BMR, profileInfoDTO.getPhysical_activity());
+
+        String typeOfGoal = nutritionalGoalRepository.findNutritionalGoalById(nutritionalGoalId).getTypeOfGoal();
+        calculateDailyNutrientBreakdown(TDEE, typeOfGoal,nutritionalGoalId);
+    }
+
+    public void addNutritionalGoal(Integer userId, NutritionalGoalDTO nutritionalGoalDTO,ProfileInfoDTO profileInfoDTO){
         UserEntity user = userEntityRepository.findUserEntitiesById(userId).orElseThrow(() -> new IllegalArgumentException("User not found."));
         NutritionalGoal nutritionalGoal = new NutritionalGoal();
 
@@ -60,7 +100,13 @@ public class NutritionalGoalService {
         nutritionalGoal.setUserEntity(user);
 
         nutritionalGoalRepository.save(nutritionalGoal);
+        dailyDemand(profileInfoDTO, nutritionalGoal.getId());
+
     }
+
+
+
+
     @Transactional
     public void deleteNutritionalGoal(Integer id){
         nutritionalGoalRepository.deleteById(id);
@@ -134,6 +180,8 @@ public class NutritionalGoalService {
                 .max(Comparator.comparing(BodyMeasurementsDTO::getMeasurement_date))
                 .orElseThrow(() -> new IllegalArgumentException("Body measurements not found"));
     }
+
+
     private double calculateBMR(String gender, double weight, double height, int age) {
         double BMR = (10.0 * weight) + (6.25 * height) - (5.0 * age);
         if (gender.equals("M")) {
@@ -175,21 +223,21 @@ public class NutritionalGoalService {
         }
     }
 
-    private void calculateDailyNutrientBreakdown(double calories, String typeOfGoal){
+    private void calculateDailyNutrientBreakdown(double calories, String typeOfGoal, Integer nutritionalGoalId){
         double carbPercentage, proteinPercentage, fatPercentage;
 
         switch (typeOfGoal) {
-            case "weight loss" -> {
+            case "Weight loss" -> {
                 carbPercentage = 0.4;
                 proteinPercentage = 0.3;
                 fatPercentage = 0.3;
             }
-            case "weight maintenance" -> {
+            case "Weight maintenance" -> {
                 carbPercentage = 0.5;
                 proteinPercentage = 0.2;
                 fatPercentage = 0.3;
             }
-            case "weight gain" -> {
+            case "Weight gain" -> {
                 carbPercentage = 0.55;
                 proteinPercentage = 0.2;
                 fatPercentage = 0.25;
@@ -203,11 +251,36 @@ public class NutritionalGoalService {
         double fatCalories = calories * fatPercentage;
 
         // 4 kcal per gram for carbs and protein, 9 kcal per gram for fat
-        double carbsGrams = carbsCalories / 4;
-        double proteinGrams = proteinCalories / 4;
-        double fatGrams = fatCalories / 9;
+
+        double carbsGrams = carbsCalories / 4; //carbs id 4
+        double proteinGrams = proteinCalories / 4; //protein id 5
+        double fatGrams = fatCalories / 9;//fat id 1
+
+        addDailyDemand(carbsGrams, 1,4,nutritionalGoalId);
+        addDailyDemand(proteinGrams, 1,5,nutritionalGoalId);
+        addDailyDemand(fatGrams, 1,1,nutritionalGoalId);
     }
 
+    private void addDailyDemand(double nutrientQuantity, Integer unitId, Integer nutrientId, Integer nutritionalGoalId){
+
+        UnitDailyDemand unitDailyDemand = unitDailyDemandRepository.findById(unitId)
+                .orElseThrow(() -> new NoSuchElementException("No unitDailyDemand found with ID: " + unitId));
+
+        NutritionalGoal nutritionalGoal = nutritionalGoalRepository.findNutritionalGoalById(nutritionalGoalId);
+
+        List<NutritionFactNutrient> nutritionFactNutrients = nutritionFactNutrientRepository.findByNutrientId(nutrientId);
+        // Iteruj po NutritionFactNutrient i twórz DailyDemand dla każdego z nich
+        for (NutritionFactNutrient nutritionFactNutrient : nutritionFactNutrients) {
+            DailyDemand dailyDemand = new DailyDemand(); // Stwórz nowy obiekt dla każdej iteracji
+            dailyDemand.setQuantity(nutrientQuantity);
+            dailyDemand.setNutritionalGoal(nutritionalGoal);
+            dailyDemand.setUnitDailyDemand(unitDailyDemand);
+            dailyDemand.setNutrient(nutritionFactNutrient);
+
+            // Zapisz DailyDemand w bazie danych
+            dailyDemandRepository.save(dailyDemand);
+        }
+    }
 
     private Integer calculateProgress(double currentValue, double startValue, double targetValue) {
         double totalChange = Math.abs(targetValue - startValue);

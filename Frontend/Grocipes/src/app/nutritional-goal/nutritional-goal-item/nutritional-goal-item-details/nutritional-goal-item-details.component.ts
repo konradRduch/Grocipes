@@ -14,6 +14,9 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
   id: number | undefined;
   nutritionalGoal: NutritionalGoal | undefined;
   user: any | undefined;
+
+  goalDailyDemand: {protein: number, carbs: number, fats: number, calories: number} | undefined;
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private nutritionalGoalService: NutritionalGoalService, private userDataService: UserDataService){
 
   }
@@ -37,6 +40,12 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
       }
     );
 
+    this.nutritionalGoalService.getGoalDailyDemands().subscribe(
+      (data: {protein: number, carbs: number, fats: number, calories: number}) =>{
+        this.goalDailyDemand = data;
+        console.log(data)
+      }
+    );
 
   }
 

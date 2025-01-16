@@ -61,9 +61,9 @@ public class NutritionalGoalController {
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
             Integer userId = jwtGenerator.getUserIdFromJWT(token);
-           // ProfileInfoDTO profileInfoDTO = bodyMeasurementsService.getUserProfileInfo(userId);
+            ProfileInfoDTO profileInfoDTO = bodyMeasurementsService.getUserProfileInfo(userId);
             //nutritionalGoalService.cos(profileInfoDTO);
-            nutritionalGoalService.addNutritionalGoal(userId, nutritionalGoalDTO);
+            nutritionalGoalService.addNutritionalGoal(userId, nutritionalGoalDTO,profileInfoDTO);
 
             return ResponseEntity.ok().build();
         } else {
@@ -82,5 +82,18 @@ public class NutritionalGoalController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/getGoalDailyDemand")
+    public DailyDemandDTO getGoalDailyDemand(HttpServletRequest request){
+        String token = request.getHeader("Authorization"); // Odczytaj token z nagłówka
+
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            Integer userId = jwtGenerator.getUserIdFromJWT(token);
+            ProfileInfoDTO profileInfoDTO = bodyMeasurementsService.getUserProfileInfo(userId);
+            return nutritionalGoalService.getGoalDailyDemand(userId, profileInfoDTO);
+        } else {
+            throw new RuntimeException("Token not found or invalid");
+        }
+    }
 
 }

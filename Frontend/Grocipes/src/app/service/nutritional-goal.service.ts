@@ -26,6 +26,10 @@ export class NutritionalGoalService{
         );
     }
 
+    getGoalDailyDemands(): Observable<{protein: number, carbs: number, fats: number, calories: number}>{
+        return this.http.get<{protein: number, carbs: number, fats: number, calories: number}>(`http://localhost:8080/nutritionalGoal/getGoalDailyDemand`);
+    }
+
     //dodaj cel
     addNutritionalGoal(dto: any){
         console.log(dto);

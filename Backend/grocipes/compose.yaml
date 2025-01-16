@@ -6,3 +6,29 @@ services:
       - 'MYSQL_ROOT_PASSWORD=1234'
     ports:
       - '33062:3306'
+
+  # Usługa dla backendu
+  backend:
+    build:
+      context: "D:/Fullstack applitacion/Grocipes/Grocipes/Backend/grocipes"
+      dockerfile: "Dockerfile"
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/grocipesdb'
+      - 'SPRING_DATASOURCE_USERNAME=root'
+      - 'SPRING_DATASOURCE_PASSWORD=1234'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+  # Usługa dla frontendu
+  frontend:
+    build:
+      context: "D:/Fullstack applitacion/Grocipes/Grocipes/Frontend/Grocipes"
+      dockerfile: "Dockerfile"
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+
+volumes:
+  mysql-data:
