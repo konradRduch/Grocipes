@@ -10,8 +10,8 @@ services:
   # Usługa dla backendu
   backend:
     build:
-      context: "D:/Fullstack applitacion/Grocipes/Grocipes/Backend/grocipes"
-      dockerfile: "Dockerfile"
+      context: ./Backend/grocipes
+      dockerfile: Dockerfile
     environment:
       - 'SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/grocipesdb'
       - 'SPRING_DATASOURCE_USERNAME=root'
@@ -23,8 +23,8 @@ services:
   # Usługa dla frontendu
   frontend:
     build:
-      context: "D:/Fullstack applitacion/Grocipes/Grocipes/Frontend/Grocipes"
-      dockerfile: "Dockerfile"
+      context: ./Frontend/Grocipes
+      dockerfile: Dockerfile
     ports:
       - '80:80'
     depends_on:
