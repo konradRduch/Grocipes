@@ -2,92 +2,92 @@
     <div class="row" style="margin-top: 50px;">
         <div class="col"></div>
         <div class="col-12 col-lg-6 text-center">
-            <img src="https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png" alt="image not found" style="max-height:500px;" class=" border border-secondary rounded img-fluid">
+            <img src="https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png" alt="image not found" style="max-height:400px;" class=" border border-secondary rounded img-fluid">
         </div>
         <div class="col"></div>
     </div>
     <div class="row text-center" style="margin-top: 25px;">
-        <h1>{{userProfileInfo?.name}} {{userProfileInfo?.surname}}</h1>
+        <h2>{{userProfileInfo?.name | titlecase}}  {{userProfileInfo?.surname | titlecase}}</h2>
         <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Email </p> 
+            <p class="fs-6">Email </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.email}}</p>
+             <p class="fs-6">{{userProfileInfo?.email}}</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Gender </p> 
+            <p class="fs-6">Gender </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{ userProfileInfo?.gender === 'M' ? 'male' : 'female' }}</p>
+             <p class="fs-6">{{ userProfileInfo?.gender === 'M' ? 'Male' : 'Female' }}</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Birthday </p> 
+            <p class="fs-6">Birthday </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.birthday}}</p>
+             <p class="fs-6">{{userProfileInfo?.birthday}}</p>
          </div>  
          <hr>
     </div>
 
     <div class="row text-center" style="margin-top: 5px;">
-        <h1>Body parameters</h1>
+        <h2>Body parameters</h2>
         <hr>
     </div>
   
 
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Height </p> 
+            <p class="fs-6">Height </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.height}} [cm]</p>
+             <p class="fs-6">{{userProfileInfo?.height}} [cm]</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Weight </p> 
+            <p class="fs-6">Weight </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.weight}} [kg]</p>
+             <p class="fs-6">{{userProfileInfo?.weight}} [kg]</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Body fat level </p> 
+            <p class="fs-6">Body fat level </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.body_fat_leve}} %</p>
+             <p class="fs-6">{{userProfileInfo?.body_fat_leve}} %</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Abdominal circumference </p> 
+            <p class="fs-6">Abdominal circumference </p> 
          </div>
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.abdominal_circumference}} [cm]</p>
+             <p class="fs-6">{{userProfileInfo?.abdominal_circumference}} [cm]</p>
          </div>  
          <hr>
     </div>
     <div class="row">
         <div class="col-12 text-center col-lg-6 text-center">
-            <p class="fs-3">Physical activiy </p> 
+            <p class="fs-6">Physical activiy </p> 
          </div>
          <!-- niska umiarkowana duza -->
           <!--low active, Moderately active, high active -->
          <div class="col-12 text-center col-lg-6 text-center">
-             <p class="fs-3">{{userProfileInfo?.physical_activity}}</p>
+             <p class="fs-6">{{userProfileInfo?.physical_activity}}</p>
          </div>  
          <hr>
     </div>

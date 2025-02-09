@@ -15,6 +15,9 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
   nutritionalGoal: NutritionalGoal | undefined;
   user: any | undefined;
 
+
+  suggestedMeals: {title: string, typeOfMeal: string, description: string, preparation_method: string, image_url:string}[]|undefined;
+
   goalDailyDemand: {protein: number, carbs: number, fats: number, calories: number} | undefined;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private nutritionalGoalService: NutritionalGoalService, private userDataService: UserDataService){
@@ -45,6 +48,12 @@ export class NutritionalGoalItemDetailsComponent implements OnInit{
         this.goalDailyDemand = data;
         console.log(data)
       }
+    );
+
+    this.nutritionalGoalService.getSuggestionRecipeList().subscribe(
+    (data: {title: string, typeOfMeal: string, description: string, preparation_method: string, image_url:string}[]) =>{
+      this.suggestedMeals = data;
+    }
     );
 
   }

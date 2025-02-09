@@ -13,6 +13,13 @@ export class NutritionalGoalService{
     constructor(private http: HttpClient){
 
     }
+
+    getSuggestionRecipeList(): Observable<{title: string, typeOfMeal: string, description: string, preparation_method: string, image_url:string}[]>{
+         return this.http.get<{title: string, typeOfMeal: string, description: string, preparation_method: string, image_url:string}[]>(`http://localhost:8080/recipeSuggestions/getSuggestionRecipeList`);
+    }
+
+
+
     //pobierz wszystkie cele
     getNutritionalGoal(id: number): Observable<NutritionalGoal>{
         return this.http.get<NutritionalGoal>(`http://localhost:8080/nutritionalGoal/${id}`);

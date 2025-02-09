@@ -1,5 +1,7 @@
 <div *ngIf="shoppingLists?.length === 0">
-   You don't have any purchases for this day.
+    <div class="alert alert-info" role="alert">
+        You don't have any purchases for this day.
+      </div>
 </div>
 <div *ngIf="shoppingLists!.length > 0">
     <div class="row" *ngFor="let s of shoppingLists">

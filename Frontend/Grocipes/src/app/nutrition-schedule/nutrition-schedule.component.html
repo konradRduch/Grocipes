@@ -1,19 +1,17 @@
 <div class="container">
     <div class="row text-center">
         <div class="col" *ngIf="breakfast===undefined">
-            <p>
+            <br>
+            <div class="alert alert-info" role="alert">
                 You don't have breakfast planned for this day
-            </p>
+              </div>
         </div>
         <div class="col" *ngIf="breakfast!==undefined">
             <hr>
-            <h4>Breakfast</h4>
+            <div class="alert alert-light" role="alert">
+                <h4>Breakfast</h4>
+              </div>
             <br>
-            <div class="row">
-                <div class="col">
-                    {{breakfast.totalPrice | number: '1.2-2'}} PLN
-                </div>
-            </div>
             <div class="row">
                 <div class="col">
                     <h5 *ngIf="breakfastImageUrl===null">Add a photo of the prepared meal</h5>
@@ -38,7 +36,13 @@
                 </div>
                 <div class="col">
                     <h5 class="mb-3"> {{breakfast.title}} </h5>
-                    <br>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-4 text-end fw-bold">Ingredients cost:</div>
+                        <div class="col">
+                            {{breakfast.totalPrice | number: '1.2-2'}} PLN
+                        </div>
+                    </div>
+                    <hr>
                     <div class="row align-items-center mb-2">
                         <div class="col-3 text-end fw-bold">Rate:</div>
                         <div class="col">
@@ -92,19 +96,17 @@
     </div>
     <div class="row text-center">
         <div class="col" *ngIf="lunch===undefined">
-            <p>
+            <br>
+            <div class="alert alert-info" role="alert">
                 You don't have lunch planned for this day
-            </p>
+              </div>
         </div>
         <div class="col" *ngIf="lunch!==undefined">
             <hr>
-            <h4>Lunch</h4>
+            <div class="alert alert-light" role="alert">
+                <h4>Lunch</h4>
+              </div>
             <br>
-            <div class="row">
-                <div class="col">
-                    {{lunch.totalPrice | number: '1.2-2'}} PLN
-                </div>
-            </div>
             <div class="row">
 
                 <div class="col">
@@ -131,7 +133,13 @@
                 </div>
                 <div class="col">
                     <h5 class="mb-3"> {{lunch.title}}</h5>
-                    <br>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-4 text-end fw-bold">Ingredients cost:</div>
+                        <div class="col">
+                            {{lunch.totalPrice | number: '1.2-2'}} PLN
+                        </div>
+                    </div>
+                    <hr>
                     <div class="row align-items-center mb-2">
                         <div class="col-3 text-end fw-bold">Rate:</div>
                         <div class="col">
@@ -183,19 +191,17 @@
     </div>
     <div class="row text-center">
         <div class="col" *ngIf="dinner===undefined">
-            <p>
+            <br>
+            <div class="alert alert-info" role="alert">
                 You don't have dinner planned for this day
-            </p>
+              </div>
         </div>
         <div class="col" *ngIf="dinner!==undefined">
             <hr>
-            <h4>Dinner</h4>
+            <div class="alert alert-light" role="alert">
+                <h4>Dinner</h4>
+              </div>
             <br>
-            <div class="row">
-                <div class="col">
-                    {{dinner.totalPrice | number: '1.2-2'}} PLN
-                </div>
-            </div>
             <div class="row">
                 <div class="col">
                     <h5 *ngIf="dinnerImageUrl===null">Add a photo of the prepared meal</h5>
@@ -222,7 +228,13 @@
 
                 <div class="col">
                     <h5 class="mb-3"> {{dinner.title}}</h5>
-                    <br>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-4 text-end fw-bold">Ingredients cost:</div>
+                        <div class="col">
+                            {{dinner.totalPrice | number: '1.2-2'}} PLN
+                        </div>
+                    </div>
+                    <hr>
                     <div class="row align-items-center mb-2">
                         <div class="col-3 text-end fw-bold">Rate:</div>
                         <div class="col">
