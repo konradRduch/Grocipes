@@ -1,0 +1,66 @@
+# Grocipes - Main .gitignore
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Documentation build artifacts
+*.pdf
+*.docx
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Database dumps
+*.sql.gz
+*.sql.zip
+backup_*.sql
+
+# Secrets and credentials
+secrets/
+credentials/
+*.pem
+*.key
+*.cert
+
+# Node modules (should be in Frontend/.gitignore but added here for safety)
+node_modules/
+
+# Maven target directory (should be in Backend/.gitignore but added here for safety)
+target/
+
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Docker volumes
+docker-data/
