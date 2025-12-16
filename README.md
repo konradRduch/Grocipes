@@ -7,7 +7,7 @@
 ## 📑 Table of Contents
 1. [Features](#-features)
 2. [Tech Stack](#-tech-stack)
-3. [Project Architecture](#-project-structure)
+3. [Project Structure](#-project-structure)
 ---
 
 ## 🚀 Features
